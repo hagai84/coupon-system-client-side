@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row bg-dark mb-4 my-4 text-white">
+    <h2>Dashboard</h2>
+  </div>
+
+  <div class="row">
+    <!-- side nav-->
+    <aside class="col-sm-6 col-md-3 card">
+      <h3> {{customerService.customerName}}</h3>
+      <hr />
+      <ul>
+        <li *ngFor="let title of menuList">
+          <a routerLink={{title.listRouting}} class="active">
+            <span class="fa fa-gear"></span>
+            {{title.listName}}
+          </a>
+        </li>
+      </ul>
+    </aside>
+    
+     <section class="col-sm-6 col-md-9 " >
+       <router-outlet></router-outlet>
+     </section>
+  </div>
+ 
+
+
+
+
+</div>

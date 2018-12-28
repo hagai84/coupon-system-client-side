@@ -1,0 +1,24 @@
+
+<div class="col-4">
+  
+  <form  class="px-4 py-3" (ngSubmit)="register()">
+    <div class="form-group">
+      <label>Name</label>
+      <input name="userName" [(ngModel)]="userName"  type="text" class="form-control"  placeholder="jhon doe">
+    </div>
+    <div class="form-group">
+      <label >Password</label>
+      <input  name="userPassword" [(ngModel)]="userPassword" type="password" class="form-control" placeholder="Password">
+    </div>
+    <div>
+      <select name="userType" [(ngModel)]="userType" class="custom-select" >
+        <option svalue="CUSTOMER">customer</option>
+      </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </form>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" routerLink="../login">a sign in user?</a>
+  <a class="dropdown-item" routerLink="../registerCompany">want to sell coupons?</a>
+</div>
