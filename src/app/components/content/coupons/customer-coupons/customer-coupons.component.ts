@@ -3,6 +3,7 @@ import { Coupon } from 'src/app/models/coupon';
 import { UtilService } from 'src/app/services/util.service';
 import { CouponApiService } from 'src/app/services/api/coupon-api.service';
 import { LoginService } from 'src/app/services/login.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer-coupons',
@@ -14,12 +15,14 @@ export class CustomerCouponsComponent implements OnInit {
   public coupons: Coupon[];
 
 
-  constructor(private loginService: LoginService,private util: UtilService, private couponApiService: CouponApiService) { }
+  constructor(private loginService: LoginService,private util: UtilService, private couponApiService: CouponApiService, private router: Router) { }
 
   ngOnInit() {
     // console.log("Customercoupons ngOninit run");
     if(this.loginService.isLogIn){
       this.setCoupons();
+    }else{
+      this.router.navigate(['/coupons']);
     }
   }
 
