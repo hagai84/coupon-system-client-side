@@ -22,7 +22,7 @@ export class CustomerCouponsComponent implements OnInit {
     if(this.loginService.isLogIn){
       this.setCoupons();
     }else{
-      this.router.navigate(['/coupons']);
+      this.router.navigate(['../coupons']);
     }
   }
 

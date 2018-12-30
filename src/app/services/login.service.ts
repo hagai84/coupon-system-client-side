@@ -33,6 +33,17 @@ export class LoginService {
       });
   }
 
+  public checkLogin() {
+    const ob = this.loginApi.check();
+    ob.subscribe(
+      userId => {
+        this.afterLogIn(userId, "CUSTOMER");
+      },
+      error => {
+        this.router.navigate(['../coupons']);
+      });
+  }
+
   setIsLogin(isLogIn) {
     this.isLogIn = isLogIn;
   }
@@ -52,8 +63,6 @@ export class LoginService {
   }
 
   logout() {
-    
-
     const ob = this.loginApi.logout();
     ob.subscribe(
      
