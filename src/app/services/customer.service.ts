@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class CustomerService {
   customerName:string;
   customerId:number;
+  customerBean: CustomerBean;
   customerCupons:Coupon[];
 
   constructor(  private router: Router, private customerApi: CustomerApiService, private util: UtilService, private http: HttpClient) {
@@ -25,9 +26,11 @@ export class CustomerService {
     
     const ob = this.customerApi.getCustomerData(customerId);
     ob.subscribe(
-      customerData=> {
-        this.customerName = customerData.custName
-      this.customerId = customerData.id
+      customerBean=> {
+        
+        this.customerBean = customerBean;
+        this.customerBean.password = "1234567";
+        
       },
       error => {
         this.util.PrintErrorToCustomer(error);

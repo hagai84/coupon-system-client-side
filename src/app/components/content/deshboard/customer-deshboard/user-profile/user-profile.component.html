@@ -3,12 +3,12 @@
     <div class="col-md-6  offset-md-0  toppad">
       <div class="card">
         <div class="card-body">
-          <h2 class="card-title">{{customerService.customerName}}</h2>
+          <h2 class="card-title">{{customerBean.custName}}</h2>
           <table class="table table-user-information ">
             <tbody>
               <tr>
                 <td>User Name:</td>
-                <td><input type="text" value={{customerBean.custName}}></td>
+                <td><input type="text" [(ngModel)]= "customerBean.custName" ></td>
               </tr>
             </tbody>
           </table>
