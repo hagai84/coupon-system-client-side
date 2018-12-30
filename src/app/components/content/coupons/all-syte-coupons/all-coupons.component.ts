@@ -13,7 +13,7 @@ export class AllCouponsComponent implements OnInit {
   public coupons: Coupon[];
 
 
-  constructor(private util: UtilService, private couponService: CouponApiService, private cookieService: CookieService) { }
+  constructor(private util: UtilService, private couponApiService: CouponApiService, private cookieService: CookieService) { }
 
   ngOnInit() {
     console.log("allcoupons ngOninit run");
@@ -21,7 +21,20 @@ export class AllCouponsComponent implements OnInit {
   }
 
   setCoupons() {
-    const ob = this.couponService.getCoupons();
+    const ob = this.couponApiService.getCoupons();
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
+  }
+
+  filter(filter:string){
+    if ( filter == "All"){
+      this.setCoupons();
+      return;
+    }
+    const ob = this.couponApiService.getCouponsByType(filter);
     ob.subscribe(coupons => {
       this.coupons = coupons;
     }, error => {

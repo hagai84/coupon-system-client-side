@@ -12,6 +12,12 @@ export class CouponApiService {
   public getCoupons():Observable<Coupon[]>{
     return this.http.get<Coupon[]>("http://localhost:8080/Coupon_System_Web-App/rest/coupons",{ withCredentials: true });
   }
+  public getCouponsByType(filter:string):Observable<Coupon[]>{
+    var urlString = "http://localhost:8080/Coupon_System_Web-App/rest/coupons/type?couponType="+filter;
+    return this.http.get<Coupon[]>(urlString,{ withCredentials: true });
+  }
+
+  
   
   public getCustomerCoupons(customerId : Number):Observable<Coupon[]>{
     let restUrl = "http://localhost:8080/Coupon_System_Web-App/rest/coupons/customer/" + customerId;

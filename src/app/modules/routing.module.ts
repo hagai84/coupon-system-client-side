@@ -22,8 +22,9 @@ const routes: Routes = [
   { path: "dashboard", component: DashboardLyoutComponent, children:
    [
       { path: "user-profile", component: UserProfileComponent }
-    ]
+   ]
   },
+  {path: "", redirectTo: "coupons",pathMatch: "full"} 
 
 
 ];

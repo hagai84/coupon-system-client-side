@@ -1,8 +1,40 @@
 <div class="container">
   <br>
-  <div>
-    <app-coupons-filter></app-coupons-filter>
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" (click) ="filter('All')" style="cursor: pointer">All<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" (click) ="filter('RESTAURANTS')">RESTAURANTS <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" (click) ="filter('ELECTRICITY')">ELECTRICITY</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" (click) ="filter('FOOD')">FOOD</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" (click) ="filter('HEALTH')">HEALTH</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer" (click) ="filter('SPORTS')">SPORTS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link poin" style="cursor: pointer" (click) ="filter('CAMPING')">CAMPING</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" style="cursor: pointer" (click) ="filter('TRAVELLING')">TRAVELLING</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
   <br>
   <div>
     <app-coupons [coupons]=coupons></app-coupons>
