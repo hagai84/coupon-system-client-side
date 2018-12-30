@@ -18,7 +18,7 @@ export class LoginService {
 
 
   constructor(private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-    this.setUserId(this.userId = +this.cookieService.get("userId"));
+    this.setUserId(this.cookieService.get("userId"));
     this.setUserType(this.cookieService.get("userType"));
 
 
