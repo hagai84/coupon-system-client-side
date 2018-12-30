@@ -17,8 +17,10 @@ export class CustomerCouponsComponent implements OnInit {
   constructor(private loginService: LoginService,private util: UtilService, private couponApiService: CouponApiService) { }
 
   ngOnInit() {
-    console.log("Customercoupons ngOninit run");
-    this.setCoupons();
+    // console.log("Customercoupons ngOninit run");
+    if(this.loginService.isLogIn){
+      this.setCoupons();
+    }
   }
 
   setCoupons() {
