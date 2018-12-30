@@ -29,6 +29,8 @@ import { CouponApiService } from '../services/api/coupon-api.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-syte-coupons/all-coupons.component';
 import { CouponsComponent } from '../components/content/coupons/one-coupon-lyout/coupons.component';
 import { UserProfileComponent } from '../components/content/deshboard/customer-deshboard/user-profile/user-profile.component';
+import { CompanyApiService } from '../services/api/company-api.service';
+import { CompanyService } from '../services/company.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,12 @@ import { UserProfileComponent } from '../components/content/deshboard/customer-d
     LoginService,
     CustomerService,
     CouponApiService,
-    CartService],
+    CartService,
+    CompanyApiService,
+    CompanyService
+  
+  
+  ],
 
   bootstrap: [LyoutComponent]
 })

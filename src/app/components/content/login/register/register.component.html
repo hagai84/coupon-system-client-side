@@ -10,9 +10,14 @@
       <label >Password</label>
       <input  name="userPassword" [(ngModel)]="userPassword" type="password" class="form-control" placeholder="Password">
     </div>
+    <div class="form-group" *ngIf = "userType == 'COMPANY'">
+      <label >Email</label>
+      <input  name="userEmail" [(ngModel)]="userEmail" type="email" class="form-control" placeholder="email">
+    </div>
     <div>
       <select name="userType" [(ngModel)]="userType" class="custom-select" >
-        <option svalue="CUSTOMER">customer</option>
+        <option value="CUSTOMER">customer</option>
+        <option value="COMPANY">company</option>
       </select>
     </div>
     <br>

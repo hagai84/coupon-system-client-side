@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
-import { LogInBean } from 'src/app/models/logInBean';
-import { CookieService } from 'ngx-cookie-service';
 import { CustomerBean } from 'src/app/models/customerbean';
 import { CustomerService } from 'src/app/services/customer.service';
+import { CompanyBean } from 'src/app/models/CompanyBean';
+import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
   selector: 'app-register',
@@ -14,13 +13,23 @@ export class RegisterComponent implements OnInit {
   public userName: string;
   public userPassword: string;
   public userType: string = "CUSTOMER";
+  public userEmail: string;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private companyService: CompanyService, private customerService: CustomerService) { }
 
   ngOnInit() {
   }
   register() {
-    var customerBean = new CustomerBean(123,this.userName, this.userPassword,[]);
-    this.customerService.register(customerBean);
+    if (this.userType == "CUSTOMER") {
+      var customerBean = new CustomerBean(123, this.userName, this.userPassword, []);
+      this.customerService.register(customerBean);
+      return;
+    }
+    if (this.userType == "COMPANY") {
+      var companyBean = new CompanyBean(123, this.userName, this.userPassword, this.userEmail ,[])
+      
+      this.companyService.register(companyBean);
+      return;
+    }
   }
 }

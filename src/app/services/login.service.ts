@@ -32,8 +32,8 @@ export class LoginService {
   }
 
   ngOnInit(){
-    var loginBean2 : LogInBean = new LogInBean("dfdfdf","dfdfdf","CUSTOMER","dfdfd");
-    this.sumbitLogin(loginBean2);
+    // var loginBean2 : LogInBean = new LogInBean("dfdfdf","dfdfdf","CUSTOMER","dfdfd");
+    // this.sumbitLogin(loginBean2);
   }
 
   public sumbitLogin(loginBean: LogInBean) {
@@ -42,7 +42,7 @@ export class LoginService {
     ob.subscribe(
       userId => {
         console.log(userId);
-        this.afterLogIn(userId, "CUSTOMER");
+        this.afterLogIn(userId, loginBean.userType);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
