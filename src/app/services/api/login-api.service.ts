@@ -15,7 +15,7 @@ export class LoginApiService {
   }
 
   public logout() {
-    return this.http.delete<void>("http://localhost:8080/Coupon_System_Web-App/rest/login", { withCredentials: true });
+    return this.http.delete<void>("http://localhost:8080/Coupon_System_Web-App/rest/logout", { withCredentials: true });
   }
 
 
