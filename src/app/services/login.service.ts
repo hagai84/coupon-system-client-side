@@ -14,17 +14,19 @@ import { LoginApiService } from './api/login-api.service';
 export class LoginService {
   public isLogIn: boolean = false;
   public userType: string;
-  public userId: Number ;
+  public userId: Number = 0;
 
 
   constructor(private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-    this.setUserId(this.cookieService.get("userId"));
-    this.setUserType(this.cookieService.get("userType"));
-
+    if(this.cookieService.check("myUserId")){
+      this.setUserId(this.cookieService.get("myUserId"));
+      this.setUserType(this.cookieService.get("myUserType"));
+    }
 
     if (this.userId != 0) {
       console.log("the user id is :" + this.userId);
       console.log("is log");
+      this.customerService.setCustomerData(this.userId);
       this.setIsLogin(true);
     }
   }
@@ -60,6 +62,8 @@ export class LoginService {
     this.setIsLogin(true);
     this.setUserId(userId);
     this.setUserType(userType);
+    this.cookieService.set("myUserId", userId.toString());
+    this.cookieService.set("myUserType", userType);
     this.router.navigate(['/customer-coupons']);
   }
 
@@ -71,6 +75,8 @@ export class LoginService {
      
       () => {
         this.isLogIn = false;
+        this.cookieService.delete("myUserId");
+        this.cookieService.delete("myUserType");
         this.router.navigate(['../coupons']);
       },
       error => {
