@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    var loginBean = new LogInBean(this.userName, this.userPassword, this.userType, this.rememberMe);
+    var loginBean = new LogInBean(1234, this.userName, this.userPassword, this.userType, this.rememberMe);
     this.loginService.sumbitLogin(loginBean);
   }
 

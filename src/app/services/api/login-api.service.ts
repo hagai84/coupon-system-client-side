@@ -19,6 +19,6 @@ export class LoginApiService {
   }
 
   public check() {
-    return this.http.get<Number>("http://localhost:8080/Coupon_System_Web-App/rest/check", { withCredentials: true });
+    return this.http.get<LogInBean>("http://localhost:8080/Coupon_System_Web-App/rest/check", { withCredentials: true });
   }
 }

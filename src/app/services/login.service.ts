@@ -35,10 +35,12 @@ export class LoginService {
   public checkLogin() {
     const ob = this.loginApi.check();
     ob.subscribe(
-      userId => {
-        this.afterLogIn(userId, "CUSTOMER");
+      userBean => {
+        // console.log(parseInt(checkBean.userName));
+        this.afterLogIn(userBean.userId, userBean.userType);
       },
       error => {
+        // console.log(error);
         this.router.navigate(['../coupons']);
       });
   }
@@ -55,10 +57,11 @@ export class LoginService {
 
   afterLogIn(userId: Number, userType: string) {
     this.customerService.setCustomerData(userId);
-    this.setIsLogin(true);
     this.setUserId(userId);
     this.setUserType(userType);
-    this.router.navigate(['/customer-coupons']);
+    this.setIsLogin(true);
+    // console.log('/'+userType.toLowerCase()+'-coupons');
+    this.router.navigate(['/'+userType.toLowerCase()+'-coupons']);
   }
 
   logout() {
