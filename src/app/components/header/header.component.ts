@@ -11,7 +11,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class HeaderComponent implements OnInit{
   public lastMenuButtonThatClicked : String = "buy"; 
-  constructor(public loginService: LoginService, private customerService: CustomerService) { }
+  constructor(public loginService: LoginService, public customerService: CustomerService) { }
 
 
   
