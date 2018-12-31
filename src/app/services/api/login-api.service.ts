@@ -18,5 +18,7 @@ export class LoginApiService {
     return this.http.delete<void>("http://localhost:8080/Coupon_System_Web-App/rest/logout", { withCredentials: true });
   }
 
-
+  public check() {
+    return this.http.get<LogInBean>("http://localhost:8080/Coupon_System_Web-App/rest/check", { withCredentials: true });
+  }
 }

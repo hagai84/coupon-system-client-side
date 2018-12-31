@@ -16,6 +16,7 @@ export class CustomerService {
   customerId:number;
   customerBean: CustomerBean;
   customerCupons:Coupon[];
+  isDataReady:boolean = false;
 
   constructor(  private router: Router, private customerApi: CustomerApiService, private util: UtilService, private http: HttpClient) {
  
@@ -30,6 +31,7 @@ public  setCustomerData(customerId:Number){
         
         this.customerBean = customerBean;
         this.customerBean.password = "1234567";
+        this.isDataReady=true;
         
       },
       error => {

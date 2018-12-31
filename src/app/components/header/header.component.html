@@ -19,11 +19,11 @@
     </ul>
 
 
-    <div *ngIf=!loginService.isLogIn class="form-inline my-2 my-lg-0">
+    <div *ngIf=!customerService.isDataReady class="form-inline my-2 my-lg-0">
       <a class="btn btn-outline-success my-2 my-sm-0" routerLink="login">login</a>
     </div>
 
-    <div *ngIf=loginService.isLogIn class="form-inline my-2 my-lg-0">
+    <div *ngIf=customerService.isDataReady class="form-inline my-2 my-lg-0">
     
 
       <app-user-menue></app-user-menue>

@@ -18,30 +18,13 @@ export class LoginService {
 
 
   constructor(private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-    // if(this.cookieService.check("myUserId")){
-    //   this.setUserId(this.cookieService.get("myUserId"));
-    //   this.setUserType(this.cookieService.get("myUserType"));
-    // }
-
-    // if (this.userId != 0) {
-    //   console.log("the user id is :" + this.userId);
-    //   console.log("is log");
-    //   this.customerService.setCustomerData(this.userId);
-    //   this.setIsLogin(true);
-    // }
-  }
-
-  ngOnInit(){
-    // var loginBean2 : LogInBean = new LogInBean("dfdfdf","dfdfdf","CUSTOMER","dfdfd");
-    // this.sumbitLogin(loginBean2);
+    this.checkLogin();
   }
 
   public sumbitLogin(loginBean: LogInBean) {
-    console.log(loginBean);
     const ob = this.loginApi.login(loginBean);
     ob.subscribe(
       userId => {
-        console.log(userId);
         this.afterLogIn(userId, loginBean.userType);
       },
       error => {
@@ -49,36 +32,44 @@ export class LoginService {
       });
   }
 
-  public setIsLogin(isLogIn) {
+  public checkLogin() {
+    const ob = this.loginApi.check();
+    ob.subscribe(
+      userBean => {
+        // console.log(parseInt(checkBean.userName));
+        this.afterLogIn(userBean.userId, userBean.userType);
+      },
+      error => {
+        // console.log(error);
+        this.router.navigate(['../coupons']);
+      });
+  }
+
+  setIsLogin(isLogIn) {
     this.isLogIn = isLogIn;
   }
-  public setUserId(userId) {
-    console.log("set user id is run and the id is : " + userId);
-
+  setUserId(userId) {
     this.userId = userId;
   }
-  public setUserType(userType) {
+  setUserType(userType) {
     this.userType = userType;
   }
 
-  public afterLogIn(userId: Number, userType: string) {
+  afterLogIn(userId: Number, userType: string) {
     this.customerService.setCustomerData(userId);
-    this.setIsLogin(true);
     this.setUserId(userId);
     this.setUserType(userType);
-    // this.cookieService.set("myUserId", userId.toString());
-    // this.cookieService.set("myUserType", userType);
-    this.router.navigate(['/customer-coupons']);
+    this.setIsLogin(true);
+    // console.log('/'+userType.toLowerCase()+'-coupons');
+    this.router.navigate(['/'+userType.toLowerCase()+'-coupons']);
   }
 
-  public logout() {
+  logout() {
     const ob = this.loginApi.logout();
     ob.subscribe(
      
       () => {
         this.isLogIn = false;
-        // this.cookieService.delete("myUserId");
-        // this.cookieService.delete("myUserType");
         this.router.navigate(['../coupons']);
       },
       error => {

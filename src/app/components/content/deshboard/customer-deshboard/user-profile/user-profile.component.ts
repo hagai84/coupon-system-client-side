@@ -23,7 +23,7 @@ customerBean:CustomerBean
     ob.subscribe(
       () => {
         this.customerService.setCustomerData(this.loginService.userId);
-        this.customerBean = this.customerService.customerBean;
+        // this.customerBean = this.customerService.customerBean;
       },
       error => {
         this.util.PrintErrorToCustomer(error);
