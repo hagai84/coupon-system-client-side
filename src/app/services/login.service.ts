@@ -18,8 +18,7 @@ export class LoginService {
 
 
   constructor(private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-    var loginBean2 : LogInBean = new LogInBean("dfdfdf","dfdfdf","CUSTOMER","dfdfd");
-    this.sumbitLogin(loginBean2);
+    this.checkLogin();
   }
 
   public sumbitLogin(loginBean: LogInBean) {
