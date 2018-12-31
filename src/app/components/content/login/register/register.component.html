@@ -1,18 +1,21 @@
 
 <div class="col-4">
   
-  <form  class="px-4 py-3" (ngSubmit)="register()">
+  <form  class="px-4 py-3" (ngSubmit)="register()" #logInForm ="ngForm">
     <div class="form-group">
       <label>Name</label>
-      <input name="userName" [(ngModel)]="userName"  type="text" class="form-control"  placeholder="jhon doe">
+      <input #nameData="ngModel" required name="userName" [(ngModel)]="userName"  type="text" class="form-control"  placeholder="jhon doe">
+      <label style="color :red" *ngIf ="nameData.invalid && !nameData.untouched">name is a required filed</label>
     </div>
     <div class="form-group">
       <label >Password</label>
-      <input  name="userPassword" [(ngModel)]="userPassword" type="password" class="form-control" placeholder="Password">
+      <input #passwordData="ngModel" required minlength="6" maxlength="10" name="userPassword" [(ngModel)]="userPassword" type="password" class="form-control" placeholder="Password">
+      <label  *ngIf ="passwordData.invalid && !passwordData.untouched" style="color :red">please enter password between 6 to 10 chars</label>
     </div>
     <div class="form-group" *ngIf = "userType == 'COMPANY'">
       <label >Email</label>
-      <input  name="userEmail" [(ngModel)]="userEmail" type="email" class="form-control" placeholder="email">
+      <input #emailData="ngModel" required email type="email" name="userEmail" [(ngModel)]="userEmail"  class="form-control" placeholder="email">
+      <label  *ngIf ="emailData.invalid && !emailData.untouched" style="color :red">please entera valid email</label>
     </div>
     <div>
       <select name="userType" [(ngModel)]="userType" class="custom-select" >
@@ -21,7 +24,7 @@
       </select>
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Sign up</button>
+    <button [disabled]="logInForm.form.invalid" type="submit" class="btn btn-primary" >Sign up</button>
   </form>
   <div class="dropdown-divider"></div>
   <a class="dropdown-item" routerLink="../login">a sign in user?</a>

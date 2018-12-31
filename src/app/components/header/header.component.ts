@@ -9,12 +9,17 @@ import { CustomerService } from 'src/app/services/customer.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit{
+  public lastMenuButtonThatClicked : String = "buy"; 
   constructor(public loginService: LoginService, private customerService: CustomerService) { }
 
 
+  
   ngOnInit() {
 
   }
 
+  public onMenuButtonClick(lastMenuButtonThatClicked : string){
+    this.lastMenuButtonThatClicked = lastMenuButtonThatClicked;
+  }
 }

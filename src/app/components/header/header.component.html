@@ -8,13 +8,13 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="coupons">Buy </a>
+        <a class="nav-link" routerLink="coupons" ng name = "Buy">Buy </a>
       </li>
       <li *ngIf=loginService.isLogIn class="nav-item active">
-        <a class="nav-link" routerLink="customer-coupons">MyCoupons</a>
+        <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">My Coupons</a>
       </li>
       <li *ngIf=loginService.isLogIn class="nav-item active">
-        <a class="nav-link" routerLink="cart">cart</a>
+        <a class="nav-link" routerLink="cart" name = "cart">Cart</a>
       </li>
     </ul>
 
