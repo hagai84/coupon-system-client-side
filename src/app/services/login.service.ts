@@ -49,19 +49,19 @@ export class LoginService {
       });
   }
 
-  setIsLogin(isLogIn) {
+  public setIsLogin(isLogIn) {
     this.isLogIn = isLogIn;
   }
-  setUserId(userId) {
+  public setUserId(userId) {
     console.log("set user id is run and the id is : " + userId);
 
     this.userId = userId;
   }
-  setUserType(userType) {
+  public setUserType(userType) {
     this.userType = userType;
   }
 
-  afterLogIn(userId: Number, userType: string) {
+  public afterLogIn(userId: Number, userType: string) {
     this.customerService.setCustomerData(userId);
     this.setIsLogin(true);
     this.setUserId(userId);
@@ -71,9 +71,7 @@ export class LoginService {
     this.router.navigate(['/customer-coupons']);
   }
 
-  logout() {
-    
-
+  public logout() {
     const ob = this.loginApi.logout();
     ob.subscribe(
      

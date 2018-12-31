@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private loginService: LoginService, private cookieService:CookieService) { }
+  constructor(public loginService: LoginService, private cookieService:CookieService) { }
   public userName: string;
   public userPassword: string;
   public userType: string = "CUSTOMER";

@@ -10,7 +10,7 @@
       <hr />
       <ul>
         <li *ngFor="let title of menuList">
-          <a routerLink={{title.listRouting}} class="active">
+          <a routerLink="{{title.listRouting}}" class="active">
             <span class="fa fa-gear"></span>
             {{title.listName}}
           </a>

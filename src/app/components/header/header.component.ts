@@ -10,7 +10,7 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private loginService: LoginService, private customerService: CustomerService) { }
+  constructor(public loginService: LoginService, private customerService: CustomerService) { }
 
 
   ngOnInit() {

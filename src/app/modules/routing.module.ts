@@ -24,9 +24,13 @@ const routes: Routes = [
       { path: "user-profile", component: UserProfileComponent }
    ]
   },
-  {path: "", redirectTo: "coupons",pathMatch: "full"} 
+  {path: "", redirectTo: "coupons",pathMatch: "full"},
 
 
+
+
+  
+  {path: "**", redirectTo: "https://www.youtube.com/watch?v=t3otBjVZzT0"}
 ];
 
 

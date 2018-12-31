@@ -21,7 +21,7 @@ export class CustomerService {
  
   }
 
-  setCustomerData(customerId:Number){
+public  setCustomerData(customerId:Number){
     console.log("set customer data is on");
     
     const ob = this.customerApi.getCustomerData(customerId);
@@ -37,7 +37,7 @@ export class CustomerService {
       });
   }
 
-  register(customerbean:CustomerBean){
+ public register(customerbean:CustomerBean){
     
     const ob = this.customerApi.createCustomer(customerbean);
     ob.subscribe(

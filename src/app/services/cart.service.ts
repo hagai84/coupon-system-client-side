@@ -17,11 +17,11 @@ export class CartService {
   constructor(private loginService: LoginService, private util: UtilService, private router: Router, private http: HttpClient, private couponApiServise: CouponApiService) { }
 
 
-  addToCart(coupon: Coupon) {
+  public addToCart(coupon: Coupon) {
     this.cart.push(coupon);
     this.setTotalPrice();
   }
-  remove(coupon: Coupon) {
+  public remove(coupon: Coupon) {
     var tempCart: Array<Coupon> = [];
     this.cart.forEach(element => {
       if (element != coupon) {
@@ -31,14 +31,14 @@ export class CartService {
       this.setTotalPrice();
     });
   }
-  setTotalPrice() {
+  public setTotalPrice() {
     var tempCart: Array<Coupon> = [];
     this.totalPrice = 0;
     this.cart.forEach(element => {
       this.totalPrice += element.price;
     });
   }
-  checkout() {
+ public checkout() {
     while (this.cart.length > 0) {
       var coupon: Coupon = this.cart.pop();
       const ob = this.couponApiServise.purchaseCoupon(coupon,this.loginService.userId);

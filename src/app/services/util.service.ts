@@ -8,7 +8,7 @@ export class UtilService {
 
   constructor() { }
 
-  PrintErrorToCustomer(error: HttpErrorResponse) {
+  public PrintErrorToCustomer(error: HttpErrorResponse) {
     if (error.status > 1000) {
       window.alert(error.error.externalMessage);
     } else {

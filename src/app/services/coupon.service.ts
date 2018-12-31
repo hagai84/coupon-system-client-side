@@ -10,7 +10,7 @@ public couponData:Coupon;
   
   }
 
-  setCoupon(coupon:Coupon){
+  public setCoupon(coupon:Coupon){
     this.couponData = coupon;
   }
 }

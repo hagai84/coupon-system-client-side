@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class UserMenueComponent implements OnInit {
 
-  constructor(private customerService: CustomerService, private loginService: LoginService ) { }
+  constructor(public customerService: CustomerService, public loginService: LoginService ) { }
 
   ngOnInit() {
   }

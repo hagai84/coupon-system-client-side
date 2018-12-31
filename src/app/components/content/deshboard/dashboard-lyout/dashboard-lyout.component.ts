@@ -12,7 +12,7 @@ import { settings } from 'cluster';
 })
 export class DashboardLyoutComponent implements OnInit {
   menuList: MenuList[] = [];
-  constructor(private customerService: CustomerService, private loginService: LoginService) { }
+  constructor(public customerService: CustomerService, private loginService: LoginService) { }
 
   ngOnInit() {
     if (this.loginService.userType == "CUSTOMER") {

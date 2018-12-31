@@ -12,7 +12,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class UserProfileComponent implements OnInit {
 customerBean:CustomerBean 
-  constructor(private loginService:LoginService, private util: UtilService, private customerApiService:CustomerApiService, private customerService: CustomerService) { }
+  constructor(public loginService:LoginService, private util: UtilService, private customerApiService:CustomerApiService, private customerService: CustomerService) { }
 
   ngOnInit() {
     this.customerBean = this.customerService.customerBean;

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./coupon.component.css']
 })
 export class CouponComponent implements OnInit {
-  constructor(private coupon:CouponService, private cart:CartService, private router:Router) { }
+  constructor(public coupon:CouponService, private cart:CartService, private router:Router) { }
   ngOnInit() {
   }
 

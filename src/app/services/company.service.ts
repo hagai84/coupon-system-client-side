@@ -12,7 +12,7 @@ export class CompanyService {
   constructor( private router: Router,private util: UtilService, private companyApi: CompanyApiService) { }
   
   
-  register(companyBean:CompanyBean){
+  public register(companyBean:CompanyBean){
     const ob = this.companyApi.createCompany(companyBean);
     ob.subscribe(
       userId=> {
