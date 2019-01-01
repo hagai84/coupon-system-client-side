@@ -5,8 +5,12 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UtilService {
+  public isLogin: Boolean;
+  public customerName: String;
 
-  constructor() { }
+  constructor() {
+    this.refresgPublicData();
+   }
 
   public PrintErrorToCustomer(error: HttpErrorResponse) {
     if (error.status > 1000) {
@@ -15,4 +19,15 @@ export class UtilService {
       window.alert(error.error);
     }
   }
+
+  refresgPublicData(){
+    this.customerName = sessionStorage.getItem("customerName");
+    this.isLogin = Boolean(sessionStorage.getItem("isLogin"));
+  }
 }
+
+
+
+    
+    
+    

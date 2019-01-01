@@ -1,49 +1,43 @@
 import { Injectable } from '@angular/core';
 import { CustomerBean } from '../models/customerbean';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Coupon } from '../models/coupon';
 import { UtilService } from './util.service';
 import { CustomerApiService } from './api/customer-api.service';
-import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  customerName:string;
-  customerId:number;
-  customerBean: CustomerBean;
-  customerCupons:Coupon[];
-  isDataReady:boolean = false;
+  customerCupons: Coupon[];
+  isDataReady: boolean = false;
 
-  constructor(  private router: Router, private customerApi: CustomerApiService, private util: UtilService, private http: HttpClient) {
- 
+  constructor(private router: Router, private customerApi: CustomerApiService, private util: UtilService, private http: HttpClient) {
+
   }
 
-public  setCustomerData(customerId:Number){
-    console.log("set customer data is on");
+  public setCustomerData(customerId: Number) {
+    console.log("set customer data excuted");
     
     const ob = this.customerApi.getCustomerData(customerId);
     ob.subscribe(
-      customerBean=> {
-        
-        this.customerBean = customerBean;
-        this.customerBean.password = "1234567";
-        this.isDataReady=true;
-        
+      customerBean => {
+        sessionStorage.setItem("customerName", customerBean.custName);
+        sessionStorage.setItem("customerId", String(customerBean.id));
+        sessionStorage.setItem("customerBean", JSON.stringify(customerBean))
+        this.util.refresgPublicData();
       },
       error => {
         this.util.PrintErrorToCustomer(error);
       });
   }
 
- public register(customerbean:CustomerBean){
-    
+  public register(customerbean: CustomerBean) {
+
     const ob = this.customerApi.createCustomer(customerbean);
     ob.subscribe(
-      userId=> {
+      userId => {
         window.alert("register sucsses please login");
         this.router.navigate(['/login']);
       },
@@ -51,7 +45,7 @@ public  setCustomerData(customerId:Number){
         this.util.PrintErrorToCustomer(error);
       });
   }
- 
+
 
 }
 

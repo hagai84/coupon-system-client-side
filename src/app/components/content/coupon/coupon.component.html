@@ -14,14 +14,14 @@
           <div class="preview col-md-6">
 
             <div class="preview-pic tab-content">
-              <div class="tab-pane active" id="pic-1"><img [src]="coupon.couponData.image" /></div>
+              <div class="tab-pane active" id="pic-1"><img [src]="coupon.image" /></div>
             </div>
 
           </div>
           <div class="details col-md-6">
-            <h3 class="product-title">{{coupon.couponData.title}}</h3>
-            <p class="product-description">{{coupon.couponData.message}}</p>
-            <h4 class="price">current price: <span>{{coupon.couponData.price}}</span></h4>
+            <h3 class="product-title">{{coupon.title}}</h3>
+            <p class="product-description">{{coupon.message}}</p>
+            <h4 class="price">current price: <span>{{coupon.price}}</span></h4>
             <div class="action">
               <button (click)="addToCart()" class="add-to-cart btn btn-default" type="button">add to cart</button>
             </div>

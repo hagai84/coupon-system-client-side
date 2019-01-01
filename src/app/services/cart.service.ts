@@ -14,7 +14,10 @@ import { LoginService } from './login.service';
 export class CartService {
   cart: Array<Coupon> = [];
   totalPrice: number = 0
-  constructor(private loginService: LoginService, private util: UtilService, private router: Router, private http: HttpClient, private couponApiServise: CouponApiService) { }
+  constructor(private loginService: LoginService, private util: UtilService, private router: Router, private http: HttpClient, private couponApiServise: CouponApiService) {
+    
+
+  }
 
 
   public addToCart(coupon: Coupon) {
@@ -38,22 +41,22 @@ export class CartService {
       this.totalPrice += element.price;
     });
   }
- public checkout() {
+  public checkout() {
     while (this.cart.length > 0) {
-      var coupon: Coupon = this.cart.pop();
-      const ob = this.couponApiServise.purchaseCoupon(coupon,this.loginService.userId);
+      const coupon: Coupon = this.cart.pop();
+      const ob = this.couponApiServise.purchaseCoupon(coupon, Number(sessionStorage.getItem("customerId")));
       ob.subscribe(
         () => {
           console.log("purchase sucsess");
           this.router.navigate(['/thank-you']);
         },
         error => {
-         this.util.PrintErrorToCustomer(error);
+          this.util.PrintErrorToCustomer(error);
           return;
         });
     }
   }
 
 
-  
+
 }

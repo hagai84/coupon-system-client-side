@@ -19,7 +19,7 @@ export class LoginApiService {
    return this.http.delete<void>("http://localhost:8080/Coupon_System_Web-App/rest/logout", { withCredentials: true });
   }
 
-  public check(): Promise<LogInBean> {
-    return this.http.get<LogInBean>("http://localhost:8080/Coupon_System_Web-App/rest/check", { withCredentials: true }).toPromise();
+  public check(): Observable<LogInBean> {
+    return this.http.get<LogInBean>("http://localhost:8080/Coupon_System_Web-App/rest/check", { withCredentials: true });
   }
 }

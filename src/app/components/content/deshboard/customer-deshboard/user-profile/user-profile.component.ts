@@ -15,15 +15,15 @@ customerBean:CustomerBean
   constructor(public loginService:LoginService, private util: UtilService, private customerApiService:CustomerApiService, private customerService: CustomerService) { }
 
   ngOnInit() {
-    this.customerBean = this.customerService.customerBean;
+    this.customerBean = JSON.parse(sessionStorage.getItem("customerBean"));
   }
   
   updateData(){
     const ob = this.customerApiService.updateCustomer(this.customerBean);
     ob.subscribe(
       () => {
-        this.customerService.setCustomerData(this.loginService.userId);
-        // this.customerBean = this.customerService.customerBean;
+        this.customerService.setCustomerData(Number(sessionStorage.getItem("customerId")));
+        this.customerBean = JSON.parse(sessionStorage.getItem("customerBean"));
       },
       error => {
         this.util.PrintErrorToCustomer(error);

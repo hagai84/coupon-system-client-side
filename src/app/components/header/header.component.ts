@@ -1,7 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
-import { CustomerBean } from 'src/app/models/customerbean';
-import { CustomerService } from 'src/app/services/customer.service';
+import { UtilService } from 'src/app/services/util.service';
 
 
 @Component({
@@ -11,12 +9,9 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class HeaderComponent implements OnInit{
   public lastMenuButtonThatClicked : String = "buy"; 
-  constructor(public loginService: LoginService, public customerService: CustomerService) { }
-
-
+  constructor(public util : UtilService) { }
   
   ngOnInit() {
-
   }
 
   public onMenuButtonClick(lastMenuButtonThatClicked : string){

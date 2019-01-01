@@ -11,14 +11,12 @@ export class LoginGurardServiceService implements CanActivate {
 
 
   canActivate(): boolean {
-   
-  const isLoggedIn:boolean = this.loginService.isLoggedIn();
-   
-    if (isLoggedIn) {
+    
+    if (sessionStorage.getItem("isLogin")) {
       return true
     }
     this.router.navigate(["/login"]);
-    
+
     window.alert("This page requires login");
     return false;
   }

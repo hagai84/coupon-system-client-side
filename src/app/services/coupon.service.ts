@@ -5,12 +5,11 @@ import { Coupon } from '../models/coupon';
   providedIn: 'root'
 })
 export class CouponService {
-public couponData:Coupon;
   constructor() {
   
   }
 
   public setCoupon(coupon:Coupon){
-    this.couponData = coupon;
+    sessionStorage.setItem("lastSingleCoupon",JSON.stringify(coupon));
   }
 }

@@ -13,69 +13,54 @@ import { LoginApiService } from './api/login-api.service';
 })
 export class LoginService {
 
-  public isFinishLogIn: boolean = false;
-  public isLogIn: boolean = false;
-  public userType: string;
-  public userId: Number = 0;
-
-
+  // public isFinishLogIn: boolean = false;
   constructor(private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-
-  }
-
-
-  public isLoggedIn() {
-    console.log("login srvice, isLoggedIn");
-    
-    if (this.isFinishLogIn) {
-      return this.isLogIn;
-    }
     this.checkLogin();
-    return this.isLogIn;
   }
 
-  public sumbitLogin(loginBean: LogInBean) {
+  // public isLoggedIn() {
+  //   if (this.isFinishLogIn) {
+  //     return;
+  //   }
+  //   this.checkLogin();
+  //   this.isFinishLogIn = true;
+  //   return;
+  // }
+
+  public submitLogin(loginBean: LogInBean) {
     const ob = this.loginApi.login(loginBean);
     ob.subscribe(
       userId => {
         this.afterLogIn(userId, loginBean.userType);
+        this.router.navigate(['/' + loginBean.userType.toLowerCase() + '-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
       });
   }
 
-  async checkLogin() {
-    console.log("login servise, checkLogin");
-
-    const userBean = <LogInBean>await this.loginApi.check();
-    console.log("user bean is: "+userBean);
+  checkLogin() {
     
-    if (userBean.userId != 0) {
-      console.log("login servise, checkLogin,if userBean.userId != null");
-      
-      this.afterLogIn(userBean.userId, userBean.userType);
-    }
-    this.isFinishLogIn = true;
+    const ob = this.loginApi.check();
+    ob.subscribe(
+      userBean => {
+        this.afterLogIn(userBean.userId, userBean.userType);
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
   }
 
-  setIsLogin(isLogIn) {
-    this.isLogIn = isLogIn;
-  }
-  setUserId(userId) {
-    this.userId = userId;
-  }
-  setUserType(userType) {
-    this.userType = userType;
-  }
+
 
   afterLogIn(userId: Number, userType: string) {
-    this.customerService.setCustomerData(userId);
+    if (userType == "CUSTOMER") {
+      this.customerService.setCustomerData(userId);
+    }
     this.setUserId(userId);
     this.setUserType(userType);
     this.setIsLogin(true);
-    // console.log('/'+userType.toLowerCase()+'-coupons');
-    this.router.navigate(['/' + userType.toLowerCase() + '-coupons']);
+    this.util.refresgPublicData();
   }
 
   logout() {
@@ -83,8 +68,10 @@ export class LoginService {
     ob.subscribe(
 
       () => {
-        this.isLogIn = false;
+        sessionStorage.clear();
         this.router.navigate(['../coupons']);
+        this.util.refresgPublicData();
+
       },
       error => {
         this.util.PrintErrorToCustomer(error);
@@ -94,5 +81,13 @@ export class LoginService {
 
 
 
-
+  setIsLogin(isLogin: boolean) {
+    sessionStorage.setItem("isLogin", String(isLogin));
+  }
+  setUserId(userId: Number) {
+    sessionStorage.setItem("userId", String(userId));
+  }
+  setUserType(userType: string) {
+    sessionStorage.setItem("userType", userType);
+  }
 }

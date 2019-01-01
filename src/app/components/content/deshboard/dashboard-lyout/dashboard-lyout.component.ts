@@ -11,19 +11,25 @@ import { settings } from 'cluster';
   styleUrls: ['./dashboard-lyout.component.css']
 })
 export class DashboardLyoutComponent implements OnInit {
+  public customerName:String;
   menuList: MenuList[] = [];
   constructor(public customerService: CustomerService, private loginService: LoginService) { }
 
   ngOnInit() {
-    if (this.loginService.userType == "CUSTOMER") {
+    if (sessionStorage.getItem("userType") == "CUSTOMER") {
       this.buildCustomerMenuList();
-    } else if (this.loginService.userType == "COMPANY") {
+      this.customerName = sessionStorage.getItem("customerName");
+    } else if (sessionStorage.getItem("userType") == "COMPANY") {
       this.buildCompanyMenuList();
-    } else if ((this.loginService.userType == "ADMIN")) {
+      this.customerName = sessionStorage.getItem("companyName");
+    } else if (sessionStorage.getItem("userType") == "ADMIN") {
       this.buildAdminMenuList();
+      this.customerName = "Admin";
+      
     }
     else {
       this.buildguestMenuList();
+      this.customerName = "Guest";
     }
   }
 

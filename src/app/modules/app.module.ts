@@ -22,15 +22,15 @@ import { UserMenueComponent } from '../components/header/user-menue/user-menue.c
 import { LoginApiService } from '../services/api/login-api.service';
 import { RegisterComponent } from '../components/content/login/register/register.component';
 import { CouponsFilterComponent } from '../components/content/coupons/coupons-filter/coupons-filter.component';
-import { CustomerCouponsComponent } from '../components/content/coupons/customer-coupons/customer-coupons.component';
 import { ThankYouComponent } from '../components/content/massagesToUser/thankYouForBoying/thank-you.component';
 import { DashboardLyoutComponent } from '../components/content/deshboard/dashboard-lyout/dashboard-lyout.component';
 import { CouponApiService } from '../services/api/coupon-api.service';
-import { AllCouponsComponent } from '../components/content/coupons/all-syte-coupons/all-coupons.component';
 import { CouponsComponent } from '../components/content/coupons/one-coupon-lyout/coupons.component';
 import { UserProfileComponent } from '../components/content/deshboard/customer-deshboard/user-profile/user-profile.component';
 import { CompanyApiService } from '../services/api/company-api.service';
 import { CompanyService } from '../services/company.service';
+import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
+import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,6 @@ import { CompanyService } from '../services/company.service';
     FooterComponent,
     LoginComponent,
     AllCouponsComponent,
-    CustomerCouponsComponent,
     CouponsComponent,
     CouponsFilterComponent,
     CouponComponent,
@@ -69,9 +68,7 @@ import { CompanyService } from '../services/company.service';
     CouponApiService,
     CartService,
     CompanyApiService,
-    CompanyService
-  
-  
+    CompanyService,
   ],
 
   bootstrap: [LyoutComponent]

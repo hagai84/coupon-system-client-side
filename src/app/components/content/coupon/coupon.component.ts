@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CouponService } from 'src/app/services/coupon.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { Coupon } from 'src/app/models/coupon';
 
 @Component({
   selector: 'app-coupon',
@@ -9,12 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./coupon.component.css']
 })
 export class CouponComponent implements OnInit {
-  constructor(public coupon:CouponService, private cart:CartService, private router:Router) { }
+  public coupon:Coupon
+  constructor(private cart:CartService, private router:Router) { }
   ngOnInit() {
+    this.coupon = JSON.parse(sessionStorage.getItem("lastSingleCoupon"));
   }
 
   addToCart(){
   this.router.navigate(['/cart']);
-  this.cart.addToCart(this.coupon.couponData);  
+  this.cart.addToCart(JSON.parse(sessionStorage.getItem("lastSingleCoupon")));  
   }
 }
