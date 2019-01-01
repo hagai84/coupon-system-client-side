@@ -6,5 +6,6 @@ export class LogInBean {
             public userPassword?:string,
             public userType?:string,
             public rememberMe?:string
+            
         ) { }
 }

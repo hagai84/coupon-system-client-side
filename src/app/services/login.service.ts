@@ -12,13 +12,26 @@ import { LoginApiService } from './api/login-api.service';
   providedIn: 'root'
 })
 export class LoginService {
+
+  public isFinishLogIn: boolean = false;
   public isLogIn: boolean = false;
   public userType: string;
   public userId: Number = 0;
 
 
-  constructor(private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
+  constructor(private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
+
+  }
+
+
+  public isLoggedIn() {
+    console.log("login srvice, isLoggedIn");
+    
+    if (this.isFinishLogIn) {
+      return this.isLogIn;
+    }
     this.checkLogin();
+    return this.isLogIn;
   }
 
   public sumbitLogin(loginBean: LogInBean) {
@@ -32,17 +45,18 @@ export class LoginService {
       });
   }
 
-  public checkLogin() {
-    const ob = this.loginApi.check();
-    ob.subscribe(
-      userBean => {
-        // console.log(parseInt(checkBean.userName));
-        this.afterLogIn(userBean.userId, userBean.userType);
-      },
-      error => {
-        // console.log(error);
-        this.router.navigate(['../coupons']);
-      });
+  async checkLogin() {
+    console.log("login servise, checkLogin");
+
+    const userBean = <LogInBean>await this.loginApi.check();
+    console.log("user bean is: "+userBean);
+    
+    if (userBean.userId != 0) {
+      console.log("login servise, checkLogin,if userBean.userId != null");
+      
+      this.afterLogIn(userBean.userId, userBean.userType);
+    }
+    this.isFinishLogIn = true;
   }
 
   setIsLogin(isLogIn) {
@@ -61,13 +75,13 @@ export class LoginService {
     this.setUserType(userType);
     this.setIsLogin(true);
     // console.log('/'+userType.toLowerCase()+'-coupons');
-    this.router.navigate(['/'+userType.toLowerCase()+'-coupons']);
+    this.router.navigate(['/' + userType.toLowerCase() + '-coupons']);
   }
 
   logout() {
     const ob = this.loginApi.logout();
     ob.subscribe(
-     
+
       () => {
         this.isLogIn = false;
         this.router.navigate(['../coupons']);

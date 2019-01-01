@@ -19,11 +19,11 @@ export class CustomerCouponsComponent implements OnInit {
 
   ngOnInit() {
     // console.log("Customercoupons ngOninit run");
-    if(this.loginService.isLogIn){
+    // if(this.loginService.isLogIn){
       this.setCoupons();
-    }else{
-      this.router.navigate(['../coupons']);
-    }
+    // }else{
+    //   this.router.navigate(['../coupons']);
+    // }
   }
 
   setCoupons() {

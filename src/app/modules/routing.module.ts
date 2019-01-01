@@ -10,13 +10,14 @@ import { ThankYouComponent } from '../components/content/massagesToUser/thankYou
 import { DashboardLyoutComponent } from '../components/content/deshboard/dashboard-lyout/dashboard-lyout.component';
 import { AllCouponsComponent } from '../components/content/coupons/all-syte-coupons/all-coupons.component';
 import { UserProfileComponent } from '../components/content/deshboard/customer-deshboard/user-profile/user-profile.component';
+import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "coupons", component: AllCouponsComponent },
-  { path: "customer-coupons", component: CustomerCouponsComponent },
+  { path: "customer-coupons", canActivate:[LoginGurardServiceService], component: CustomerCouponsComponent },
   { path: "coupon", component: CouponComponent },
-  { path: "cart", component: CartComponent },
+  { path: "cart",  component: CartComponent },
   { path: "thank-you", component: ThankYouComponent },
   { path: "register", component: RegisterComponent },
   { path: "dashboard", component: DashboardLyoutComponent, children:
