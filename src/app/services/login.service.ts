@@ -13,19 +13,31 @@ import { LoginApiService } from './api/login-api.service';
 })
 export class LoginService {
 
-  // public isFinishLogIn: boolean = false;
+  public isFinishLogIn: boolean = false;
+
   constructor(private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
     this.checkLogin();
   }
 
-  // public isLoggedIn() {
-  //   if (this.isFinishLogIn) {
-  //     return;
-  //   }
-  //   this.checkLogin();
-  //   this.isFinishLogIn = true;
-  //   return;
-  // }
+  async isLoggedIn():Promise<boolean> {
+    if (this.isFinishLogIn) {
+      console.log("isFinished");
+      return true
+    }
+    if (sessionStorage.getItem("isLogin")) {
+      console.log("isLogin");
+      this.isFinishLogIn=true;
+      return true
+    }
+    console.log("check");
+    await this.checkLogin();
+    
+    this.isFinishLogIn = true;
+    if (sessionStorage.getItem("isLogin")) {
+      return true
+    }
+    return false;
+  }
 
   public submitLogin(loginBean: LogInBean) {
     const ob = this.loginApi.login(loginBean);
