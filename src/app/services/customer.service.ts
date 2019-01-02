@@ -5,6 +5,7 @@ import { Coupon } from '../models/coupon';
 import { UtilService } from './util.service';
 import { CustomerApiService } from './api/customer-api.service';
 import { Router } from '@angular/router';
+import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,6 @@ export class CustomerService {
   }
 
   public setCustomerData(customerId: Number) {
-    console.log("set customer data excuted");
-    
     const ob = this.customerApi.getCustomerData(customerId);
     ob.subscribe(
       customerBean => {
@@ -31,6 +30,8 @@ export class CustomerService {
         this.util.PrintErrorToCustomer(error);
       });
   }
+
+  
 
   public register(customerbean: CustomerBean) {
 

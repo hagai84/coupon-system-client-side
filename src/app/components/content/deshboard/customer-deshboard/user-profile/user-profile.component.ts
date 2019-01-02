@@ -11,23 +11,36 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-customerBean:CustomerBean 
-  constructor(public loginService:LoginService, private util: UtilService, private customerApiService:CustomerApiService, private customerService: CustomerService) { }
+  customerBean: CustomerBean
+  public myStorage: Storage = sessionStorage;
+  constructor(public loginService: LoginService, private util: UtilService, private customerApiService: CustomerApiService, public customerService: CustomerService) { }
 
   ngOnInit() {
     this.customerBean = JSON.parse(sessionStorage.getItem("customerBean"));
   }
-  
-  updateData(){
+
+  updateData() {
     const ob = this.customerApiService.updateCustomer(this.customerBean);
     ob.subscribe(
       () => {
         this.customerService.setCustomerData(Number(sessionStorage.getItem("customerId")));
-        this.customerBean = JSON.parse(sessionStorage.getItem("customerBean"));
       },
       error => {
         this.util.PrintErrorToCustomer(error);
       });
+  }
+  updateCustomerPassword(oldPassword,newPassword) {
+    console.log("updateCustomer password as start");
+    const ob = this.customerApiService.updateCustomerPassword(oldPassword,newPassword);
+    ob.subscribe(
+      customerBean => {
+        console.log("updateCustomer password finish sucssesfuly");
+
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+
   }
 
 }

@@ -10,6 +10,7 @@ import { DashboardLyoutComponent } from '../components/content/deshboard/dashboa
 import { UserProfileComponent } from '../components/content/deshboard/customer-deshboard/user-profile/user-profile.component';
 import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
+import { DefaultUrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },

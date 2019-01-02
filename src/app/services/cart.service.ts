@@ -15,14 +15,18 @@ export class CartService {
   cart: Array<Coupon> = [];
   totalPrice: number = 0
   constructor(private loginService: LoginService, private util: UtilService, private router: Router, private http: HttpClient, private couponApiServise: CouponApiService) {
-    
-
+    if (JSON.parse(sessionStorage.getItem("cart"))) {
+      this.cart = JSON.parse(sessionStorage.getItem("cart"));
+      this.totalPrice = Number(sessionStorage.getItem("totalCartPrice"));
+    }
   }
 
 
   public addToCart(coupon: Coupon) {
     this.cart.push(coupon);
     this.setTotalPrice();
+    sessionStorage.setItem("cart", JSON.stringify(this.cart));
+    sessionStorage.setItem("totalCartPrice", String(this.totalPrice));
   }
   public remove(coupon: Coupon) {
     var tempCart: Array<Coupon> = [];
@@ -32,6 +36,8 @@ export class CartService {
       }
       this.cart = tempCart;
       this.setTotalPrice();
+      sessionStorage.setItem("cart", JSON.stringify(this.cart));
+      sessionStorage.setItem("totalCartPrice", String(this.totalPrice));
     });
   }
   public setTotalPrice() {
@@ -49,6 +55,8 @@ export class CartService {
         () => {
           console.log("purchase sucsess");
           this.router.navigate(['/thank-you']);
+          sessionStorage.setItem("cart", JSON.stringify(this.cart));
+          sessionStorage.setItem("totalCartPrice", String(this.totalPrice));
         },
         error => {
           this.util.PrintErrorToCustomer(error);

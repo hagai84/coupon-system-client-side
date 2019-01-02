@@ -12,8 +12,8 @@ export class CustomerApiService {
 
 
   getCustomerData(customerId): Observable<CustomerBean> {
-    var str = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ customerId;
-    return this.http.get<CustomerBean>(str,{ withCredentials: true });
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ customerId;
+    return this.http.get<CustomerBean>(url,{ withCredentials: true });
   }
 
   createCustomer(customerBean:CustomerBean): Observable<Number> {
@@ -22,6 +22,14 @@ export class CustomerApiService {
 
   updateCustomer(customerBean:CustomerBean): Observable<void> {
     return this.http.put<void>("http://localhost:8080/Coupon_System_Web-App/rest/customers",customerBean,{ withCredentials: true });
+  }
+  updateCustomerPassword(newPassword,oldPassword): Observable<void> {
+    let body = new FormData();
+    body.append('oldPassword', oldPassword);
+    body.append('nawPassword', newPassword);
+    let body2 = JSON.stringify(body);
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ sessionStorage.getItem("customerId") + "/password";
+    return this.http.put<void>(url,body2,{ withCredentials: true});
   }
 
 

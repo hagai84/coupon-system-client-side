@@ -11,6 +11,8 @@ import { settings } from 'cluster';
   styleUrls: ['./dashboard-lyout.component.css']
 })
 export class DashboardLyoutComponent implements OnInit {
+  public myStorage :Storage = sessionStorage;
+
   public customerName:String;
   menuList: MenuList[] = [];
   constructor(public customerService: CustomerService, private loginService: LoginService) { }

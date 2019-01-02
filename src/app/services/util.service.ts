@@ -11,6 +11,7 @@ export class UtilService {
 
   public PrintErrorToCustomer(error: HttpErrorResponse) {
     if (error.status > 1000) {
+     
       window.alert(error.error.externalMessage);
     } else {
       window.alert(error.error);
