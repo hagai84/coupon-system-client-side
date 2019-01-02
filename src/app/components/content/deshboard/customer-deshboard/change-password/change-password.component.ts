@@ -8,9 +8,9 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-  public oldPassword =""
-  public newPassword1=""
-  public newPassword2=""
+  public oldPassword ="";
+  public newPassword1="";
+  public newPassword2="";
   constructor(public customerApiService:CustomerApiService, public util:UtilService) { }
 
   ngOnInit() {
