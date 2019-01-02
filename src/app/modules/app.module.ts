@@ -59,11 +59,11 @@ import { LoginGurardServiceService } from '../services/login-gurard-service.serv
 
   ],
   providers: [
+    LoginService,
     CustomerService,
     LoginApiService,
     UtilService,
     CookieService,
-    LoginService,
     CustomerService,
     CouponApiService,
     CartService,

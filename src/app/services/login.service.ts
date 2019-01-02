@@ -39,16 +39,12 @@ export class LoginService {
       });
   }
 
-  checkLogin() {
+  async checkLogin() {
     
-    const ob = this.loginApi.check();
-    ob.subscribe(
-      userBean => {
-        this.afterLogIn(userBean.userId, userBean.userType);
-      },
-      error => {
-        this.util.PrintErrorToCustomer(error);
-      });
+    const userBean = <LogInBean>await this.loginApi.check();
+    if(userBean.userId!=-1){
+      this.afterLogIn(userBean.userId, userBean.userType);
+    }
   }
 
 
