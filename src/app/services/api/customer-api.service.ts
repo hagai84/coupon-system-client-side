@@ -32,6 +32,10 @@ export class CustomerApiService {
     return this.http.put<void>(url,body2,{ withCredentials: true});
   }
 
+  deleteCustomer(customerId): Observable<CustomerBean> {
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ customerId;
+    return this.http.delete<CustomerBean>(url,{ withCredentials: true });
+  }
 
 	
 // 	/**

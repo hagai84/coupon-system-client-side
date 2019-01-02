@@ -4,6 +4,7 @@ import { CustomerBean } from 'src/app/models/customerbean';
 import { CustomerApiService } from 'src/app/services/api/customer-api.service';
 import { UtilService } from 'src/app/services/util.service';
 import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,7 +14,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class UserProfileComponent implements OnInit {
   customerBean: CustomerBean
   public myStorage: Storage = sessionStorage;
-  constructor(public loginService: LoginService, private util: UtilService, private customerApiService: CustomerApiService, public customerService: CustomerService) { }
+  constructor(private router: Router, public loginService: LoginService, private util: UtilService, private customerApiService: CustomerApiService, public customerService: CustomerService) { }
 
   ngOnInit() {
     this.customerBean = JSON.parse(sessionStorage.getItem("customerBean"));
@@ -30,5 +31,18 @@ export class UserProfileComponent implements OnInit {
       });
   }
   
+  deleteCustomer(){
+    const ob = this.customerApiService.deleteCustomer(sessionStorage.getItem("customerId"));
+    ob.subscribe(
+      () => {
+        this.loginService.logout();
+        alert("customer deleted sucsessfully")
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+
+
+  }
 
 }
