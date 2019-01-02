@@ -9,6 +9,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class HeaderComponent implements OnInit{
   public lastMenuButtonThatClicked : String = "buy"; 
+  public myStorage :Storage = sessionStorage;
   constructor(public util : UtilService) { }
   
   ngOnInit() {

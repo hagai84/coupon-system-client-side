@@ -60,7 +60,6 @@ export class LoginService {
     this.setUserId(userId);
     this.setUserType(userType);
     this.setIsLogin(true);
-    this.util.refresgPublicData();
   }
 
   logout() {
@@ -70,7 +69,6 @@ export class LoginService {
       () => {
         sessionStorage.clear();
         this.router.navigate(['../coupons']);
-        this.util.refresgPublicData();
 
       },
       error => {

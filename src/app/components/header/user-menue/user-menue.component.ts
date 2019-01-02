@@ -9,11 +9,10 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./user-menue.component.css']
 })
 export class UserMenueComponent implements OnInit {
-public customerName:String;
+public myStorage :Storage = sessionStorage;
   constructor(public util : UtilService, public customerService: CustomerService, public loginService: LoginService ) { }
 
   ngOnInit() {
-   this.customerName = sessionStorage.getItem("customerName")
   }
 
 }

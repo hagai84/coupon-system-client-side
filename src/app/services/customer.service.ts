@@ -26,7 +26,6 @@ export class CustomerService {
         sessionStorage.setItem("customerName", customerBean.custName);
         sessionStorage.setItem("customerId", String(customerBean.id));
         sessionStorage.setItem("customerBean", JSON.stringify(customerBean))
-        this.util.refresgPublicData();
       },
       error => {
         this.util.PrintErrorToCustomer(error);
