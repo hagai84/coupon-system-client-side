@@ -12,7 +12,7 @@ export class LoginGurardServiceService implements CanActivate {
 
   canActivate(): boolean {
     
-    if (sessionStorage.getItem("isLogin")) {
+    if (this.loginService.isLoggedIn()) {
       return true
     }
     this.router.navigate(["/login"]);
