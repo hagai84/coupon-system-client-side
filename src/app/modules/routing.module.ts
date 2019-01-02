@@ -11,6 +11,7 @@ import { UserProfileComponent } from '../components/content/deshboard/customer-d
 import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
 import { DefaultUrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
+import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "dashboard", component: DashboardLyoutComponent, children:
    [
-      { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent }
+      { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent },
+      { path: "change-Password", canActivate:[LoginGurardServiceService], component: ChangePasswordComponent}
    ]
   },
   {path: "", redirectTo: "coupons",pathMatch: "full"},

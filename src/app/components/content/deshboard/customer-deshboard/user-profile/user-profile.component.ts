@@ -29,18 +29,6 @@ export class UserProfileComponent implements OnInit {
         this.util.PrintErrorToCustomer(error);
       });
   }
-  updateCustomerPassword(oldPassword,newPassword) {
-    console.log("updateCustomer password as start");
-    const ob = this.customerApiService.updateCustomerPassword(oldPassword,newPassword);
-    ob.subscribe(
-      customerBean => {
-        console.log("updateCustomer password finish sucssesfuly");
-
-      },
-      error => {
-        this.util.PrintErrorToCustomer(error);
-      });
-
-  }
+  
 
 }

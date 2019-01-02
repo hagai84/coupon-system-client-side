@@ -31,6 +31,7 @@ import { CompanyApiService } from '../services/api/company-api.service';
 import { CompanyService } from '../services/company.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
 import { LoginGurardServiceService } from '../services/login-gurard-service.service';
+import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { LoginGurardServiceService } from '../services/login-gurard-service.serv
     RegisterComponent,
     DashboardLyoutComponent,
     UserProfileComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
