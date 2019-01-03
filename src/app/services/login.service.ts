@@ -8,6 +8,7 @@ import { CustomerService } from './customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from './util.service';
 import { LoginApiService } from './api/login-api.service';
+import { CompanyService } from './company.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,7 @@ export class LoginService {
 
   public isFinishLogIn: boolean = false;
 
-  constructor(private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
+  constructor(private companyService: CompanyService, private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
     // this.checkLogin();
   }
 
@@ -68,6 +69,9 @@ export class LoginService {
   afterLogIn(userId: Number, userType: string) {
     if (userType == "CUSTOMER") {
       this.customerService.setCustomerData(userId);
+    }
+    if (userType == "COMPANY") {
+      this.companyService.setCompanyData(userId);
     }
     this.setUserId(userId);
     this.setUserType(userType);

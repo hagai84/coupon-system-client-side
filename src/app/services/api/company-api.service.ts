@@ -9,8 +9,32 @@ import { HttpClient } from '@angular/common/http';
 export class CompanyApiService {
 
   constructor(private http : HttpClient) { }
-
+  
+  getCompanyData(customerId): Observable<CompanyBean> {
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/companies/"+ customerId;
+    return this.http.get<CompanyBean>(url,{ withCredentials: true });
+  }
   createCompany(companyBean:CompanyBean): Observable<Number> {
     return this.http.post<Number>("http://localhost:8080/Coupon_System_Web-App/rest/companies",companyBean,{ withCredentials: true });
   }
+ 
+  updateCompany(companyBean:CompanyBean): Observable<void> {
+    return this.http.put<void>("http://localhost:8080/Coupon_System_Web-App/rest/companies",companyBean,{ withCredentials: true });
+  }
+ 
+  updateCompanyPassword(newPassword,oldPassword): Observable<void> {
+    let body = new FormData();
+    body.append('oldPassword', oldPassword);
+    body.append('nawPassword', newPassword);
+    let body2 = JSON.stringify(body);
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/companies/"+ sessionStorage.getItem("customerId") + "/password";
+    return this.http.put<void>(url,body2,{ withCredentials: true});
+  }
+
+  deleteCompany(companyId): Observable<void> {
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/companies/"+ companyId;
+    return this.http.delete<void>(url,{ withCredentials: true });
+  }
+
+
 }
