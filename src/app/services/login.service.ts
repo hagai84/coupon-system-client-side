@@ -21,7 +21,7 @@ export class LoginService {
   }
 
   async isLoggedIn():Promise<boolean> {
-    if (sessionStorage.getItem("isLogin")) {
+    if (sessionStorage.getItem("isLogin")&&localStorage.getItem("isLogin")) {
       console.log("isLogin");
       this.isFinishLogIn=true;
       return true;
@@ -31,13 +31,13 @@ export class LoginService {
       await this.checkLogin();
     }
     
-    if (sessionStorage.getItem("isLogin")) {
+    if (sessionStorage.getItem("isLogin")&&localStorage.getItem("isLogin")) {
       console.log("isLogin2");
       
       return true;
     }
     console.log("isLogin3");
-
+    
     return false;
   }
   
@@ -45,7 +45,9 @@ export class LoginService {
     const ob = this.loginApi.login(loginBean);
     ob.subscribe(
       userId => {
-        this.afterLogIn(userId, loginBean.userType);
+        console.log(loginBean);
+        loginBean.userId=userId;
+        this.afterLogIn(loginBean);
         this.router.navigate(['/' + loginBean.userType.toLowerCase() + '-coupons']);
       },
       error => {
@@ -55,27 +57,35 @@ export class LoginService {
     
     async checkLogin() {
       
-      const userBean = <LogInBean>await this.loginApi.check();
-      console.log(userBean.userId);
-      
-      if(userBean.userId!=-1){
-        this.afterLogIn(userBean.userId, userBean.userType);
+      if(localStorage.getItem("rememberMe")||localStorage.getItem("isLogin")){
+        const userBean = <LogInBean>await this.loginApi.check();
+        console.log(userBean);
+        
+        if(userBean.userId!=-1){
+          this.afterLogIn(userBean);
+        }
       }
       this.isFinishLogIn = true;
     }
-
-
-
-  afterLogIn(userId: Number, userType: string) {
-    if (userType == "CUSTOMER") {
-      this.customerService.setCustomerData(userId);
+    
+    
+    
+  afterLogIn(userBean:LogInBean) {
+    if (userBean.userType == "CUSTOMER") {
+      console.log(userBean.userId);
+      
+      this.customerService.setCustomerData(userBean.userId);
     }
-    if (userType == "COMPANY") {
-      this.companyService.setCompanyData(userId);
+    if (userBean.userType == "COMPANY") {
+      this.companyService.setCompanyData(userBean.userId);
     }
-    this.setUserId(userId);
-    this.setUserType(userType);
+    this.setUserId(userBean.userId);
+    this.setUserType(userBean.userType);
     this.setIsLogin(true);
+    localStorage.setItem("isLogin","true");
+    if(userBean.rememberMe=="true"){
+      localStorage.setItem("rememberMe","true");
+    }
     console.log("isLogin4");
 
   }
@@ -86,6 +96,8 @@ export class LoginService {
 
       () => {
         sessionStorage.clear();
+        localStorage.removeItem("rememberMe");
+        localStorage.removeItem("isLogin");
         this.router.navigate(['../coupons']);
 
       },
