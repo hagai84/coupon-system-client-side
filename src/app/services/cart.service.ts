@@ -15,7 +15,7 @@ export class CartService {
   cart: Array<Coupon> = [];
   totalPrice: number = 0
   constructor(private loginService: LoginService, private util: UtilService, private router: Router, private http: HttpClient, private couponApiServise: CouponApiService) {
-    this.readCart();
+    // this.readCart();
   }
 
   public readCart(){
@@ -29,7 +29,7 @@ export class CartService {
 
   public addToCart(coupon: Coupon) {
     let buy:boolean=true;
-    this.readCart();
+    // this.readCart();
     this.cart.forEach(element => {    
       if(element.couponId === coupon.couponId){
         buy=false;
@@ -45,7 +45,7 @@ export class CartService {
     }
   }
   public remove(coupon: Coupon) {
-    this.readCart();
+    // this.readCart();
     var tempCart: Array<Coupon> = [];
     this.cart.forEach(element => {
       if (element.couponId != coupon.couponId) {
