@@ -8,12 +8,16 @@
               <tbody>
                 <tr>
                   <td>User Name:</td>
-                  <td><input type="text" [(ngModel)]="customerBean.custName"></td>
+                  <td><input type="text" [(ngModel)]="companyBean.compName"></td>
+                </tr>
+                <tr>
+                  <td>User email:</td>
+                  <td><input type="text" [(ngModel)]="companyBean.email"></td>
                 </tr>
               </tbody>
             </table>
             <a (click)="updateData()" class="btn btn-primary ml-2">Save</a>
-            <a (click)="deleteCustomer()" class="btn btn-danger ml-2">Delete Account</a>
+            <a (click)="deleteCompany()" class="btn btn-danger ml-2">Delete Account</a>
           </div>
         </div>
       </div>
