@@ -23,8 +23,11 @@
       <a class="btn btn-outline-success my-2 my-sm-0" routerLink="login">login</a>
     </div>
 
-    <div *ngIf="myStorage.getItem('isLogin')" class="form-inline my-2 my-lg-0">
+    <div *ngIf="myStorage.getItem('isLogin')&&myStorage.getItem('userType')=='CUSTOMER'" class="form-inline my-2 my-lg-0">
       <app-user-menue></app-user-menue>
+    </div>
+    <div *ngIf="myStorage.getItem('isLogin')&&myStorage.getItem('userType')=='COMPANY'" class="form-inline my-2 my-lg-0">
+      <app-company-menu></app-company-menu>
     </div>
   </div>
 </nav>

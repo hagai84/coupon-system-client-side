@@ -33,6 +33,7 @@ import { AllCouponsComponent } from '../components/content/coupons/all-coupons-l
 import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
+import { CompanyMenuComponent } from '../components/header/company-menu/company-menu.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CompanyProfileComponent } from '../components/content/deshboard/company
     UserProfileComponent,
     ChangePasswordComponent,
     CompanyProfileComponent,
+    CompanyMenuComponent,
   ],
   imports: [
     BrowserModule,

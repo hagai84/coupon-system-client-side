@@ -12,11 +12,13 @@ import { LoginGurardServiceService } from '../services/login-gurard-service.serv
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
 import { DefaultUrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
+import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "coupons", component: AllCouponsComponent },
   { path: "customer-coupons", canActivate:[LoginGurardServiceService], component:  AllCouponsComponent },
+  { path: "company-coupons", canActivate:[LoginGurardServiceService], component:  AllCouponsComponent },
   { path: "coupon", component: CouponComponent },
   { path: "cart",  component: CartComponent },
   { path: "thank-you", component: ThankYouComponent },
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: "dashboard", component: DashboardLyoutComponent, children:
    [
       { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent },
+      { path: "company-profile", canActivate:[LoginGurardServiceService], component: CompanyProfileComponent },
       { path: "change-Password", canActivate:[LoginGurardServiceService], component: ChangePasswordComponent}
    ]
   },
