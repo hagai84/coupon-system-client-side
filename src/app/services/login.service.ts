@@ -26,11 +26,18 @@ export class LoginService {
         sessionStorage.clear();
         //TODO shld refresh view
         await this.loginApi.check();
-        this.isFinishLogIn = true;
+        // this.isFinishLogIn = true;
         return false;
-      }else{
+      }else if(localStorage.getItem("userId")===sessionStorage.getItem("userId")&&
+                localStorage.getItem("userType")===sessionStorage.getItem("userType")){
         this.isFinishLogIn=true;
         return true;
+      }else{
+        //TODO shld refresh view
+        this.router.navigate(['/coupons']);
+        await this.checkLogin();
+        // this.isFinishLogIn = true;
+        return false;
       }
     }else{
       return await this.checkLogin();
@@ -78,38 +85,44 @@ export class LoginService {
     this.setUserId(userBean.userId);
     this.setUserType(userBean.userType);
     this.setIsLogin(true);
-    localStorage.setItem("isLogin","true");
     if(userBean.rememberMe=="true"){
       localStorage.setItem("rememberMe","true");
     }
   }
-
+  
   logout() {
     const ob = this.loginApi.logout();
     ob.subscribe(
-
+      
       () => {
         sessionStorage.clear();
         localStorage.removeItem("rememberMe");
         localStorage.removeItem("isLogin");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userType");
         this.router.navigate(['../coupons']);
-
+        
       },
       error => {
         this.util.PrintErrorToCustomer(error);
       });
-  }
-
-
-
-
-  setIsLogin(isLogin: boolean) {
-    sessionStorage.setItem("isLogin", String(isLogin));
-  }
+    }
+    
+    
+    
+    
+    setIsLogin(isLogin: boolean) {
+      sessionStorage.setItem("isLogin", String(isLogin));
+      localStorage.setItem("isLogin","true");
+    }
   setUserId(userId: Number) {
     sessionStorage.setItem("userId", String(userId));
+    localStorage.setItem("userId", String(userId));
+
   }
   setUserType(userType: string) {
     sessionStorage.setItem("userType", userType);
+    localStorage.setItem("userType", userType);
+
   }
 }

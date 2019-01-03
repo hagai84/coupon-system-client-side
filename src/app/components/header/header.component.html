@@ -7,17 +7,23 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="coupons"  name = "Buy">Buy </a>
-      </li>
-      <!-- <ng-container *ngIf="!mylocalStorage.getItem('isLogin')&&mysessionStorage.getItem('isLogin')" >{{loginService.isLoggedIn()}}</ng-container>
-      <ng-container *ngIf="mylocalStorage.getItem('isLogin')&&!mysessionStorage.getItem('isLogin')" >{{loginService.isLoggedIn()}}</ng-container> -->
-      <li *ngIf="mysessionStorage.getItem('isLogin')" class="nav-item active">
-        <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">My Coupons</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="cart" name = "cart">Cart</a>
-      </li>
+      <!-- <ng-container *ngIf="mysessionStorage.getItem('isLogin')" > -->
+        <!-- <ng-container *ngIf="mysessionStorage.getItem('userType')=='CUSTOMER'" > -->
+            <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'" class="nav-item active">
+              <a class="nav-link" routerLink="coupons"  name = "Buy">Buy </a>
+            </li>
+            <li *ngIf="mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='CUSTOMER'" class="nav-item active">
+              <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">My Coupons</a>
+            </li>
+            <li *ngIf="mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='COMPANY'" class="nav-item active">
+                <a class="nav-link" routerLink="company-coupons" name= "My Coupons">My Coupons</a>
+              </li>
+            <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'" class="nav-item active">
+              <a class="nav-link" routerLink="cart" name = "cart">Cart</a>
+            </li>
+          
+            <!-- </ng-container> -->
+      <!-- </ng-container> -->
     </ul>
 
 
