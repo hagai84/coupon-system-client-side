@@ -10,9 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HeaderComponent implements OnInit{
   public lastMenuButtonThatClicked : String = "buy"; 
-  public mylocalStorage :Storage = localStorage;
   public mysessionStorage :Storage = sessionStorage;
-  public myStorage :Storage = sessionStorage;
 
   constructor(public util : UtilService, private loginService:LoginService) { }
   

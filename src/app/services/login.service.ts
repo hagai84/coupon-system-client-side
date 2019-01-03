@@ -22,28 +22,19 @@ export class LoginService {
 
   async isLoggedIn():Promise<boolean> {
     this.isFinishLogIn=false;
-    if (sessionStorage.getItem("isLogin")&&!localStorage.getItem("isLogin")) {
-      sessionStorage.clear();
-      return false;
-    }
-    if (sessionStorage.getItem("isLogin")&&localStorage.getItem("isLogin")) {
-      console.log("isLogin");
-      this.isFinishLogIn=true;
-      return true;
-    }
-    if (!this.isFinishLogIn) {
-      console.log("check");
-      await this.checkLogin();
+    if (sessionStorage.getItem("isLogin")){
+      if(!localStorage.getItem("isLogin")) {
+        sessionStorage.clear();
+        this.isFinishLogIn = true;
+        return false;
+      }else{
+        this.isFinishLogIn=true;
+        return true;
+      }
+    }else{
+      return await this.checkLogin();
     }
     
-    if (sessionStorage.getItem("isLogin")&&localStorage.getItem("isLogin")) {
-      console.log("isLogin2");
-      
-      return true;
-    }
-    console.log("isLogin3");
-    
-    return false;
   }
   
   public submitLogin(loginBean: LogInBean) {
@@ -60,7 +51,7 @@ export class LoginService {
       });
     }
     
-    async checkLogin() {
+    async checkLogin():Promise<boolean> {
       
       if(localStorage.getItem("rememberMe")||localStorage.getItem("isLogin")){
         const userBean = <LogInBean>await this.loginApi.check();
@@ -68,9 +59,13 @@ export class LoginService {
         
         if(userBean.userId!=-1){
           this.afterLogIn(userBean);
+          this.isFinishLogIn = true;
+          return true;
         }
+      }else{
+        this.isFinishLogIn = true;
+        return false;
       }
-      this.isFinishLogIn = true;
     }
     
     

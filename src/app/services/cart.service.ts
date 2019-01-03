@@ -15,7 +15,7 @@ export class CartService {
   cart: Array<Coupon> = [];
   totalPrice: number = 0
   constructor(private loginService: LoginService, private util: UtilService, private router: Router, private http: HttpClient, private couponApiServise: CouponApiService) {
-    // this.readCart();
+    this.readCart();
   }
 
   public readCart(){

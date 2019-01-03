@@ -6,13 +6,11 @@ import { CartService } from 'src/app/services/cart.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
-  public mylocalStorage:Storage = localStorage; 
+export class CartComponent implements OnInit { 
 
   constructor(public cartService:CartService) { }
 
   ngOnInit() {
-    this.cartService.readCart();
   }
 
 }
