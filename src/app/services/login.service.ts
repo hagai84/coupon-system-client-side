@@ -21,6 +21,11 @@ export class LoginService {
   }
 
   async isLoggedIn():Promise<boolean> {
+    this.isFinishLogIn=false;
+    if (sessionStorage.getItem("isLogin")&&!localStorage.getItem("isLogin")) {
+      sessionStorage.clear();
+      return false;
+    }
     if (sessionStorage.getItem("isLogin")&&localStorage.getItem("isLogin")) {
       console.log("isLogin");
       this.isFinishLogIn=true;

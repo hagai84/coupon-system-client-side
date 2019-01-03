@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -9,8 +10,11 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class HeaderComponent implements OnInit{
   public lastMenuButtonThatClicked : String = "buy"; 
+  public mylocalStorage :Storage = localStorage;
+  public mysessionStorage :Storage = sessionStorage;
   public myStorage :Storage = sessionStorage;
-  constructor(public util : UtilService) { }
+
+  constructor(public util : UtilService, private loginService:LoginService) { }
   
   ngOnInit() {
   }

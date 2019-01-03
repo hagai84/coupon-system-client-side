@@ -1,5 +1,5 @@
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
-<div class="container">
+<div class="container" >
   <div class="card shopping-cart">
     <div class="card-header bg-dark text-light">
       <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -9,8 +9,9 @@
     <div class="card-body">
 
       <!-- PRODUCT -->
-      <div class="row" *ngFor="let coupon of cartService.cart" style="margin: 1%">
-        <div class="col-12 col-sm-12 col-md-2 text-center">
+      <!-- <ng-container *ngIf="mylocalStorage.getItem('cart')!=null"> -->
+        <div class="row" *ngFor="let coupon of cartService.cart" style="margin: 1%">
+          <div class="col-12 col-sm-12 col-md-2 text-center">
           <img class="img-responsive" [src]="coupon.image" width="120" height="80">
         </div>
         <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
@@ -31,6 +32,7 @@
           </div>
         </div>
       </div>
+    <!-- </ng-container> -->
       <hr>
       <br>
       <!-- END PRODUCT -->

@@ -7,10 +7,12 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  public mylocalStorage:Storage = localStorage; 
 
   constructor(public cartService:CartService) { }
 
   ngOnInit() {
+    this.cartService.readCart();
   }
 
 }

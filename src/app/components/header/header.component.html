@@ -8,25 +8,27 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="coupons" ng name = "Buy">Buy </a>
+        <a class="nav-link" routerLink="coupons"  name = "Buy">Buy </a>
       </li>
-      <li *ngIf="myStorage.getItem('isLogin')" class="nav-item active">
+      <ng-container *ngIf="!mylocalStorage.getItem('isLogin')&&mysessionStorage.getItem('isLogin')" >{{loginService.isLoggedIn()}}</ng-container>
+      <ng-container *ngIf="mylocalStorage.getItem('isLogin')&&!mysessionStorage.getItem('isLogin')" >{{loginService.isLoggedIn()}}</ng-container>
+      <li *ngIf="mylocalStorage.getItem('isLogin')&&mysessionStorage.getItem('isLogin')" class="nav-item active">
         <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">My Coupons</a>
       </li>
-      <li *ngIf="myStorage.getItem('isLogin')" class="nav-item active">
+      <li class="nav-item active">
         <a class="nav-link" routerLink="cart" name = "cart">Cart</a>
       </li>
     </ul>
 
 
-    <div *ngIf="!myStorage.getItem('isLogin')" class="form-inline my-2 my-lg-0">
+    <div *ngIf="!mylocalStorage.getItem('isLogin')||!mysessionStorage.getItem('isLogin')" class="form-inline my-2 my-lg-0">
       <a class="btn btn-outline-success my-2 my-sm-0" routerLink="login">login</a>
     </div>
 
-    <div *ngIf="myStorage.getItem('isLogin')&&myStorage.getItem('userType')=='CUSTOMER'" class="form-inline my-2 my-lg-0">
+    <div *ngIf="mylocalStorage.getItem('isLogin')&&mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='CUSTOMER'" class="form-inline my-2 my-lg-0">
       <app-user-menue></app-user-menue>
     </div>
-    <div *ngIf="myStorage.getItem('isLogin')&&myStorage.getItem('userType')=='COMPANY'" class="form-inline my-2 my-lg-0">
+    <div *ngIf="mylocalStorage.getItem('isLogin')&&mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='COMPANY'" class="form-inline my-2 my-lg-0">
       <app-company-menu></app-company-menu>
     </div>
   </div>
