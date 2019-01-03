@@ -23,7 +23,7 @@ export class LoginService {
     if (sessionStorage.getItem("isLogin")) {
       console.log("isLogin");
       this.isFinishLogIn=true;
-      return true
+      return true;
     }
     if (!this.isFinishLogIn) {
       console.log("check");
@@ -31,8 +31,12 @@ export class LoginService {
     }
     
     if (sessionStorage.getItem("isLogin")) {
-      return true
+      console.log("isLogin2");
+      
+      return true;
     }
+    console.log("isLogin3");
+
     return false;
   }
   
@@ -51,6 +55,8 @@ export class LoginService {
     async checkLogin() {
       
       const userBean = <LogInBean>await this.loginApi.check();
+      console.log(userBean.userId);
+      
       if(userBean.userId!=-1){
         this.afterLogIn(userBean.userId, userBean.userType);
       }
@@ -66,6 +72,8 @@ export class LoginService {
     this.setUserId(userId);
     this.setUserType(userType);
     this.setIsLogin(true);
+    console.log("isLogin4");
+
   }
 
   logout() {

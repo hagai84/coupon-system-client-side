@@ -12,7 +12,10 @@ export class LyoutComponent implements OnInit {
   constructor(private loginService:LoginService) { }
 
   async ngOnInit() {
-    this.isInitialized = await this.loginService.isLoggedIn();
+    await this.loginService.isLoggedIn();
+    // if(sessionStorage.getItem("isLogin")){
+      this.isInitialized = true;
+  // }
   }
 
 }
