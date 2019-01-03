@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CouponApiService {
-  public coupons: Coupon[];
-
+  
   constructor(private http:  HttpClient) { }
   public getCoupons():Observable<Coupon[]>{
     return this.http.get<Coupon[]>("http://localhost:8080/Coupon_System_Web-App/rest/coupons",{ withCredentials: true });
@@ -17,8 +16,6 @@ export class CouponApiService {
     var urlString = "http://localhost:8080/Coupon_System_Web-App/rest/coupons/type?couponType="+filter;
     return this.http.get<Coupon[]>(urlString,{ withCredentials: true });
   }
-
-  
   
   public getCustomerCoupons(customerId : Number):Observable<Coupon[]>{
     let restUrl = "http://localhost:8080/Coupon_System_Web-App/rest/coupons/customer/" + customerId;

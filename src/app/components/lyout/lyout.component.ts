@@ -18,11 +18,7 @@ export class LyoutComponent implements OnInit {
   async refreshData($event) {
     // do something meaningful with it
     this.cartService.readCart();
-    // this.couponService.coupons=[];
-    await this.loginService.isLoggedIn(); 
-    // this.router.onSameUrlNavigation="reload";  
-    // this.router.navigateByUrl(this.router.url);
-    // this.router.onSameUrlNavigation="ignore";  
+    await this.loginService.isLoggedIn();   
     console.log("refresh");
     
   }
@@ -30,13 +26,7 @@ export class LyoutComponent implements OnInit {
   constructor(private loginService:LoginService, private cartService:CartService, private couponService:CouponApiService, private router:Router) { }
 
   async ngOnInit() {
-    
-   
-    // this.isInitialized=sessionStorage.getItem("isLogin");
     await this.loginService.isLoggedIn();
-    // if(sessionStorage.getItem("isLogin")){
-      // this.isInitialized = true;
-  // }
   }
 
 }

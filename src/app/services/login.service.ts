@@ -17,7 +17,6 @@ export class LoginService {
   public isFinishLogIn: boolean = false;
 
   constructor(private companyService: CompanyService, private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-    // this.checkLogin();
   }
 
   async isLoggedIn():Promise<boolean> {
@@ -43,7 +42,6 @@ export class LoginService {
     const ob = this.loginApi.login(loginBean);
     ob.subscribe(
       userId => {
-        console.log(loginBean);
         loginBean.userId=userId;
         this.afterLogIn(loginBean);
         this.router.navigate(['/' + loginBean.userType.toLowerCase() + '-coupons']);
@@ -56,9 +54,7 @@ export class LoginService {
     async checkLogin():Promise<boolean> {
       
       if(localStorage.getItem("rememberMe")||localStorage.getItem("isLogin")){
-        const userBean = <LogInBean>await this.loginApi.check();
-        console.log(userBean);
-        
+        const userBean = <LogInBean>await this.loginApi.check();        
         if(userBean.userId!=-1){
           this.afterLogIn(userBean);
           this.isFinishLogIn = true;
@@ -73,9 +69,7 @@ export class LoginService {
     
     
   afterLogIn(userBean:LogInBean) {
-    if (userBean.userType == "CUSTOMER") {
-      console.log(userBean.userId);
-      
+    if (userBean.userType == "CUSTOMER") {      
       this.customerService.setCustomerData(userBean.userId);
     }
     if (userBean.userType == "COMPANY") {
@@ -88,8 +82,6 @@ export class LoginService {
     if(userBean.rememberMe=="true"){
       localStorage.setItem("rememberMe","true");
     }
-    console.log("isLogin4");
-
   }
 
   logout() {
