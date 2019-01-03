@@ -10,11 +10,14 @@ export class LoginGurardServiceService implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) { }
 
 
-  canActivate(): boolean {
+  async canActivate(): Promise<boolean> {
     
-    if (this.loginService.isLoggedIn()) {
-      return true
+    if (await this.loginService.isLoggedIn()) {
+      console.log("route true");
+      return true;
     }
+    console.log("route");
+    
     this.router.navigate(["/login"]);
 
     window.alert("This page requires login");

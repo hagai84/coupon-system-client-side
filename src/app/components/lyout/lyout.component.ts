@@ -8,13 +8,15 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LyoutComponent implements OnInit {
   public isInitialized:boolean=false;
+  public myStorage:Storage = sessionStorage;
 
   constructor(private loginService:LoginService) { }
 
   async ngOnInit() {
+    // this.isInitialized=sessionStorage.getItem("isLogin");
     await this.loginService.isLoggedIn();
     // if(sessionStorage.getItem("isLogin")){
-      this.isInitialized = true;
+      // this.isInitialized = true;
   // }
   }
 
