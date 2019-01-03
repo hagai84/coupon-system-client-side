@@ -17,29 +17,26 @@ export class LoginService {
   public isFinishLogIn: boolean = false;
 
   constructor(private companyService: CompanyService, private http: HttpClient, private loginApi: LoginApiService, private util: UtilService, private cookieService: CookieService, private customerService: CustomerService, private router: Router) {
-    this.checkLogin();
+    // this.checkLogin();
   }
 
   async isLoggedIn():Promise<boolean> {
-    if (this.isFinishLogIn) {
-      console.log("isFinished");
-      return true
-    }
     if (sessionStorage.getItem("isLogin")) {
       console.log("isLogin");
       this.isFinishLogIn=true;
       return true
     }
-    console.log("check");
-    await this.checkLogin();
+    if (!this.isFinishLogIn) {
+      console.log("check");
+      await this.checkLogin();
+    }
     
-    this.isFinishLogIn = true;
     if (sessionStorage.getItem("isLogin")) {
       return true
     }
     return false;
   }
-
+  
   public submitLogin(loginBean: LogInBean) {
     const ob = this.loginApi.login(loginBean);
     ob.subscribe(
@@ -50,15 +47,16 @@ export class LoginService {
       error => {
         this.util.PrintErrorToCustomer(error);
       });
-  }
-
-  async checkLogin() {
-    
-    const userBean = <LogInBean>await this.loginApi.check();
-    if(userBean.userId!=-1){
-      this.afterLogIn(userBean.userId, userBean.userType);
     }
-  }
+    
+    async checkLogin() {
+      
+      const userBean = <LogInBean>await this.loginApi.check();
+      if(userBean.userId!=-1){
+        this.afterLogIn(userBean.userId, userBean.userType);
+      }
+      this.isFinishLogIn = true;
+    }
 
 
 
