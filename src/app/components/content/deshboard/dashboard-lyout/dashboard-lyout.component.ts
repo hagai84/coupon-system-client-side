@@ -44,6 +44,7 @@ export class DashboardLyoutComponent implements OnInit {
   }
   buildCompanyMenuList() {
     this.menuList.push(new MenuList("Profile","profile"));
+    this.menuList.push(new MenuList("Change Passwprd","change-Password"));
     this.menuList.push(new MenuList("Account Setting","settings"));
     this.menuList.push(new MenuList("create new product","create-product"));
     this.menuList.push(new MenuList("selles History","history"));

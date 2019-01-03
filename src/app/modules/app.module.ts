@@ -32,6 +32,7 @@ import { CompanyService } from '../services/company.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
 import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
+import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ChangePasswordComponent } from '../components/content/deshboard/custome
     DashboardLyoutComponent,
     UserProfileComponent,
     ChangePasswordComponent,
+    CompanyProfileComponent,
   ],
   imports: [
     BrowserModule,

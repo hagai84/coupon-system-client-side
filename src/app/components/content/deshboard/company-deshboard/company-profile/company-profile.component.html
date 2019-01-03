@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6  offset-md-0  toppad">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Update Your Data</h2>
+            <table class="table table-user-information ">
+              <tbody>
+                <tr>
+                  <td>User Name:</td>
+                  <td><input type="text" [(ngModel)]="customerBean.custName"></td>
+                </tr>
+              </tbody>
+            </table>
+            <a (click)="updateData()" class="btn btn-primary ml-2">Save</a>
+            <a (click)="deleteCustomer()" class="btn btn-danger ml-2">Delete Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

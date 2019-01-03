@@ -23,4 +23,23 @@ export class CompanyService {
         this.util.PrintErrorToCustomer(error);
       });
   }
+
+
+  public setCompanyData(customerId: Number) {
+    const ob = this.companyApi.getCompanyData(customerId);
+    ob.subscribe(
+      companyBean => {
+        sessionStorage.setItem("companyName", companyBean.compName);
+        sessionStorage.setItem("customerId", String(companyBean.id));
+        sessionStorage.setItem("customerEmail", String(companyBean.email));
+        sessionStorage.setItem("customerBean", JSON.stringify(companyBean))
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+  }
+
+
+
+
 }
