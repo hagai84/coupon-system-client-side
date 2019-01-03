@@ -25,6 +25,8 @@ export class LoginService {
     if (sessionStorage.getItem("isLogin")){
       if(!localStorage.getItem("isLogin")) {
         sessionStorage.clear();
+        //TODO shld refresh view
+        await this.loginApi.check();
         this.isFinishLogIn = true;
         return false;
       }else{

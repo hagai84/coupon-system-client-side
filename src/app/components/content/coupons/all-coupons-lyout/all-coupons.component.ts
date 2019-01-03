@@ -11,17 +11,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./all-coupons.component.css']
 })
 export class AllCouponsComponent implements OnInit {
-  public coupons: Coupon[];
+  // public coupons: Coupon[];
 
 
   constructor(private router: Router, private util: UtilService, private couponApiService: CouponApiService, private cookieService: CookieService) { }
 
   ngOnInit() {
     if (this.router.url == "/coupons") {
-
       this.setCouponsToAllSyteCoupons();
-    }
-    if (this.router.url == "/customer-coupons") {
+    }else if(!sessionStorage.getItem('isLogin')){
+      console.log("happening");
+      
+      this.router.navigate(['../coupons']);
+    }else if (this.router.url == "/customer-coupons") {
+      console.log("not  happening");
+
       this.setCouponsToCustomerCoupons();
     }
   }
@@ -30,7 +34,7 @@ export class AllCouponsComponent implements OnInit {
   setCouponsToAllSyteCoupons() {
     const ob = this.couponApiService.getCoupons();
     ob.subscribe(coupons => {
-      this.coupons = coupons;
+      this.couponApiService.coupons = coupons;
     }, error => {
       this.util.PrintErrorToCustomer(error);
     });
@@ -39,7 +43,7 @@ export class AllCouponsComponent implements OnInit {
   setCouponsToCustomerCoupons() {
     const ob = this.couponApiService.getCustomerCoupons(Number(sessionStorage.getItem("userId")));
     ob.subscribe(coupons => {
-      this.coupons = coupons;
+      this.couponApiService.coupons = coupons;
     }, error => {
       this.util.PrintErrorToCustomer(error);
     });

@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CouponApiService {
+  public coupons: Coupon[];
 
   constructor(private http:  HttpClient) { }
   public getCoupons():Observable<Coupon[]>{
