@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CustomerBean } from '../models/customerbean';
 import { HttpClient } from '@angular/common/http';
-import { Coupon } from '../models/coupon';
-import { UtilService } from './util.service';
-import { CustomerApiService } from './api/customer-api.service';
 import { Router } from '@angular/router';
 import { error } from '@angular/compiler/src/util';
+import { Coupon } from 'src/app/models/coupon';
+import { CustomerBean } from 'src/app/models/customerbean';
+import { CustomerApiService } from '../api/customer-api.service';
+import { UtilService } from '../util.service';
 
 @Injectable({
   providedIn: 'root'

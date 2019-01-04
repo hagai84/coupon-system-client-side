@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { UtilService } from 'src/app/services/util.service';
 import { CompanyApiService } from 'src/app/services/api/company-api.service';
-import { CompanyService } from 'src/app/services/company.service';
+import { CompanyService } from 'src/app/services/res/reources/company.service';
 
 @Component({
   selector: 'app-company-profile',

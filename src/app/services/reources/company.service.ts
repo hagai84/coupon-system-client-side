@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CompanyBean } from '../models/CompanyBean';
-import { CompanyApiService } from './api/company-api.service';
 import { Router } from '@angular/router';
-import { UtilService } from './util.service';
+import { CompanyBean } from 'src/app/models/CompanyBean';
+import { UtilService } from '../util.service';
+import { CompanyApiService } from '../api/company-api.service';
 
 @Injectable({
   providedIn: 'root'

@@ -4,11 +4,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { LogInBean } from '../models/logInBean';
 import { HeaderComponent } from '../components/header/header.component';
-import { CustomerService } from './customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from './util.service';
 import { LoginApiService } from './api/login-api.service';
-import { CompanyService } from './company.service';
+import { CompanyService } from './reources/company.service';
+import { CustomerService } from './reources/customer.service';
 @Injectable({
   providedIn: 'root'
 })

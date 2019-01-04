@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Coupon } from 'src/app/models/coupon';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { CouponService } from 'src/app/services/coupon.service';
+import { CouponService } from 'src/app/services/res/reources/coupon.service';
 
 @Component({
   selector: 'app-coupons',

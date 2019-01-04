@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Coupon } from '../models/coupon';
+import { Coupon } from 'src/app/models/coupon';
 
 @Injectable({
   providedIn: 'root'

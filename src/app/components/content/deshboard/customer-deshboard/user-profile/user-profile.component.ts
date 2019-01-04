@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerService } from 'src/app/services/res/reources/customer.service';
 import { CustomerBean } from 'src/app/models/customerbean';
 import { CustomerApiService } from 'src/app/services/api/customer-api.service';
 import { UtilService } from 'src/app/services/util.service';

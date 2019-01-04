@@ -8,14 +8,14 @@ import { RegisterComponent } from '../components/content/login/register/register
 import { ThankYouComponent } from '../components/content/massagesToUser/thankYouForBoying/thank-you.component';
 import { DashboardLyoutComponent } from '../components/content/deshboard/dashboard-lyout/dashboard-lyout.component';
 import { UserProfileComponent } from '../components/content/deshboard/customer-deshboard/user-profile/user-profile.component';
-import { LoginGurardServiceService } from '../services/login-gurard-service.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
-import { DefaultUrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
-import { CustomerGuardServiceService } from '../services/customer-guard-service.service';
-import { CompanyGuardServiceService } from '../services/company-guard-service.service';
-import { GuestGuardServiceService } from '../services/guest-guard-service.service';
+import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
+import { GuestGuardServiceService } from '../services/gurds/guest-guard-service.service';
+import { CustomerGuardServiceService } from '../services/gurds/customer-guard-service.service';
+import { CompanyGuardServiceService } from '../services/gurds/company-guard-service.service';
+import { LoginGurardServiceService } from '../services/gurds/login-gurard-service.service';
 
 const routes: Routes = [
   { path: "login", canActivate:[GuestGuardServiceService], component: LoginComponent },
@@ -30,15 +30,11 @@ const routes: Routes = [
    [
       { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent },
       { path: "company-profile", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CompanyProfileComponent },
-      { path: "change-Password", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: ChangePasswordComponent}
+      { path: "change-Password", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: ChangePasswordComponent},
+      { path: "change-Password", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CreateProductComponent}
    ]
   },
   {path: "", redirectTo: "coupons",pathMatch: "full"},
-
-
-
-
-  
   {path: "**", redirectTo: "https://www.youtube.com/watch?v=t3otBjVZzT0"}
 ];
 

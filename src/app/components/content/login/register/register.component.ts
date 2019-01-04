@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerBean } from 'src/app/models/customerbean';
-import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerService } from 'src/app/services/res/reources/customer.service';
 import { CompanyBean } from 'src/app/models/CompanyBean';
-import { CompanyService } from 'src/app/services/company.service';
+import { CompanyService } from 'src/app/services/res/reources/company.service';
 import { Router } from '@angular/router';
 
 @Component({
