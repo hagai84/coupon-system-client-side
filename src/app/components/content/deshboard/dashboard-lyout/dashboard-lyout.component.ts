@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerApiService } from 'src/app/services/api/customer-api.service';
 import { LoginService } from 'src/app/services/login.service';
-import { CustomerService } from 'src/app/services/res/reources/customer.service';
 import { MenuList } from 'src/app/models/MenuList';
-import { settings } from 'cluster';
+import { CustomerService } from 'src/app/services/reources/customer.service';
 
 @Component({
   selector: 'app-dashboard-lyout',

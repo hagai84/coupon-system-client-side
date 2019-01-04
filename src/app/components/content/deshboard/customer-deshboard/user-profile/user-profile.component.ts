@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from 'src/app/services/res/reources/customer.service';
 import { CustomerBean } from 'src/app/models/customerbean';
 import { CustomerApiService } from 'src/app/services/api/customer-api.service';
 import { UtilService } from 'src/app/services/util.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { CustomerService } from 'src/app/services/reources/customer.service';
 
 @Component({
   selector: 'app-user-profile',

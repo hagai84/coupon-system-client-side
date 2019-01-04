@@ -13,7 +13,6 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { LoginComponent } from '../components/content/login/login.component';
 import { RoutingModule } from './routing.module';
 import { LoginService } from '../services/login.service';
-import { CustomerService } from '../services/res/reources/customer.service';
 import { CouponComponent } from '../components/content/coupon/coupon.component';
 import { CartService } from '../services/cart.service';
 import { CartComponent } from '../components/content/cart/cart.component';
@@ -28,13 +27,14 @@ import { CouponApiService } from '../services/api/coupon-api.service';
 import { CouponsComponent } from '../components/content/coupons/one-coupon-lyout/coupons.component';
 import { UserProfileComponent } from '../components/content/deshboard/customer-deshboard/user-profile/user-profile.component';
 import { CompanyApiService } from '../services/api/company-api.service';
-import { CompanyService } from '../services/res/reources/company.service';
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
 import { LoginGurardServiceService } from '../services/gurds/login-gurard-service.service';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
 import { CompanyMenuComponent } from '../components/header/company-menu/company-menu.component';
 import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
+import { CustomerService } from '../services/reources/customer.service';
+import { CompanyService } from '../services/reources/company.service';
 
 @NgModule({
   declarations: [

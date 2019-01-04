@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerBean } from 'src/app/models/customerbean';
-import { CustomerService } from 'src/app/services/res/reources/customer.service';
 import { CompanyBean } from 'src/app/models/CompanyBean';
-import { CompanyService } from 'src/app/services/res/reources/company.service';
 import { Router } from '@angular/router';
+import { CompanyService } from 'src/app/services/reources/company.service';
+import { CustomerService } from 'src/app/services/reources/customer.service';
 
 @Component({
   selector: 'app-register',
