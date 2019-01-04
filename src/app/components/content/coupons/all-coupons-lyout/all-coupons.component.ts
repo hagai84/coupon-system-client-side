@@ -128,18 +128,20 @@ export class AllCouponsComponent implements OnInit {
     }
   }
 
-  searchKeyWord(keyWord:string){
+  searchKeyWord(){
     var tmpCoupons:Coupon[]=[];
-    if(keyWord==""){
+    if(this.keyWord==" "){
       this.coupons=this.savedCoupons;
+      this.keyWord='';
       return;
     }
     this.savedCoupons.forEach(element => {    
-      if(element.title.toLowerCase().includes(keyWord.toLowerCase())||
-      element.message.toLowerCase().includes(keyWord.toLowerCase())){
+      if(element.title.toLowerCase().includes(this.keyWord.toLowerCase())||
+      element.message.toLowerCase().includes(this.keyWord.toLowerCase())){
         tmpCoupons.push(element);
       }
     });
+    this.keyWord=' ';
     this.coupons=tmpCoupons;
   }
 }
