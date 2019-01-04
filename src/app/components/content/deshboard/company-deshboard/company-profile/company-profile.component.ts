@@ -14,7 +14,11 @@ import { CompanyService } from 'src/app/services/company.service';
 export class CompanyProfileComponent implements OnInit {
   companyBean: CompanyBean
   public myStorage: Storage = sessionStorage;
-  constructor(private comapnyService: CompanyService, private router: Router, public loginService: LoginService, private util: UtilService, private companyApiService: CompanyApiService) { }
+  constructor(private comapnyService: CompanyService,
+               private router: Router, 
+               public loginService: LoginService, 
+               private util: UtilService, 
+               private companyApiService: CompanyApiService) { }
 
   ngOnInit() {
     this.companyBean = JSON.parse(sessionStorage.getItem("companyBean"));
@@ -25,6 +29,9 @@ export class CompanyProfileComponent implements OnInit {
     ob.subscribe(
       () => {
         this.comapnyService.setCompanyData(Number(sessionStorage.getItem("companyId")));
+        localStorage.setItem('profileUpdated', Date.now().toString());
+        alert("company profile sucsessfully updated");
+        this.router.navigate(["/company-coupons"]);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
@@ -32,11 +39,11 @@ export class CompanyProfileComponent implements OnInit {
   }
   
   deleteCompany(){
-    const ob = this.companyApiService.deleteCompany(sessionStorage.getItem("customerId"));
+    const ob = this.companyApiService.deleteCompany(sessionStorage.getItem("companyId"));
     ob.subscribe(
       () => {
         this.loginService.logout();
-        alert("customer deleted sucsessfully")
+        alert("company sucsessfully deleted");
       },
       error => {
         this.util.PrintErrorToCustomer(error);

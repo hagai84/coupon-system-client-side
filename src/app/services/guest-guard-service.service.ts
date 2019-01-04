@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGurardServiceService implements CanActivate {
+export class GuestGuardServiceService {
 
   constructor(private loginService: LoginService, private router: Router) { }
 
-
   canActivate() {
     
-    if (this.loginService.isLoggedIn()) {
+    if (!this.loginService.isLoggedIn()) {
       return true;
     }    
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/coupons"]);
 
-    window.alert("This page requires login");
+    window.alert("Log out first");
     return false;
   }
 }

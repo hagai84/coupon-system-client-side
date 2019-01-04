@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {  CustomerBean } from 'src/app/models/customerbean';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { LogInBean } from 'src/app/models/logInBean';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,10 @@ export class CustomerApiService {
   updateCustomer(customerBean:CustomerBean): Observable<void> {
     return this.http.put<void>("http://localhost:8080/Coupon_System_Web-App/rest/customers",customerBean,{ withCredentials: true });
   }
-  updateCustomerPassword(newPassword,oldPassword): Observable<void> {
-    let body = new FormData();
-    body.append('oldPassword', oldPassword);
-    body.append('nawPassword', newPassword);
-    let body2 = JSON.stringify(body);
-    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ sessionStorage.getItem("customerId") + "/password";
-    return this.http.put<void>(url,body2,{ withCredentials: true});
+
+  updateCustomerPassword(passwordBean:LogInBean): Observable<void> {
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ passwordBean.userId + "/password";
+    return this.http.put<void>(url,passwordBean,{ withCredentials: true});
   }
 
   deleteCustomer(customerId): Observable<void> {

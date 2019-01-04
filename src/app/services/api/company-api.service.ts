@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CompanyBean } from 'src/app/models/CompanyBean';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { LogInBean } from 'src/app/models/logInBean';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +23,9 @@ export class CompanyApiService {
     return this.http.put<void>("http://localhost:8080/Coupon_System_Web-App/rest/companies",companyBean,{ withCredentials: true });
   }
  
-  updateCompanyPassword(newPassword,oldPassword): Observable<void> {
-    let body = new FormData();
-    body.append('oldPassword', oldPassword);
-    body.append('nawPassword', newPassword);
-    let body2 = JSON.stringify(body);
-    var url = "http://localhost:8080/Coupon_System_Web-App/rest/companies/"+ sessionStorage.getItem("customerId") + "/password";
-    return this.http.put<void>(url,body2,{ withCredentials: true});
+  updateCompanyPassword(passwordBean:LogInBean): Observable<void> {
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/companies/"+ passwordBean.userId + "/password";
+    return this.http.put<void>(url,passwordBean,{ withCredentials: true});
   }
 
   deleteCompany(companyId): Observable<void> {

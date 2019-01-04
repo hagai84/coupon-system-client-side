@@ -13,21 +13,24 @@ import { AllCouponsComponent } from '../components/content/coupons/all-coupons-l
 import { DefaultUrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
+import { CustomerGuardServiceService } from '../services/customer-guard-service.service';
+import { CompanyGuardServiceService } from '../services/company-guard-service.service';
+import { GuestGuardServiceService } from '../services/guest-guard-service.service';
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
+  { path: "login", canActivate:[GuestGuardServiceService], component: LoginComponent },
   { path: "coupons", component: AllCouponsComponent },
-  { path: "customer-coupons", canActivate:[LoginGurardServiceService], component:  AllCouponsComponent },
-  { path: "company-coupons", canActivate:[LoginGurardServiceService], component:  AllCouponsComponent },
+  { path: "customer-coupons", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component:  AllCouponsComponent },
+  { path: "company-coupons", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component:  AllCouponsComponent },
   { path: "coupon", component: CouponComponent },
-  { path: "cart",  component: CartComponent },
+  { path: "cart", component: CartComponent },
   { path: "thank-you", component: ThankYouComponent },
-  { path: "register", component: RegisterComponent },
+  { path: "register", canActivate:[GuestGuardServiceService],component: RegisterComponent },
   { path: "dashboard", component: DashboardLyoutComponent, children:
    [
       { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent },
-      { path: "company-profile", canActivate:[LoginGurardServiceService], component: CompanyProfileComponent },
-      { path: "change-Password", canActivate:[LoginGurardServiceService], component: ChangePasswordComponent}
+      { path: "company-profile", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CompanyProfileComponent },
+      { path: "change-Password", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: ChangePasswordComponent}
    ]
   },
   {path: "", redirectTo: "coupons",pathMatch: "full"},

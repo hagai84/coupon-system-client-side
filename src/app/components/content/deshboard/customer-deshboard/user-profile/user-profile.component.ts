@@ -14,7 +14,11 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
   customerBean: CustomerBean
   public myStorage: Storage = sessionStorage;
-  constructor(private router: Router, public loginService: LoginService, private util: UtilService, private customerApiService: CustomerApiService, public customerService: CustomerService) { }
+  constructor(private router: Router, 
+              public loginService: LoginService, 
+              private util: UtilService, 
+              private customerApiService: CustomerApiService, 
+              public customerService: CustomerService) { }
 
   ngOnInit() {
     this.customerBean = JSON.parse(sessionStorage.getItem("customerBean"));
@@ -26,6 +30,8 @@ export class UserProfileComponent implements OnInit {
       () => {
         this.customerService.setCustomerData(Number(sessionStorage.getItem("customerId")));
         localStorage.setItem('profileUpdated', Date.now().toString());
+        alert("customer profile sucsessfully updated");
+        this.router.navigate(["/customer-coupons"]);
       },
       error => {
         this.util.PrintErrorToCustomer(error);

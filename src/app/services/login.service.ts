@@ -22,9 +22,11 @@ export class LoginService {
     this.checkLogin();
   }
 
-  async isLoggedIn():Promise<boolean> {
+   isLoggedIn():boolean {
     if (sessionStorage.getItem("isLogin")&&this.isFinishLogIn == true){
       return true;
+    }else{
+      return false;
     }
   }
   

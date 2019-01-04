@@ -3,6 +3,7 @@ import { CustomerBean } from 'src/app/models/customerbean';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CompanyBean } from 'src/app/models/CompanyBean';
 import { CompanyService } from 'src/app/services/company.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,10 +16,14 @@ export class RegisterComponent implements OnInit {
   public userType: string = "CUSTOMER";
   public userEmail: string;
 
-  constructor(private companyService: CompanyService, private customerService: CustomerService) { }
+  constructor(private companyService: CompanyService, private customerService: CustomerService, private router:Router) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem('isLogin')){
+      this.router.navigate(['../coupons']);
+    }
   }
+
   register() {
     if (this.userType == "CUSTOMER") {
       var customerBean = new CustomerBean(123, this.userName, this.userPassword, []);
