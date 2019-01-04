@@ -46,6 +46,10 @@ export class LoginService {
     
     async checkLogin():Promise<boolean> {
       this.isFinishLogIn = false;
+      if(sessionStorage.getItem("isLogin")&&localStorage.getItem("isLogin")){
+        this.isFinishLogIn = true;
+          return true;
+      }
       if(localStorage.getItem("rememberMe")||localStorage.getItem("isLogin")){
         const userBean = <LogInBean>await this.loginApi.check();        
         if(userBean.userId!=-1){
