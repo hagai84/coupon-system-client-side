@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UtilService } from 'src/app/services/util.service';
 import { CouponApiService } from 'src/app/services/api/coupon-api.service';
 import { Router } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-all-coupons',
@@ -56,19 +57,80 @@ export class AllCouponsComponent implements OnInit {
     });
   }
 
-  filter(filter: string) {
-  //   if (filter == "All") {
-  //     this.setCoupons();
-  //     return;
-  //   }
-  //   const ob = this.couponApiService.getCouponsByType(filter);
-  //   ob.subscribe(coupons => {
-  //     this.coupons = coupons;
-  //   }, error => {
-  //     this.util.PrintErrorToCustomer(error);
-  //   });
+  getCouponsByType(filter: string){
+    const ob = this.couponApiService.getCouponsByType(filter);
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
   }
 
+  getCompanyCouponsByType(companyId:number, type: string){
+    const ob = this.couponApiService.getCompanyCouponsByType(companyId, type);
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
+  }
+
+  getCompanyCouponsByPrice(companyId:number, price: number){
+    const ob = this.couponApiService.getCompanyCouponsByPrice(companyId, price);
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
+  }
+
+  getCompanyCouponsByDate(companyId:number, expirationDate: Date){
+    const ob = this.couponApiService.getCompanyCouponsByDate(companyId, expirationDate);
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
+  }
+
+  getCustomerCouponsByType(customerId:number, type: string){
+    const ob = this.couponApiService.getCustomerCouponsByType(customerId, type);
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
+  }
+
+  getCustomerCouponsByPrice(customerId:number, price: number){
+    const ob = this.couponApiService.getCustomerCouponsByPrice(customerId, price);
+    ob.subscribe(coupons => {
+      this.coupons = coupons;
+    }, error => {
+      this.util.PrintErrorToCustomer(error);
+    });
+  }
+  
+  filter(type: string) {
+    if(type=='All'){
+      this.ngOnInit();
+      return;
+    }
+    if(this.router.url=='/coupons'){
+      this.getCouponsByType(type);
+      return;
+    }else if(this.router.url=='/company-coupons'){
+      this.getCompanyCouponsByType(Number(sessionStorage.getItem('userId')), type);
+      return;
+    }else if(this.router.url=='/customer-coupons'){
+      this.getCustomerCouponsByType(Number(sessionStorage.getItem('userId')), type);
+      return;
+    }
+    console.log(this.router.url);
+    
+    console.log("nothing");
+    
+  }
 
 }
 
