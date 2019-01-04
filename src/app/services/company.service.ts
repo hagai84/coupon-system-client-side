@@ -8,6 +8,7 @@ import { UtilService } from './util.service';
   providedIn: 'root'
 })
 export class CompanyService {
+  companyBean:CompanyBean;
 
   constructor( private router: Router,private util: UtilService, private companyApi: CompanyApiService) { }
   
@@ -29,6 +30,7 @@ export class CompanyService {
     const ob = this.companyApi.getCompanyData(customerId);
     ob.subscribe(
       companyBean => {
+        this.companyBean=companyBean;
         sessionStorage.setItem("companyName", companyBean.compName);
         sessionStorage.setItem("customerId", String(companyBean.id));
         sessionStorage.setItem("customerEmail", String(companyBean.email));

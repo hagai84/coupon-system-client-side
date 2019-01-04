@@ -13,6 +13,7 @@ import { error } from '@angular/compiler/src/util';
 export class CustomerService {
   customerCupons: Coupon[];
   isDataReady: boolean = false;
+  customerBean:CustomerBean;
 
   constructor(private router: Router, private customerApi: CustomerApiService, private util: UtilService, private http: HttpClient) {
 
@@ -22,6 +23,7 @@ export class CustomerService {
     const ob = this.customerApi.getCustomerData(customerId);
     ob.subscribe(
       customerBean => {
+        this.customerBean=customerBean;
         sessionStorage.setItem("customerName", customerBean.custName);
         sessionStorage.setItem("customerId", String(customerBean.id));
         sessionStorage.setItem("customerBean", JSON.stringify(customerBean))

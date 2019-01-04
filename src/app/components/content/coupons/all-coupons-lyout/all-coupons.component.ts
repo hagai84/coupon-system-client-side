@@ -42,5 +42,20 @@ export class AllCouponsComponent implements OnInit {
       this.util.PrintErrorToCustomer(error);
     });
   }
+
+  filter(filter: string) {
+  //   if (filter == "All") {
+  //     this.setCoupons();
+  //     return;
+  //   }
+  //   const ob = this.couponApiService.getCouponsByType(filter);
+  //   ob.subscribe(coupons => {
+  //     this.coupons = coupons;
+  //   }, error => {
+  //     this.util.PrintErrorToCustomer(error);
+  //   });
+  }
+
+
 }
 

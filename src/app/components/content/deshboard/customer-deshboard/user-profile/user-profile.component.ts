@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
     ob.subscribe(
       () => {
         this.customerService.setCustomerData(Number(sessionStorage.getItem("customerId")));
+        localStorage.setItem('profileUpdated', Date.now().toString());
       },
       error => {
         this.util.PrintErrorToCustomer(error);
