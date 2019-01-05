@@ -3,6 +3,8 @@ import { Coupon } from 'src/app/models/coupon';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { CouponService } from 'src/app/services/reources/coupon.service';
+import { CouponApiService } from 'src/app/services/api/coupon-api.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-coupons',
@@ -11,31 +13,39 @@ import { CouponService } from 'src/app/services/reources/coupon.service';
 })
 export class CouponsComponent implements OnInit {
   @Input() coupons: Coupon[];
-  public mysessionStorage :Storage = sessionStorage;
+  public mysessionStorage: Storage = sessionStorage;
 
 
 
-  constructor(private cart:CartService, private couponService:CouponService, private router:Router) { }
-  
+  constructor(private util: UtilService, private couponApi: CouponApiService, private cart: CartService, private couponService: CouponService, private router: Router) { }
+
   ngOnInit() {
-    
+
   }
-  goToCoupon(coupon){
+  goToCoupon(coupon) {
     this.router.navigate(['/coupon']);
     this.couponService.setCoupon(coupon)
   }
-  addToCart(coupon){
+  addToCart(coupon) {
     this.router.navigate(['/cart']);
-    this.cart.addToCart(coupon);  
-    }
+    this.cart.addToCart(coupon);
+  }
 
-    editProduct(coupon){
-      sessionStorage.setItem("lestCouponToUpdate", JSON.stringify(coupon));
-      this.router.navigate(['/dashboard/edit-product']);
-    }
+  editCoupon(coupon) {
+    sessionStorage.setItem("lestCouponToUpdate", JSON.stringify(coupon));
+    this.router.navigate(['/dashboard/edit-product']);
+  }
 
 
-    deleteProduct(coupon){
-
-    }
+  deleteCoupon(coupon) {
+    const ob = this.couponApi.deleteCoupon(coupon.id);
+    ob.subscribe(
+      () => {
+        alert("coupon deleted successfuly");
+        this.router.navigate(['/company-coupons']);
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+  }
 }

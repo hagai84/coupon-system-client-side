@@ -27,6 +27,7 @@ export class EditProductComponent implements OnInit {
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
   ngOnInit() {
     let coupon : Coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
+    this.couponId = coupon.couponId;
     this.startDate = coupon.startDate;
     this.endDate = coupon.endDate;
     this.amount = coupon.amount;
@@ -35,13 +36,24 @@ export class EditProductComponent implements OnInit {
     this.price = coupon.price;
   }
 
-  public createProduct() {
+  public updateProduct() {
     let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
 
     const ob = this.couponApi.createCoupon(coupon);
     ob.subscribe(
       couponId => {
-        alert("coupon adedd successfuly the new coupon id is: "+couponId)
+        alert("coupon update successfuly");
+        this.router.navigate(['/company-coupons']);
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+  }
+  deleteCoupon(){
+    const ob = this.couponApi.deleteCoupon(this.couponId);
+    ob.subscribe(
+      () => {
+        alert("coupon deleted successfuly");
         this.router.navigate(['/company-coupons']);
       },
       error => {

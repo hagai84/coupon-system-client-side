@@ -53,5 +53,10 @@ export class CouponApiService {
     var str = "http://localhost:8080/Coupon_System_Web-App/rest/coupons/"+ coupon.couponId + "/"+ customerId;
     return this.http.put<void>(str,{},{ withCredentials: true });
   }
+
+  deleteCoupon(couponId): Observable<void> {
+    var url = "http://localhost:8080/Coupon_System_Web-App/rest/coupons/"+ couponId;
+    return this.http.delete<void>(url,{ withCredentials: true });
+  }
  
 }

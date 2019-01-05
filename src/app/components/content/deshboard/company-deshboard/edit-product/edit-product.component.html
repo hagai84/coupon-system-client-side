@@ -1,5 +1,5 @@
-<form (ngSubmit)="createProduct()" #createProductForm ="ngForm">
-    <legend>Create New Product</legend>
+<form (ngSubmit)="updateProduct()" #createProductForm ="ngForm">
+    <legend>Update Product</legend>
   
     <!-- Text input-->
     <div class="form-group row row">
@@ -85,6 +85,9 @@
       </div>
     </div>
   </form>
+  
+  
+  <button (click)="deleteCoupon()" class="btn btn-danger">Delete Coupon</button>
   
   <div>
     <br>

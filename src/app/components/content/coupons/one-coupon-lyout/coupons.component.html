@@ -9,8 +9,8 @@
         </a>
 
         <ul *ngIf="mysessionStorage.getItem('userType')  == 'COMPANY' && this.router.url == '/company-coupons'" class="social">
-            <li><a (click)="editProduct(coupon)" data-tip="Edit Product" style = "background-image: url('https://image.flaticon.com/icons/svg/126/126483.svg')" ><i class="fa fa-eye"></i></a></li>
-            <li><a (click)="deleteProduct(coupon)" data-tip="Delete Product" style= "background-image: url('https://image.flaticon.com/icons/svg/458/458594.svg')"><i class="fa fa-shopping-bag"></i></a></li>
+            <li><a (click)="editCoupon(coupon)" data-tip="Edit Product" style = "background-image: url('https://image.flaticon.com/icons/svg/126/126483.svg')" ><i class="fa fa-eye"></i></a></li>
+            <li><a (click)="deleteCoupon(coupon)" data-tip="Delete Product" style= "background-image: url('https://image.flaticon.com/icons/svg/458/458594.svg')"><i class="fa fa-shopping-bag"></i></a></li>
         </ul>
 
         <a *ngIf= "!(mysessionStorage.getItem('userType')=='COMPANY') && !(this.router.url == '/customer-coupons')" class="add-to-cart" (click)="addToCart(coupon)">Add to cart</a>
