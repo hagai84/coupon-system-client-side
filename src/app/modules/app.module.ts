@@ -35,6 +35,7 @@ import { CompanyMenuComponent } from '../components/header/company-menu/company-
 import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
 import { CustomerService } from '../services/reources/customer.service';
 import { CompanyService } from '../services/reources/company.service';
+import { EditProductComponent } from '../components/content/deshboard/company-deshboard/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CompanyService } from '../services/reources/company.service';
     CompanyProfileComponent,
     CompanyMenuComponent,
     CreateProductComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

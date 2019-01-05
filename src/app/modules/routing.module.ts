@@ -16,6 +16,7 @@ import { GuestGuardServiceService } from '../services/gurds/guest-guard-service.
 import { CustomerGuardServiceService } from '../services/gurds/customer-guard-service.service';
 import { CompanyGuardServiceService } from '../services/gurds/company-guard-service.service';
 import { LoginGurardServiceService } from '../services/gurds/login-gurard-service.service';
+import { EditProductComponent } from '../components/content/deshboard/company-deshboard/edit-product/edit-product.component';
 
 const routes: Routes = [
   { path: "login", canActivate:[GuestGuardServiceService], component: LoginComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
       { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent },
       { path: "company-profile", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CompanyProfileComponent },
       { path: "change-Password", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: ChangePasswordComponent},
-      { path: "change-Password", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CreateProductComponent}
+      { path: "create-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CreateProductComponent},
+      { path: "edit-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: EditProductComponent}
    ]
   },
   {path: "", redirectTo: "coupons",pathMatch: "full"},

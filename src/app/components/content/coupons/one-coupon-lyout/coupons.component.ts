@@ -11,7 +11,10 @@ import { CouponService } from 'src/app/services/reources/coupon.service';
 })
 export class CouponsComponent implements OnInit {
   @Input() coupons: Coupon[];
-  
+  public mysessionStorage :Storage = sessionStorage;
+
+
+
   constructor(private cart:CartService, private couponService:CouponService, private router:Router) { }
   
   ngOnInit() {
@@ -24,5 +27,15 @@ export class CouponsComponent implements OnInit {
   addToCart(coupon){
     this.router.navigate(['/cart']);
     this.cart.addToCart(coupon);  
+    }
+
+    editProduct(coupon){
+      sessionStorage.setItem("lestCouponToUpdate", JSON.stringify(coupon));
+      this.router.navigate(['/dashboard/edit-product']);
+    }
+
+
+    deleteProduct(coupon){
+
     }
 }

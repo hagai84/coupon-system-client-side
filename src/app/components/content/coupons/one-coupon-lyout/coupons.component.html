@@ -5,9 +5,15 @@
       <div class="product-image2">
         <a (click)="goToCoupon(coupon)">
           <img class="pic-1" [src]="coupon.image">
-          <img class="pic-2" src="https://image.shutterstock.com/image-photo/collection-various-coffee-cups-on-450w-86406382.jpg">
+          <img class="pic-2" src="https://images.pexels.com/photos/1682706/pexels-photo-1682706.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
         </a>
-        <a class="add-to-cart" (click)="addToCart(coupon)">Add to cart</a>
+
+        <ul *ngIf="mysessionStorage.getItem('userType')  == 'COMPANY' && this.router.url == '/company-coupons'" class="social">
+            <li><a (click)="editProduct(coupon)" data-tip="Edit Product" style = "background-image: url('https://image.flaticon.com/icons/svg/126/126483.svg')" ><i class="fa fa-eye"></i></a></li>
+            <li><a (click)="deleteProduct(coupon)" data-tip="Delete Product" style= "background-image: url('https://image.flaticon.com/icons/svg/458/458594.svg')"><i class="fa fa-shopping-bag"></i></a></li>
+        </ul>
+
+        <a *ngIf= "!(mysessionStorage.getItem('userType')=='COMPANY') && !(this.router.url == '/customer-coupons')" class="add-to-cart" (click)="addToCart(coupon)">Add to cart</a>
       </div>
       <div class="product-content">
         <h3 class="title"><a>{{coupon.title}}</a></h3>

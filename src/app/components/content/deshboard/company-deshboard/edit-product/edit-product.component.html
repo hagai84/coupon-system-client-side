@@ -1,0 +1,96 @@
+<form (ngSubmit)="createProduct()" #createProductForm ="ngForm">
+    <legend>Create New Product</legend>
+  
+    <!-- Text input-->
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="textinput">Title</label>
+      <div class="col-md-4">
+        <input #couponTitle="ngModel" name="couponTitle" type="text" placeholder="meal for two" [(ngModel)]="title" class="form-control input-md">
+      </div>
+    </div>
+  
+    <!-- Text input-->
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="textinput">Description</label>
+      <div class="col-md-4">
+        <textarea #couponMessege="ngModel" id="textinput" name="textinput" type="text" placeholder="diner for 2 at our place" [(ngModel)]="message" class="form-control input-md"></textarea>
+      </div>
+    </div>
+  
+  
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="selectbasic">coupon type</label>
+      <div class="col-md-4">
+  <select #CcouponType="ngModel" id="selectbasic" name="selectbasic" class="form-control" [(ngModel)]="type">
+          <option value="RESTAURANTS">Restaurants</option>
+          <option value="ELECTRICITY">Electricity</option>
+          <option value="FOOD">Food</option>
+          <option value="HEALTH">Health</option>
+          <option value="SPORTS">Sports</option>
+          <option value="CAMPING">cAMPING</option>
+          <option value="RESTAURANTS">Restaurants</option>
+          <option value="TRAVELLING">Travelling</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="textinput">Price</label>
+      <div class="col-md-4">
+        <input  #couponPrice="ngModel" id="textinput" name="textinput" type="number" step="0.01" placeholder="1553.5"  [(ngModel)]="price" class="form-control input-md">
+      </div>
+    </div>
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="textinput">amount</label>
+      <div class="col-md-4">
+        <input  #coupoAmount="ngModel" id="textinput" name="textinput" type="number" placeholder="10" class="form-control input-md" [(ngModel)]="amount">
+      </div>
+    </div>
+  
+    <div class="form-group row row">
+      <label class="control-label col-md-2" for="registration-date">Start Date</label>
+      <div class="col-md-4">
+        <div class="input-group registration-date-time">
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+          <input  #couponStartDate="ngModel" class="form-control" name="registration_date" id="registration-date" type="date" [(ngModel)]="startDate">
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <label class="control-label col-md-2" for="registration-date">End Date</label>
+      <div class="col-md-4">
+        <div class="input-group registration-date-time">
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+          <input #couponEndDate="ngModel" class="form-control" name="registration_date" id="registration-date" type="date" [(ngModel)]="endDate">
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="textinput">Image</label>
+      <div class="col-md-4" >
+        <input #couponImage="ngModel" type="text" name="pic"  [(ngModel)]="image">
+      </div>
+    </div>
+  
+    <div class="form-group row row">
+  <img>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 control-label" for="singlebutton"></label>
+      <div class="col-md-4">
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Create Coupon</button>
+      </div>
+    </div>
+  </form>
+  
+  <div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+  

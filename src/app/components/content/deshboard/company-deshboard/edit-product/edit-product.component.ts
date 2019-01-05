@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Coupon } from 'src/app/models/coupon';
-import { CouponApiService } from 'src/app/services/api/coupon-api.service';
-import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
+import { Router } from '@angular/router';
+import { CouponApiService } from 'src/app/services/api/coupon-api.service';
+import { Coupon } from 'src/app/models/coupon';
 
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class CreateProductComponent implements OnInit {
+export class EditProductComponent implements OnInit {
+
   public couponId: number;
   public title: string;
   public startDate: Date;
@@ -20,18 +21,18 @@ export class CreateProductComponent implements OnInit {
   public price: number;
   public image: string;
   public companyId: number;
+  public myStorage :Storage = sessionStorage;
 
-  public couponType: string[] = [
-    "RESTAURANTS",
-    "ELECTRICITY",
-    "FOOD",
-    "HEALTH",
-    "SPORTS",
-    "CAMPING",
-    "TRAVELLING"
-  ];
+
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
   ngOnInit() {
+    let coupon : Coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
+    this.startDate = coupon.startDate;
+    this.endDate = coupon.endDate;
+    this.amount = coupon.amount;
+    this.type = coupon.type;
+    this.message = coupon.message;
+    this.price = coupon.price;
   }
 
   public createProduct() {
@@ -49,4 +50,3 @@ export class CreateProductComponent implements OnInit {
   }
 
 }
-
