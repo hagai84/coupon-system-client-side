@@ -5,6 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UtilService {
+  // public webServiceUrl : String ="ec2-18-222-31-108.us-east-2.compute.amazonaws.com";
+  public webServiceUrl : String ="http://localhost:8080/Coupon_System_Web-App";
 
   constructor() {
    }

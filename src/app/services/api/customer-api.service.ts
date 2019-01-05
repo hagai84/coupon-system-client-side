@@ -3,35 +3,36 @@ import {  CustomerBean } from 'src/app/models/customerbean';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LogInBean } from 'src/app/models/logInBean';
+import { UtilService } from '../util.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor( private http : HttpClient, private utilService : UtilService) { }
 
 
   getCustomerData(customerId): Observable<CustomerBean> {
-    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ customerId;
+    var url = this.utilService.webServiceUrl + "/rest/customers/"+ customerId;
     return this.http.get<CustomerBean>(url,{ withCredentials: true });
   }
 
   createCustomer(customerBean:CustomerBean): Observable<Number> {
-    return this.http.post<Number>("http://localhost:8080/Coupon_System_Web-App/rest/customers",customerBean,{ withCredentials: true });
+    return this.http.post<Number>(this.utilService.webServiceUrl + "/rest/customers",customerBean,{ withCredentials: true });
   }
 
   updateCustomer(customerBean:CustomerBean): Observable<void> {
-    return this.http.put<void>("http://localhost:8080/Coupon_System_Web-App/rest/customers",customerBean,{ withCredentials: true });
+    return this.http.put<void>(this.utilService.webServiceUrl + "/rest/customers",customerBean,{ withCredentials: true });
   }
 
   updateCustomerPassword(passwordBean:LogInBean): Observable<void> {
-    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ passwordBean.userId + "/password";
+    var url = this.utilService.webServiceUrl + "/rest/customers/"+ passwordBean.userId + "/password";
     return this.http.put<void>(url,passwordBean,{ withCredentials: true});
   }
 
   deleteCustomer(customerId): Observable<void> {
-    var url = "http://localhost:8080/Coupon_System_Web-App/rest/customers/"+ customerId;
+    var url = this.utilService.webServiceUrl + "/rest/customers/"+ customerId;
     return this.http.delete<void>(url,{ withCredentials: true });
   }
 
