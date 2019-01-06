@@ -12,9 +12,14 @@ export class CompanyApiService {
 
   constructor( private http : HttpClient, private utilService : UtilService) { }
   
-  getCompanyData(customerId): Observable<CompanyBean> {
-    var url = this.utilService.webServiceUrl + "/rest/companies/"+ customerId;
+  getCompanyData(companyId): Observable<CompanyBean> {
+    var url = this.utilService.webServiceUrl + "/rest/companies/"+ companyId;
     return this.http.get<CompanyBean>(url,{ withCredentials: true });
+  }
+
+  getAllCompanies(): Observable<CompanyBean[]> {
+    var url = this.utilService.webServiceUrl + "/rest/companies/";
+    return this.http.get<CompanyBean[]>(url,{ withCredentials: true });
   }
   createCompany(companyBean:CompanyBean): Observable<Number> {
     return this.http.post<Number>(this.utilService.webServiceUrl + "/rest/companies",companyBean,{ withCredentials: true });

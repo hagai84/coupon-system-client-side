@@ -36,6 +36,10 @@ export class CustomerApiService {
     return this.http.delete<void>(url,{ withCredentials: true });
   }
 
+  getAllCustomers(): Observable<CustomerBean[]> {
+    var url = this.utilService.webServiceUrl + "/rest/customers";
+    return this.http.get<CustomerBean[]>(url,{ withCredentials: true });
+  }
 	
 // 	/**
 // 	 * Updates all of a customer's fields (except ID) in the DB according to the given customer bean.

@@ -9,6 +9,4 @@ export class CustomerBean {
             public coupons: Coupon[]
 
         ) { }
-            
-
 }

@@ -70,8 +70,6 @@ export class CartService {
       const ob = this.couponApiServise.purchaseCoupon(coupon, Number(sessionStorage.getItem("customerId")));
       ob.subscribe(
         () => {
-          console.log("purchase sucsess");
-          this.router.navigate(['/thank-you']);
           localStorage.setItem("cart", JSON.stringify(this.cart));
           localStorage.setItem("totalCartPrice", String(this.totalPrice));
         },
@@ -79,7 +77,8 @@ export class CartService {
           this.util.PrintErrorToCustomer(error);
           return;
         });
-    }
+      }
+      this.router.navigate(['/thank-you']);
   }
 
 
