@@ -11,7 +11,7 @@ export class GuestGuardServiceService {
 
   canActivate() {
     
-    if (!this.loginService.isLoggedIn()) {
+    if (!this.loginService.isLoggedIn()||sessionStorage.getItem('userType')=='ADMIN') {
       return true;
     }    
     this.router.navigate(["/coupons"]);

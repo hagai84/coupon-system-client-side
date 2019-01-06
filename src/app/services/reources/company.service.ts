@@ -26,15 +26,16 @@ export class CompanyService {
   }
 
 
-  public setCompanyData(customerId: Number) {
-    const ob = this.companyApi.getCompanyData(customerId);
+  public setCompanyData(companyId: Number) {
+    const ob = this.companyApi.getCompanyData(companyId);
     ob.subscribe(
       companyBean => {
         this.companyBean=companyBean;
         sessionStorage.setItem("companyName", companyBean.compName);
-        sessionStorage.setItem("customerId", String(companyBean.id));
-        sessionStorage.setItem("customerEmail", String(companyBean.email));
-        sessionStorage.setItem("customerBean", JSON.stringify(companyBean))
+        sessionStorage.setItem("companyId", String(companyBean.id));
+        sessionStorage.setItem("companyEmail", String(companyBean.email));
+        sessionStorage.setItem("companyBean", JSON.stringify(companyBean));
+        this.router.navigate(['/company-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);

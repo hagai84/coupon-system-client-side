@@ -33,4 +33,23 @@ export class CustomersTableComponent implements OnInit {
     sessionStorage.setItem('customerBean', JSON.stringify(this.customers[index]));
     this.router.navigate(['/dashboard/user-profile']);
   }
+
+  removeCustomer(index:number){
+    const ob = this.customerApiService.deleteCustomer(this.customers[index].id);
+    ob.subscribe(
+      () => {
+        
+        alert("customer deleted sucsessfully")
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+  }
+
+  customerCoupons(index:number){
+    sessionStorage.setItem('customerId',this.customers[index].id.toString());
+    this.router.navigate(['/customer-coupons']);
+  }
+
+  
 }

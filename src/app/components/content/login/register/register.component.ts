@@ -19,9 +19,9 @@ export class RegisterComponent implements OnInit {
   constructor(private companyService: CompanyService, private customerService: CustomerService, private router:Router) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem('isLogin')){
-      this.router.navigate(['../coupons']);
-    }
+    // if(sessionStorage.getItem('isLogin')){
+    //   this.router.navigate(['../coupons']);
+    // }
   }
 
   register() {

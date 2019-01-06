@@ -32,4 +32,22 @@ export class CompaniesTableComponent implements OnInit {
     sessionStorage.setItem('companyBean', JSON.stringify(this.companies[index]));
     this.router.navigate(['/dashboard/company-profile']);
   }
+
+  removeCompany(index:number){
+    const ob = this.companyApiService.deleteCompany(this.companies[index].id);
+    ob.subscribe(
+      () => {
+        
+        alert("company deleted sucsessfully")
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+  }
+  
+
+  companyCoupons(index:number){
+    sessionStorage.setItem('companyId',this.companies[index].id.toString());
+    this.router.navigate(['/company-coupons']);
+  }
 }

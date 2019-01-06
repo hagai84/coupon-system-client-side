@@ -9,23 +9,23 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <!-- <ng-container *ngIf="mysessionStorage.getItem('isLogin')" > -->
         <!-- <ng-container *ngIf="mysessionStorage.getItem('userType')=='CUSTOMER'" > -->
-            <li *ngIf="mysessionStorage.getItem('userType')=='CUSTOMER' || !mysessionStorage.getItem('isLogin')" class="nav-item active">
+            <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'" class="nav-item active">
               <a class="nav-link" routerLink="coupons"  name = "Buy">Buy </a>
             </li>
-            <li *ngIf="mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='CUSTOMER'" class="nav-item active">
-              <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">My Coupons</a>
+            <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'" class="nav-item active">
+              <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">Customer Coupons</a>
             </li>
-            <li *ngIf="mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='COMPANY'" class="nav-item active">
-              <a class="nav-link" routerLink="company-coupons" name= "My Coupons">My Coupons</a>
+            <li *ngIf="mysessionStorage.getItem('userType')!='CUSTOMER'" class="nav-item active">
+              <a class="nav-link" routerLink="company-coupons" name= "My Coupons">Company Coupons</a>
             </li>
-            <li *ngIf="mysessionStorage.getItem('userType')=='CUSTOMER' || !mysessionStorage.getItem('isLogin')" class="nav-item active">
+            <li *ngIf="mysessionStorage.getItem('userType')!='!COMPANY' || !mysessionStorage.getItem('isLogin')" class="nav-item active">
               <a class="nav-link" routerLink="cart" name = "cart">Cart</a>
             </li>
             <li *ngIf="mysessionStorage.getItem('userType')=='ADMIN'" class="nav-item active">
-              <a class="nav-link" routerLink="customers-table" name = "cart">Customers Table</a>
+              <a class="nav-link" routerLink="customers-table" name = "customers table">Customers Table</a>
             </li>
             <li *ngIf="mysessionStorage.getItem('userType')=='ADMIN'" class="nav-item active">
-              <a class="nav-link" routerLink="companies-table" name = "cart">Companies Table</a>
+              <a class="nav-link" routerLink="companies-table" name ="companies table">Companies Table</a>
             </li>
           
             <!-- </ng-container> -->
@@ -45,6 +45,7 @@
     </div>
     <div *ngIf="mysessionStorage.getItem('isLogin')&&mysessionStorage.getItem('userType')=='ADMIN'" class="form-inline my-2 my-lg-0">
         <!-- <app-company-menu></app-company-menu> -->
+        <app-user-menue></app-user-menue>
     </div>
   </div>
 </nav>
