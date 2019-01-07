@@ -27,6 +27,7 @@ export class EditProductComponent implements OnInit {
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
   ngOnInit() {
     let coupon : Coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
+    this.title =coupon.title
     this.couponId = coupon.couponId;
     this.startDate = coupon.startDate;
     this.endDate = coupon.endDate;
