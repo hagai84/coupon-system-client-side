@@ -18,8 +18,8 @@ import { CompanyGuardServiceService } from '../services/gurds/company-guard-serv
 import { LoginGurardServiceService } from '../services/gurds/login-gurard-service.service';
 import { EditProductComponent } from '../components/content/deshboard/company-deshboard/edit-product/edit-product.component';
 import { AdminGuardService } from '../services/gurds/admin-guard.service';
-import { CustomersTableComponent } from '../components/content/customers-table/customers-table.component';
-import { CompaniesTableComponent } from '../components/content/companies-table/companies-table.component';
+import { CompaniesTableComponent } from '../components/content/deshboard/admin-dashboard/companies-table/companies-table.component';
+import { CustomersTableComponent } from '../components/content/deshboard/admin-dashboard/customers-table/customers-table.component';
 
 const routes: Routes = [
   { path: "login", canActivate:[GuestGuardServiceService], component: LoginComponent },
