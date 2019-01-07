@@ -26,7 +26,8 @@ export class CustomerService {
         this.customerBean=customerBean;
         sessionStorage.setItem("customerName", customerBean.custName);
         sessionStorage.setItem("customerId", String(customerBean.id));
-        sessionStorage.setItem("customerBean", JSON.stringify(customerBean))
+        sessionStorage.setItem("customerBean", JSON.stringify(customerBean));
+        this.router.navigate(['/customer-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);

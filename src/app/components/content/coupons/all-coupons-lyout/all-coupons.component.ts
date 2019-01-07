@@ -43,7 +43,7 @@ export class AllCouponsComponent implements OnInit {
   }
 
   setCouponsToCustomerCoupons() {
-    const ob = this.couponApiService.getCustomerCoupons(Number(sessionStorage.getItem("userId")));
+    const ob = this.couponApiService.getCustomerCoupons(Number(sessionStorage.getItem("customerId")));
     ob.subscribe(coupons => {
       this.savedCoupons=this.coupons = coupons;
     }, error => {
@@ -52,7 +52,7 @@ export class AllCouponsComponent implements OnInit {
   }
 
   setCouponsToCompanyCoupons() {
-    const ob = this.couponApiService.getCompanyCoupons(Number(sessionStorage.getItem("userId")));
+    const ob = this.couponApiService.getCompanyCoupons(Number(sessionStorage.getItem("companyId")));
     ob.subscribe(coupons => {
       this.savedCoupons=this.coupons = coupons;
     }, error => {
@@ -122,9 +122,9 @@ export class AllCouponsComponent implements OnInit {
     if(this.router.url=='/coupons'){
       this.getCouponsByType(type);
     }else if(this.router.url=='/company-coupons'){
-      this.getCompanyCouponsByType(Number(sessionStorage.getItem('userId')), type);
+      this.getCompanyCouponsByType(Number(sessionStorage.getItem('companyId')), type);
     }else if(this.router.url=='/customer-coupons'){
-      this.getCustomerCouponsByType(Number(sessionStorage.getItem('userId')), type);
+      this.getCustomerCouponsByType(Number(sessionStorage.getItem('customerId')), type);
     }
   }
 

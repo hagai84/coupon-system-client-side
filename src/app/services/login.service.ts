@@ -37,7 +37,6 @@ export class LoginService {
       userId => {
         loginBean.userId=userId;
         this.afterLogIn(loginBean);
-        this.router.navigate(['/' + loginBean.userType.toLowerCase() + '-coupons']);
         this.isFinishLogIn = true;
       },
       error => {
@@ -69,9 +68,14 @@ export class LoginService {
   afterLogIn(userBean:LogInBean) {
     if (userBean.userType == "CUSTOMER") {      
       this.customerService.setCustomerData(userBean.userId);
+      // this.router.navigate(['/customer-coupons']);
     }
     if (userBean.userType == "COMPANY") {
       this.companyService.setCompanyData(userBean.userId);
+      // this.router.navigate(['/company-coupons']);
+    }
+    if (userBean.userType == "ADMIN") {
+      this.router.navigate(['/coupons']);
     }
     this.setUserId(userBean.userId);
     this.setUserType(userBean.userType);

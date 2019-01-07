@@ -1,0 +1,42 @@
+            <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+            <!------ Include the above in your HEAD tag ---------->
+                        
+            <div class="container">
+              <div class="row  custyle">
+                <table class="table table-striped custab">
+                  <thead>
+                    <!-- <tr>
+                      <th></th>
+                      <th></th>
+                      
+                    </tr> -->
+                    <tr>
+                      <th>ID Number</th>
+                      <th>Company Name</th>
+                      <th class="text-center">
+                        <a class="btn btn-primary btn-xs " routerLink="/register">Create Company</a>
+                        
+                                  </th>
+                                </tr>
+                                
+                            </thead>
+                            
+                          <tr *ngFor="let company of companies; let i = index">
+                              <td>{{company.id}}</td>
+								              <td>{{company.compName}}</td>        
+                                <td class="text-center">
+                                  <a class='btn btn-info btn-xs' (click)="companyProfile(i)">
+                                    <span class="glyphicon glyphicon-edit"></span> Edit</a> 
+                                  <a class="btn btn-danger btn-xs" (click)="removeCompany(i)">
+                                    <span class="glyphicon glyphicon-remove"></span> Del</a>
+                                    <a class="btn btn-default btn-xs" (click)="companyCoupons(i)">
+                                        <span class="glyphicon glyphicon-barcode"></span> Coupons</a></td>
+                                        
+                                    </tr>
+                            </table>
+                            </div>
+                        </div>
+
+            

@@ -17,6 +17,9 @@ import { CustomerGuardServiceService } from '../services/gurds/customer-guard-se
 import { CompanyGuardServiceService } from '../services/gurds/company-guard-service.service';
 import { LoginGurardServiceService } from '../services/gurds/login-gurard-service.service';
 import { EditProductComponent } from '../components/content/deshboard/company-deshboard/edit-product/edit-product.component';
+import { AdminGuardService } from '../services/gurds/admin-guard.service';
+import { CustomersTableComponent } from '../components/content/customers-table/customers-table.component';
+import { CompaniesTableComponent } from '../components/content/companies-table/companies-table.component';
 
 const routes: Routes = [
   { path: "login", canActivate:[GuestGuardServiceService], component: LoginComponent },
@@ -27,13 +30,16 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
   { path: "thank-you", component: ThankYouComponent },
   { path: "register", canActivate:[GuestGuardServiceService],component: RegisterComponent },
+  { path: "customers-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CustomersTableComponent },
+  { path: "companies-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CompaniesTableComponent },
   { path: "dashboard", component: DashboardLyoutComponent, children:
    [
-      { path: "user-profile", canActivate:[LoginGurardServiceService], component: UserProfileComponent },
+      { path: "user-profile", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: UserProfileComponent },
       { path: "company-profile", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CompanyProfileComponent },
-      { path: "change-Password", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: ChangePasswordComponent},
+      { path: "change-Password", canActivate:[LoginGurardServiceService], component: ChangePasswordComponent},
       { path: "create-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CreateProductComponent},
-      { path: "edit-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: EditProductComponent}
+      { path: "edit-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: EditProductComponent},
+
    ]
   },
   {path: "", redirectTo: "coupons",pathMatch: "full"},
