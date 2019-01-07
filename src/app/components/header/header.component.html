@@ -12,10 +12,10 @@
             <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'" class="nav-item active">
               <a class="nav-link" routerLink="coupons"  name = "Buy">Buy </a>
             </li>
-            <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'" class="nav-item active">
+            <li *ngIf="mysessionStorage.getItem('userType')!='COMPANY'&&mysessionStorage.getItem('customerId')!==null" class="nav-item active">
               <a class="nav-link" routerLink="customer-coupons" name= "My Coupons">Customer Coupons</a>
             </li>
-            <li *ngIf="mysessionStorage.getItem('userType')!='CUSTOMER'" class="nav-item active">
+            <li *ngIf="mysessionStorage.getItem('userType')!='CUSTOMER'&&mysessionStorage.getItem('companyId')!==null" class="nav-item active">
               <a class="nav-link" routerLink="company-coupons" name= "My Coupons">Company Coupons</a>
             </li>
             <li *ngIf="mysessionStorage.getItem('userType')!='!COMPANY' || !mysessionStorage.getItem('isLogin')" class="nav-item active">
