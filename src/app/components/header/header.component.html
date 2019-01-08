@@ -21,12 +21,6 @@
             <li *ngIf="mysessionStorage.getItem('userType')!='!COMPANY' || !mysessionStorage.getItem('isLogin')" class="nav-item active">
               <a class="nav-link" routerLink="cart" name = "cart">Cart</a>
             </li>
-            <li *ngIf="mysessionStorage.getItem('userType')=='ADMIN'" class="nav-item active">
-              <a class="nav-link" routerLink="customers-table" name = "customers table">Customers Table</a>
-            </li>
-            <li *ngIf="mysessionStorage.getItem('userType')=='ADMIN'" class="nav-item active">
-              <a class="nav-link" routerLink="companies-table" name ="companies table">Companies Table</a>
-            </li>
           
             <!-- </ng-container> -->
       <!-- </ng-container> -->

@@ -30,8 +30,6 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
   { path: "thank-you", component: ThankYouComponent },
   { path: "register", canActivate:[GuestGuardServiceService],component: RegisterComponent },
-  { path: "customers-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CustomersTableComponent },
-  { path: "companies-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CompaniesTableComponent },
   { path: "dashboard", component: DashboardLyoutComponent, children:
    [
       { path: "user-profile", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: UserProfileComponent },
@@ -39,6 +37,8 @@ const routes: Routes = [
       { path: "change-Password", canActivate:[LoginGurardServiceService], component: ChangePasswordComponent},
       { path: "create-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CreateProductComponent},
       { path: "edit-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: EditProductComponent},
+      { path: "customers-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CustomersTableComponent },
+      { path: "companies-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CompaniesTableComponent },
 
    ]
   },

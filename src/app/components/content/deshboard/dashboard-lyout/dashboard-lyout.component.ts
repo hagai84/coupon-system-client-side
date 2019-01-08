@@ -50,6 +50,8 @@ export class DashboardLyoutComponent implements OnInit {
     this.menuList.push(new MenuList("Statistics","statistics"));
   }
   buildAdminMenuList() {
+    this.menuList.push(new MenuList("Customers Table","customers-table"));
+    this.menuList.push(new MenuList("Companies Table","companies-table"));
     this.menuList.push(new MenuList("Profile","profile"));
     this.menuList.push(new MenuList("Account Setting","settings"));
     this.menuList.push(new MenuList("Statistics","statistics"));

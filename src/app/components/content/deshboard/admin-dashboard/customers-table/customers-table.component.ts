@@ -38,7 +38,6 @@ export class CustomersTableComponent implements OnInit {
     const ob = this.customerApiService.deleteCustomer(this.customers[index].id);
     ob.subscribe(
       () => {
-        
         alert("customer deleted sucsessfully")
       },
       error => {
