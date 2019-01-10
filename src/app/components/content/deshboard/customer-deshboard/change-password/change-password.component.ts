@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.router.url);
     
     var ob:Observable<void>;
-    if(this.router.url==='/dashboard/change-password'){
+    if(this.router.url==='/dashboard/change-Password'){
       passwordBean.userId=Number(sessionStorage.getItem('userId'));
       if (sessionStorage.getItem("userType") == "CUSTOMER") {
          ob = this.customerApiService.updateCustomerPassword(passwordBean);

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 import { LyoutComponent } from '../components/lyout/lyout.component';
@@ -83,6 +84,7 @@ import { CompaniesTableComponent } from '../components/content/deshboard/admin-d
     CartService,
     CompanyApiService,
     CompanyService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
   ],
 
   bootstrap: [LyoutComponent]
