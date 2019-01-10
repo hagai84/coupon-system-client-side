@@ -35,6 +35,8 @@ const routes: Routes = [
       { path: "user-profile", canActivate:[LoginGurardServiceService, CustomerGuardServiceService], component: UserProfileComponent },
       { path: "company-profile", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CompanyProfileComponent },
       { path: "change-Password", canActivate:[LoginGurardServiceService], component: ChangePasswordComponent},
+      { path: "customer-Password", canActivate:[LoginGurardServiceService, AdminGuardService], component: ChangePasswordComponent},
+      { path: "company-Password", canActivate:[LoginGurardServiceService, AdminGuardService], component: ChangePasswordComponent},
       { path: "create-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: CreateProductComponent},
       { path: "edit-product", canActivate:[LoginGurardServiceService, CompanyGuardServiceService], component: EditProductComponent},
       { path: "customers-table", canActivate:[LoginGurardServiceService, AdminGuardService], component: CustomersTableComponent },

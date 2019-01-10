@@ -57,13 +57,13 @@ export class LyoutComponent implements OnInit {
         if (event.key == 'isLogout') {
           this.loginService.logout();
         }
-        else if (event.key == 'isLogin') {
+        if (event.key == 'isLogin') {
           this.loginService.checkLogin();
         }
-        else if (event.key == 'cart') {
+        if (event.key == 'cart' && localStorage.getItem('userType')=='CUSTOMER') {
           this.cartService.readCart();
         }
-        else if (event.key == 'profileUpdated' && sessionStorage.getItem('userType')!='ADMIN') {
+        if (event.key == 'profileUpdated' && sessionStorage.getItem('userType')!='ADMIN') {
           this.loginService.afterLogIn(this.loginService.userBean);
 
         //refresh profile data

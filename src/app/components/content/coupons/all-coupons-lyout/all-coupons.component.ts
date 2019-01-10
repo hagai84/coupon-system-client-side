@@ -54,7 +54,11 @@ export class AllCouponsComponent implements OnInit {
   }
 
   setCouponsToCustomerCoupons() {
-    const ob = this.couponApiService.getCustomerCoupons(Number(sessionStorage.getItem("customerId")));
+    const customerId = sessionStorage.getItem("customerId");
+    if(customerId == null){
+      this.router.navigate(['/coupons'])
+    }
+    const ob = this.couponApiService.getCustomerCoupons(Number(customerId));
     ob.subscribe(coupons => {
       this.savedCoupons=this.coupons = coupons;
     }, error => {
@@ -63,7 +67,11 @@ export class AllCouponsComponent implements OnInit {
   }
 
   setCouponsToCompanyCoupons() {
-    const ob = this.couponApiService.getCompanyCoupons(Number(sessionStorage.getItem("companyId")));
+    const companyId = sessionStorage.getItem("companyId");
+    if(companyId == null){
+      this.router.navigate(['/coupons'])
+    }
+    const ob = this.couponApiService.getCompanyCoupons(Number(companyId));
     ob.subscribe(coupons => {
       this.savedCoupons=this.coupons = coupons;
     }, error => {
