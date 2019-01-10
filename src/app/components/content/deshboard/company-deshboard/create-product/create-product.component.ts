@@ -32,9 +32,12 @@ export class CreateProductComponent implements OnInit {
   ];
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
   ngOnInit() {
+    console.log("create product componnet excecuted");
+    
   }
-
+  
   public createProduct() {
+    console.log("create product method excecuted");
     let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
 
     const ob = this.couponApi.createCoupon(coupon);
