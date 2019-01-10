@@ -43,7 +43,8 @@ export class CreateProductComponent implements OnInit {
     const ob = this.couponApi.createCoupon(coupon);
     ob.subscribe(
       couponId => {
-        alert("coupon adedd successfuly the new coupon id is: "+couponId)
+        alert("coupon adedd successfuly the new coupon id is: "+couponId);
+        localStorage.setItem('createdCoupon', coupon.companyId.toString());
         this.router.navigate(['/company-coupons']);
       },
       error => {

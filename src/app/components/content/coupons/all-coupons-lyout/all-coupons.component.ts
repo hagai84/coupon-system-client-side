@@ -30,7 +30,18 @@ export class AllCouponsComponent implements OnInit {
       this.setCouponsToCustomerCoupons();
     }else if (this.router.url == "/company-coupons") {
       this.setCouponsToCompanyCoupons();
-    }    
+    }  
+    
+    window.addEventListener('storage', (event)=>{
+        if (event.key == 'purchased' && 
+            localStorage.getItem('purchased')===sessionStorage.getItem('customerId')) {
+          this.setCouponsToCustomerCoupons();
+        }
+        if (event.key == 'createdCoupon' && 
+            localStorage.getItem('createdCoupon')===sessionStorage.getItem('companyId')) {
+          this.setCouponsToCompanyCoupons();
+        }
+    });
   }
 
   setCouponsToAllSyteCoupons() {

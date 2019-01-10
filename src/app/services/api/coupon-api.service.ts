@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coupon } from 'src/app/models/coupon';
+import { CartBean } from 'src/app/models/cartBean';
 import { HttpClient } from '@angular/common/http';
 import { UtilService } from '../util.service';
 
@@ -53,6 +54,11 @@ export class CouponApiService {
   public purchaseCoupon(coupon: Coupon, customerId : Number): Observable<void> {
     var str = this.utilService.webServiceUrl + "/rest/coupons/"+ coupon.couponId + "/"+ customerId;
     return this.http.put<void>(str,{},{ withCredentials: true });
+  }
+
+  public checkoutCart(cartBean: CartBean, customerId : Number): Observable<CartBean> {
+    var str = this.utilService.webServiceUrl + "/rest/coupons/cart/"+ customerId;
+    return this.http.put<CartBean>(str,cartBean,{ withCredentials: true });
   }
 
   deleteCoupon(couponId): Observable<void> {

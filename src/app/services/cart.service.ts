@@ -7,6 +7,7 @@ import { UtilService } from './util.service';
 import { utils } from 'protractor';
 import { CouponApiService } from './api/coupon-api.service';
 import { LoginService } from './login.service';
+import { CartBean } from '../models/CartBean';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,49 @@ export class CartService {
     });
   }
   public checkout() {
+    const couponId:number[]=[];
+    this.cart.forEach(element => {
+      couponId.push(element.couponId);
+    });
+    const cartBean:CartBean = new CartBean(couponId,"REQUESTED");
+    const ob = this.couponApiServise.checkoutCart(cartBean, Number(sessionStorage.getItem("customerId")));
+    ob.subscribe(
+      returnedCart => {
+        if(returnedCart.status=='PURCHASED'){
+          this.cart=[];
+          localStorage.setItem('purchased', sessionStorage.getItem("customerId"));
+          this.updateCart();
+          alert("Cart was successfuly purchased");
+          this.router.navigate(['/customer-coupons']);
+        }else if(returnedCart.status=='UPDATED'){
+          const tmpCart:Array<Coupon>=[];
+          this.cart.forEach(element => {
+            if(returnedCart.coupons.includes(element.couponId)){
+              tmpCart.push(element);
+            }
+          });
+          this.cart=tmpCart;
+          this.updateCart();
+          alert("Certain coupons could not be purchased\n The cart has been updated \n please authorize purchase thank you");
+        }
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+        return;
+      });
+    
+    // this.router.navigate(['/thank-you']);
+    
+    }
+    
+    public updateCart(){
+      this.setTotalPrice();
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("totalCartPrice", String(this.totalPrice));
+
+    }
+
+  public oldcheckout() {
     while (this.cart.length > 0) {
       const coupon: Coupon = this.cart.pop();
       const ob = this.couponApiServise.purchaseCoupon(coupon, Number(sessionStorage.getItem("customerId")));
@@ -80,7 +124,5 @@ export class CartService {
       }
       this.router.navigate(['/thank-you']);
   }
-
-
 
 }
