@@ -75,6 +75,7 @@ export class LoginService {
       // this.router.navigate(['/company-coupons']);
     }
     if (userBean.userType == "ADMIN") {
+      sessionStorage.setItem('userName', 'ADMIN');
       this.router.navigate(['/coupons']);
     }
     this.setUserId(userBean.userId);

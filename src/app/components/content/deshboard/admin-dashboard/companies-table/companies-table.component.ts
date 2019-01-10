@@ -30,6 +30,8 @@ export class CompaniesTableComponent implements OnInit {
 
   companyProfile(index:number){
     sessionStorage.setItem('companyBean', JSON.stringify(this.companies[index]));
+    sessionStorage.setItem('companyId', this.companies[index].id.toString());
+    localStorage.setItem('adminSelect', new Date().toString());
     this.router.navigate(['/dashboard/company-profile']);
   }
 

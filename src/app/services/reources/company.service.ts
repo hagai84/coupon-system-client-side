@@ -31,6 +31,7 @@ export class CompanyService {
     ob.subscribe(
       companyBean => {
         this.companyBean=companyBean;
+        sessionStorage.setItem('userName', companyBean.compName);
         sessionStorage.setItem("companyName", companyBean.compName);
         sessionStorage.setItem("companyId", String(companyBean.id));
         sessionStorage.setItem("companyEmail", String(companyBean.email));

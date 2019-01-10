@@ -19,6 +19,7 @@ export class DashboardLyoutComponent implements OnInit {
   ngOnInit() {
     this.userName = sessionStorage.getItem("userName");
     if (sessionStorage.getItem("userType") == "CUSTOMER") {
+      // this.userName = sessionStorage.getItem("customerName");
       this.buildCustomerMenuList();
     } else if (sessionStorage.getItem("userType") == "COMPANY") {
       this.buildCompanyMenuList();
@@ -32,9 +33,14 @@ export class DashboardLyoutComponent implements OnInit {
       this.userName = "Guest";
     }
 
-    if(localStorage.getItem('userType')=='ADMIN'){
+    if(sessionStorage.getItem('userType')=='ADMIN'){
+      console.log("ADMIN listener password");
+
       window.addEventListener('storage', (event)=>{
-        if (event.key == 'customerId' || event.key == 'companyId') {
+        if (event.key == 'adminSelect') {
+          console.log("ADMIN change password");
+          
+          this.menuList=[];
           this.buildAdminMenuList();
         }  
       });

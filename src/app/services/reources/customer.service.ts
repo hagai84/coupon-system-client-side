@@ -24,6 +24,7 @@ export class CustomerService {
     ob.subscribe(
       customerBean => {
         this.customerBean=customerBean;
+        sessionStorage.setItem('userName', customerBean.custName);
         sessionStorage.setItem("customerName", customerBean.custName);
         sessionStorage.setItem("customerId", String(customerBean.id));
         sessionStorage.setItem("customerBean", JSON.stringify(customerBean));
