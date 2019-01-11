@@ -14,7 +14,7 @@
           <div class="preview col-md-6">
 
             <div class="preview-pic tab-content">
-              <div class="tab-pane active" id="pic-1"><img [src]="coupon.image" /></div>
+              <div class="tab-pane active" id="pic-1"><img [src]="'/resources/coupons/' + coupon.image" /></div>
             </div>
 
           </div>
@@ -24,8 +24,8 @@
             <h4 class="price">current price: <span>{{coupon.price}}</span></h4>
             <div class="action">
               <!-- add ngif for buttons according to user and view -->
-              <button *ngIf= "(mysessionStorage.getItem('userType')=='CUSTOMER')" (click)="addToCart()" class="add-to-cart btn btn-default" type="button">add to cart</button>
-              <button *ngIf= "(mysessionStorage.getItem('userType')=='COMPANY')" (click)="editCoupon(coupon)" class="add-to-cart btn btn-default" type="button">edit coupon</button>
+              <button *ngIf= "(mysessionStorage.getItem('userType')!='COMPANY')" (click)="addToCart()" class="add-to-cart btn btn-default" type="button">add to cart</button>
+              <button *ngIf= "(mysessionStorage.getItem('userType')=='COMPANY')||(mysessionStorage.getItem('userType')=='ADMIN')" (click)="editCoupon(coupon)" class="add-to-cart btn btn-default" type="button">edit coupon</button>
             </div>
           </div>
         </div>

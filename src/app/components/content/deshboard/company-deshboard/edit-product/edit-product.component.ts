@@ -43,7 +43,7 @@ export class EditProductComponent implements OnInit {
 
   public updateProduct() {
     // this.updateProductAmount()
-    let coupon: Coupon = new Coupon(this.couponId, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
+    let coupon: Coupon = new Coupon(this.couponId, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image.substr(12), Number(sessionStorage.getItem("userId")));
     const ob = this.couponApi.updateCoupon(coupon);
     ob.subscribe(
       couponId => {

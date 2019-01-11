@@ -8,7 +8,8 @@
           <img class="pic-2" [src]="coupon.image">
         </a>
 
-        <ul *ngIf="mysessionStorage.getItem('userType')  == 'COMPANY' && this.router.url == '/company-coupons'" class="social">
+        <ul *ngIf="mysessionStorage.getItem('userType')  == 'COMPANY' && this.router.url == '/company-coupons' ||
+                  mysessionStorage.getItem('userType')  == 'ADMIN'" class="social">
             <li><a (click)="editCoupon(coupon)" data-tip="Edit Product" style = "background-image: url('https://image.flaticon.com/icons/svg/126/126483.svg')" ><i class="fa fa-eye"></i></a></li>
             <li><a (click)="deleteCoupon(coupon)" data-tip="Delete Product" style= "background-image: url('https://image.flaticon.com/icons/svg/458/458594.svg')"><i class="fa fa-shopping-bag"></i></a></li>
         </ul>
