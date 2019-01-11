@@ -24,7 +24,8 @@
             <h4 class="price">current price: <span>{{coupon.price}}</span></h4>
             <div class="action">
               <!-- add ngif for buttons according to user and view -->
-              <button (click)="addToCart()" class="add-to-cart btn btn-default" type="button">add to cart</button>
+              <button *ngIf= "(mysessionStorage.getItem('userType')=='CUSTOMER')" (click)="addToCart()" class="add-to-cart btn btn-default" type="button">add to cart</button>
+              <button *ngIf= "(mysessionStorage.getItem('userType')=='COMPANY')" (click)="editCoupon(coupon)" class="add-to-cart btn btn-default" type="button">edit coupon</button>
             </div>
           </div>
         </div>

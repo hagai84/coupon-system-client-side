@@ -27,20 +27,24 @@ export class EditProductComponent implements OnInit {
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
   ngOnInit() {
     let coupon : Coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
-    this.title =coupon.title
-    this.couponId = coupon.couponId;
-    this.startDate = coupon.startDate;
-    this.endDate = coupon.endDate;
+   
+   
+   
+   this.title = coupon.title
+   this.couponId = coupon.couponId;
+   this.startDate = coupon.startDate;
+   this.endDate = coupon.endDate;
     this.amount = coupon.amount;
     this.type = coupon.type;
     this.message = coupon.message;
     this.price = coupon.price;
+    this.image = coupon.image;
   }
 
   public updateProduct() {
-    let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
-
-    const ob = this.couponApi.createCoupon(coupon);
+    // this.updateProductAmount()
+    let coupon: Coupon = new Coupon(this.couponId, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
+    const ob = this.couponApi.updateCoupon(coupon);
     ob.subscribe(
       couponId => {
         alert("coupon update successfuly");
@@ -50,6 +54,21 @@ export class EditProductComponent implements OnInit {
         this.util.PrintErrorToCustomer(error);
       });
   }
+  // public updateProductAmount() {
+  //   let coupon: Coupon = new Coupon(this.couponId, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
+
+  //   const ob = this.couponApi.updateCouponAmount(coupon);
+  //   ob.subscribe(
+  //     couponId => {
+  //       alert("amount update successfuly");
+  //       this.router.navigate(['/company-coupons']);
+  //     },
+  //     error => {
+  //       this.util.PrintErrorToCustomer(error);
+  //     });
+  // }
+
+
   deleteCoupon(){
     const ob = this.couponApi.deleteCoupon(this.couponId);
     ob.subscribe(

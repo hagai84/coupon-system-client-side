@@ -9,6 +9,7 @@ import { Coupon } from 'src/app/models/coupon';
   styleUrls: ['./coupon.component.css']
 })
 export class CouponComponent implements OnInit {
+  public mysessionStorage: Storage = sessionStorage;
   public coupon:Coupon
   constructor(private cart:CartService, private router:Router) { }
   ngOnInit() {
@@ -18,5 +19,10 @@ export class CouponComponent implements OnInit {
   addToCart(){
   this.router.navigate(['/cart']);
   this.cart.addToCart(JSON.parse(sessionStorage.getItem("lastSingleCoupon")));  
+  }
+
+  editCoupon(coupon) {
+    sessionStorage.setItem("lestCouponToUpdate", JSON.stringify(coupon));
+    this.router.navigate(['/dashboard/edit-product']);
   }
 }

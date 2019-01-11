@@ -17,6 +17,9 @@ export class CouponApiService {
   public createCoupon(coupon : Coupon):Observable<number>{
     return this.http.post<number>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
   }
+  public updateCoupon(coupon : Coupon):Observable<void>{
+    return this.http.put<void>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
+  }
   public getCouponsByType(type:string):Observable<Coupon[]>{
     var urlString = this.utilService.webServiceUrl + "/rest/coupons/couponType?couponType="+type;
     return this.http.get<Coupon[]>(urlString,{ withCredentials: true });
