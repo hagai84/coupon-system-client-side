@@ -17,6 +17,10 @@ export class CouponApiService {
   public createCoupon(coupon : Coupon):Observable<number>{
     return this.http.post<number>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
   }
+  public uploadImage(uploadData:FormData):Observable<void>{
+    // return this.http.post<number>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
+     return this.http.post<void>(this.utilService.webServiceUrl + "/rest/coupons/uploadimage", uploadData,{ withCredentials: true });
+  }
   public updateCoupon(coupon : Coupon):Observable<void>{
     return this.http.put<void>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
   }
@@ -64,7 +68,7 @@ export class CouponApiService {
     return this.http.put<CartBean>(str,cartBean,{ withCredentials: true });
   }
 
-  deleteCoupon(couponId): Observable<void> {
+  public deleteCoupon(couponId): Observable<void> {
     var url = this.utilService.webServiceUrl + "/rest/coupons/"+ couponId;
     return this.http.delete<void>(url,{ withCredentials: true });
   }

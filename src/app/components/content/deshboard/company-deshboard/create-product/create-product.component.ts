@@ -18,7 +18,7 @@ export class CreateProductComponent implements OnInit {
   public type: string;
   public message: string;
   public price: number;
-  public image: string;
+  public image: File;
   public companyId: number;
 
   public couponType: string[] = [
@@ -38,14 +38,24 @@ export class CreateProductComponent implements OnInit {
   
   public createProduct() {
     console.log("create product method excecuted");
-    let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
+    let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image.name, Number(sessionStorage.getItem("userId")));
 
     const ob = this.couponApi.createCoupon(coupon);
     ob.subscribe(
       couponId => {
-        alert("coupon adedd successfuly the new coupon id is: "+couponId);
+        alert("coupon added successfuly the new coupon id is: "+couponId);
         localStorage.setItem('createdCoupon', coupon.companyId.toString());
         this.router.navigate(['/company-coupons']);
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+      const uploadData = new FormData();
+      uploadData.append('pic', this.image, this.image.name);
+      const ob2 = this.couponApi.uploadImage(uploadData);
+    ob2.subscribe(
+      couponId => {
+        alert("Image successfuly uploaded");
       },
       error => {
         this.util.PrintErrorToCustomer(error);

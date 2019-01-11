@@ -76,7 +76,7 @@
   <div class="form-group row row">
     <label class="col-md-2 control-label" for="textinput">Image</label>
     <div class="col-md-4">
-      <input required #couponImage="ngModel" type="text" name="pic" [(ngModel)]="image">
+      <input required #couponImage="ngModel" type="file" name="pic" [(ngModel)]="image">
       <img class="img-thumbnail" [src]="image">
     </div>
   </div>
