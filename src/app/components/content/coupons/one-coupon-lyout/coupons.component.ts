@@ -38,7 +38,7 @@ export class CouponsComponent implements OnInit {
 
 
   deleteCoupon(coupon) {
-    const ob = this.couponApi.deleteCoupon(coupon.id);
+    const ob = this.couponApi.deleteCoupon(coupon.couponId);
     ob.subscribe(
       () => {
         alert("coupon deleted successfuly");

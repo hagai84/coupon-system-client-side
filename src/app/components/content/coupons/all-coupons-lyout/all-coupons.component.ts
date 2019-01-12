@@ -14,7 +14,7 @@ import { utils } from 'protractor';
 })
 export class AllCouponsComponent implements OnInit {
   public coupons: Coupon[];
-  private savedCoupons: Coupon[];
+  public savedCoupons: Coupon[];
   public keyWord:string;
 
   constructor(private router: Router, private util: UtilService, private couponApiService: CouponApiService, private cookieService: CookieService) { }
@@ -148,20 +148,25 @@ export class AllCouponsComponent implements OnInit {
   }
 
   searchKeyWord(){
-    var tmpCoupons:Coupon[]=[];
-    if(this.keyWord==" "){
-      this.coupons=this.savedCoupons;
-      this.keyWord='';
-      return;
-    }
-    this.savedCoupons.forEach(element => {    
-      if(element.title.toLowerCase().includes(this.keyWord.toLowerCase())||
-      element.message.toLowerCase().includes(this.keyWord.toLowerCase())){
-        tmpCoupons.push(element);
-      }
-    });
-    this.keyWord=' ';
-    this.coupons=tmpCoupons;
+    this.keyWord.split(" ").forEach(keyword => {
+      var tmpCoupons:Coupon[]=[];
+      // if(this.keyWord==" "){
+      //   this.coupons=this.c;
+      //   this.keyWord='';
+      //   return;
+      // }
+      this.coupons.forEach(element => {    
+        if(element.title.toLowerCase().includes(keyword.toLowerCase())||
+        element.message.toLowerCase().includes(keyword.toLowerCase())){
+          tmpCoupons.push(element);
+        }
+      });   
+      this.coupons=tmpCoupons;  
+    });    
+    this.keyWord='';
+  }
+  clearFilter(){
+    this.coupons=this.savedCoupons;
   }
 }
 

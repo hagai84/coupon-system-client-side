@@ -11,81 +11,93 @@ import { Coupon } from 'src/app/models/coupon';
 })
 export class EditProductComponent implements OnInit {
 
-  public couponId: number;
-  public title: string;
-  public startDate: Date;
-  public endDate: Date;
-  public amount: number;
-  public type: string;
-  public message: string;
-  public price: number;
-  public image: string;
+  public coupon:Coupon = new Coupon(0,"", new Date(), new Date(), 0, "", "", 0,"", 0);
+  public create: boolean;
+  public amountDelta: number;
   public imageFile: File;
-  public companyId: number;
   public myStorage :Storage = sessionStorage;
+  public legendTitle:string;
 
 
-  constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
+  public couponTypes: string[] = [
+    "RESTAURANTS",
+    "ELECTRICITY",
+    "FOOD",
+    "HEALTH",
+    "SPORTS",
+    "CAMPING",
+    "TRAVELLING"
+  ];
+
+  constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) {
+    console.log(this.router.url);
+    
+    if(this.router.url=='/dashboard/create-product'){
+      this.create=true;
+      this.legendTitle=" Create Coupon ";
+      console.log("create == true");
+      
+    }else {
+      this.create=false;
+      this.legendTitle=" Edit Coupon ";
+    }
+   }
   ngOnInit() {
-    let coupon : Coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
-   
-   this.title = coupon.title
-   this.couponId = coupon.couponId;
-   this.startDate = coupon.startDate;
-   this.endDate = coupon.endDate;
-    this.amount = coupon.amount;
-    this.type = coupon.type;
-    this.message = coupon.message;
-    this.price = coupon.price;
-    this.image = coupon.image;
+    if(!this.create){
+      this.coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
+    }
+  }
+
+  public createProduct() {  
+    const ob = this.couponApi.createCoupon(this.coupon);
+    ob.subscribe(
+      couponId => {
+        alert("coupon added successfuly the new coupon id is: "+couponId);
+        localStorage.setItem('createdCoupon', this.coupon.companyId.toString());
+        this.router.navigate(['/company-coupons']);
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });   
   }
 
   public updateProduct() {
     // this.updateProductAmount()
-    let coupon: Coupon = new Coupon(this.couponId, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image.substr(12), Number(sessionStorage.getItem("userId")));
-    const ob = this.couponApi.updateCoupon(coupon);
+    const ob = this.couponApi.updateCoupon(this.coupon);
     ob.subscribe(
       couponId => {
-        if(this.imageFile!=null){
-          const uploadData = new FormData();
-        uploadData.append('pic', this.imageFile, this.image);
-        const ob2 = this.couponApi.uploadImage(uploadData);
-      ob2.subscribe(
-        couponId => {
-          alert("Image successfuly uploaded");
-        },
-        error => {
-          this.util.PrintErrorToCustomer(error);
-        });
-        }
         alert("coupon update successfuly");
+        this.router.navigate(['/company-coupons']);
+        if(this.amountDelta!=null){
+          this.updateProductAmount();
+        }
+      },
+      error => {
+        this.util.PrintErrorToCustomer(error);
+      });
+  }
+  public updateProductAmount() {
+    console.log("amount Delta  " + this.amountDelta);
+    
+    const ob = this.couponApi.updateCouponAmount(this.amountDelta, this.coupon.couponId);
+    ob.subscribe(
+      couponId => {
+        alert("amount update successfuly");
         this.router.navigate(['/company-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
       });
   }
-  // public updateProductAmount() {
-  //   let coupon: Coupon = new Coupon(this.couponId, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
-
-  //   const ob = this.couponApi.updateCouponAmount(coupon);
-  //   ob.subscribe(
-  //     couponId => {
-  //       alert("amount update successfuly");
-  //       this.router.navigate(['/company-coupons']);
-  //     },
-  //     error => {
-  //       this.util.PrintErrorToCustomer(error);
-  //     });
-  // }
   onFileChanged(event) {
-    this.imageFile=<File>event.target.files[0];   
+    this.imageFile=<File>event.target.files[0]; 
+    this.uploadImage();  
     // this.image = this.imageFile.name;
     // this.image = decodeURIComponent(escape(this.imageFile.name));    
   }
 
   deleteCoupon(){
-    const ob = this.couponApi.deleteCoupon(this.couponId);
+    const ob = this.couponApi.deleteCoupon(this.coupon.couponId);
     ob.subscribe(
       () => {
         alert("coupon deleted successfuly");
@@ -96,4 +108,32 @@ export class EditProductComponent implements OnInit {
       });
   }
 
+  uploadImage(){
+    const localyGenFileName:string = (Math.random()*100000000000000000000).toString();
+    const uploadData = new FormData();
+        uploadData.append('pic', this.imageFile, localyGenFileName);
+        const ob2 = this.couponApi.uploadImage(uploadData);
+      ob2.subscribe(
+        fileName => {
+          // this.image = fileName;
+          this.coupon.image = localyGenFileName;
+          alert("Image successfuly uploaded");
+        },
+        error => {
+          this.util.PrintErrorToCustomer(error);
+        });
+  }
+
+  public extractFilename(path) {
+    if (path.substr(0, 12) == "C:/fakepath/")
+      return path.substr(12); // modern browser
+    var x;
+    x = path.lastIndexOf('/');
+    if (x >= 0) // Unix-based path
+      return path.substr(x+1);
+    x = path.lastIndexOf('\\');
+    if (x >= 0) // Windows-based path
+      return path.substr(x+1);
+    return path; // just the file name
+  }
 }

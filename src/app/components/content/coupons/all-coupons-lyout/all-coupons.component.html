@@ -32,11 +32,19 @@
       <!-- 0<input type="range" min="0" max="2000" value="0" [(ngModel)]="priceRange">2000 -->
       <!-- <input  #theOldPassword="ngModel" [(ngModel)]="oldPassword" name="oldPassword"></td> -->
       <form class="form-inline my-2 my-lg-0" (ngSubmit)="searchKeyWord()">
-        <input class="form-control mr-sm-2"  [(ngModel)]="keyWord" name="keyWord" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          <ng-container *ngIf="keyWord==' '">Clear Search</ng-container>
-          <ng-container *ngIf="keyWord!=' '">Search</ng-container>
+        <input class="form-control mr-sm-2"  [(ngModel)]="keyWord" name="keyWord" type="search" placeholder="Enter Keyword" aria-label="Search">
+        <button  *ngIf="keyWord!=''" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Filter
+          <!-- <ng-container *ngIf="keyWord==' '">Clear</ng-container> -->
+          <!-- <ng-container *ngIf="keyWord!=' '">Filter</ng-container> -->
         </button>
+        <button *ngIf="coupons.length != savedCoupons.length" class="btn btn-outline-success my-2 my-sm-0" 
+                  type="button" (click)="clearFilter()">
+            Clear
+            <!-- <ng-container *ngIf="keyWord==' '">Clear</ng-container> -->
+            <!-- <ng-container *ngIf="keyWord!=' '">Filter</ng-container> -->
+          </button>
+
       </form>
     </div>
   </nav>

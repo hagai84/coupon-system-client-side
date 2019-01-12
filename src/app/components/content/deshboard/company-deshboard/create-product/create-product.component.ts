@@ -61,6 +61,7 @@ export class CreateProductComponent implements OnInit {
   }
   
   onFileChanged(event) {
+    
     this.imageFile=<File>event.target.files[0];   
     // this.image = this.imageFile.name;
     // this.image = decodeURIComponent(escape(this.imageFile.name));    

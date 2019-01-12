@@ -68,9 +68,13 @@ export class CouponApiService {
     return this.http.put<CartBean>(str,cartBean,{ withCredentials: true });
   }
 
-  public deleteCoupon(couponId): Observable<void> {
+  public deleteCoupon(couponId:number): Observable<void> {
     var url = this.utilService.webServiceUrl + "/rest/coupons/"+ couponId;
     return this.http.delete<void>(url,{ withCredentials: true });
   }
- 
+  public updateCouponAmount(amount:number, couponId : Number): Observable<void> {
+    var str = this.utilService.webServiceUrl + "/rest/coupons/amount/"+ couponId;
+    return this.http.put<void>(str,{amount},{ withCredentials: true });
+  }
+  
 }
