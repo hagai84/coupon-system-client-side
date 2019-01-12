@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   public userPassword: string;
   public userType: string = "CUSTOMER";
   public userEmail: string;
+  public newPassword2 = "";
 
   constructor(private companyService: CompanyService, private customerService: CustomerService, private router:Router) { }
 

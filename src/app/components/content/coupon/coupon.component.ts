@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { Coupon } from 'src/app/models/coupon';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-coupon',
@@ -11,7 +12,7 @@ import { Coupon } from 'src/app/models/coupon';
 export class CouponComponent implements OnInit {
   public mysessionStorage: Storage = sessionStorage;
   public coupon:Coupon
-  constructor(private cart:CartService, private router:Router) { }
+  constructor(private cart:CartService, private router:Router, public utilService:UtilService) { }
   ngOnInit() {
     this.coupon = JSON.parse(sessionStorage.getItem("lastSingleCoupon"));
   }

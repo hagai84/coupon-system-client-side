@@ -4,8 +4,8 @@
     <div class="product-grid2">
       <div class="product-image2">
         <a (click)="goToCoupon(coupon)">
-          <img class="pic-1" [src]="'/couponby/resources/coupons/' + coupon.image">
-          <img class="pic-2" [src]="'/couponby/resources/coupons/' + coupon.image">
+          <img class="pic-1" [src]="util.resourcesUrl + coupon.image">
+          <img class="pic-2" [src]="util.resourcesUrl + coupon.image">
         </a>
 
         <ul *ngIf="mysessionStorage.getItem('userType')  == 'COMPANY' && this.router.url == '/company-coupons' ||

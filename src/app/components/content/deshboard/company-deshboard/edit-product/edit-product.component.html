@@ -61,7 +61,7 @@
       <div class="input-group registration-date-time">
         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
         <input required #couponStartDate="ngModel" class="form-control" name="couponStartDateName" id="couponStartDateId"
-          type="date" [(ngModel)]="coupon.startDate">
+          type="date" [(ngModel)]="coupon.startDate" [value]="coupon.startDate">
       </div>
     </div>
   </div>
@@ -72,7 +72,7 @@
       <div class="input-group registration-date-time">
         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
         <input #couponEndDate="ngModel" class="form-control" name="couponEndDateName" id="couponEndDateId" type="date"
-          [(ngModel)]="coupon.endDate">
+          [(ngModel)]="coupon.endDate" [value]="coupon.startDate">
       </div>
     </div>
   </div>
