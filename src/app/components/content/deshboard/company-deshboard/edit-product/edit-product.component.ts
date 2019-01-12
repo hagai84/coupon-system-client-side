@@ -20,6 +20,7 @@ export class EditProductComponent implements OnInit {
   public message: string;
   public price: number;
   public image: string;
+  public imageFile: File;
   public companyId: number;
   public myStorage :Storage = sessionStorage;
 
@@ -27,8 +28,6 @@ export class EditProductComponent implements OnInit {
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
   ngOnInit() {
     let coupon : Coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
-   
-   
    
    this.title = coupon.title
    this.couponId = coupon.couponId;
@@ -47,6 +46,18 @@ export class EditProductComponent implements OnInit {
     const ob = this.couponApi.updateCoupon(coupon);
     ob.subscribe(
       couponId => {
+        if(this.imageFile!=null){
+          const uploadData = new FormData();
+        uploadData.append('pic', this.imageFile, this.image);
+        const ob2 = this.couponApi.uploadImage(uploadData);
+      ob2.subscribe(
+        couponId => {
+          alert("Image successfuly uploaded");
+        },
+        error => {
+          this.util.PrintErrorToCustomer(error);
+        });
+        }
         alert("coupon update successfuly");
         this.router.navigate(['/company-coupons']);
       },
@@ -67,7 +78,11 @@ export class EditProductComponent implements OnInit {
   //       this.util.PrintErrorToCustomer(error);
   //     });
   // }
-
+  onFileChanged(event) {
+    this.imageFile=<File>event.target.files[0];   
+    // this.image = this.imageFile.name;
+    // this.image = decodeURIComponent(escape(this.imageFile.name));    
+  }
 
   deleteCoupon(){
     const ob = this.couponApi.deleteCoupon(this.couponId);

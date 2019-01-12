@@ -18,7 +18,8 @@ export class CreateProductComponent implements OnInit {
   public type: string;
   public message: string;
   public price: number;
-  public image: File;
+  public image: string;
+  public imageFile: File;
   public companyId: number;
 
   public couponType: string[] = [
@@ -31,65 +32,51 @@ export class CreateProductComponent implements OnInit {
     "TRAVELLING"
   ];
   constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) { }
-  ngOnInit() {
-    console.log("create product componnet excecuted");
-    
+  ngOnInit() {    
   }
   
-  public createProduct() {
-    console.log("create product method excecuted");
-    console.log(this.image);
-    console.log(this.image.name);
-
-    
-    let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image.name, Number(sessionStorage.getItem("userId")));
+  public createProduct() {  
+    let coupon: Coupon = new Coupon(undefined, this.title, this.startDate, this.endDate, this.amount, this.type, this.message, this.price, this.image, Number(sessionStorage.getItem("userId")));
 
     const ob = this.couponApi.createCoupon(coupon);
     ob.subscribe(
       couponId => {
+        const uploadData = new FormData();
+        uploadData.append('pic', this.imageFile, this.image);
+        const ob2 = this.couponApi.uploadImage(uploadData);
+      ob2.subscribe(
+        couponId => {
+          alert("Image successfuly uploaded");
+        },
+        error => {
+          this.util.PrintErrorToCustomer(error);
+        });
         alert("coupon added successfuly the new coupon id is: "+couponId);
         localStorage.setItem('createdCoupon', coupon.companyId.toString());
         this.router.navigate(['/company-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
-      });
-      const uploadData = new FormData();
-      
-      uploadData.append('pic', this.image, this.image.name);
-      const ob2 = this.couponApi.uploadImage(uploadData);
-    ob2.subscribe(
-      couponId => {
-        alert("Image successfuly uploaded");
-      },
-      error => {
-        this.util.PrintErrorToCustomer(error);
-      });
+      });   
   }
-
-  public extractFilename(path) {
-    if (path.substr(0, 12) == "C:/fakepath/")
-      return path.substr(12); // modern browser
-    var x;
-    x = path.lastIndexOf('/');
-    if (x >= 0) // Unix-based path
-      return path.substr(x+1);
-    x = path.lastIndexOf('\\');
-    if (x >= 0) // Windows-based path
-      return path.substr(x+1);
-    return path; // just the file name
-  }
-
+  
   onFileChanged(event) {
-    
-    // this.image = this.extractFilename(event.target.files[0]);
-    // return val.replace( /C:\\fakepath\\/i, "" );
-    console.log(event.target.files);
-    
-    this.image=<File>event.target.files[0];
-    console.log(this.image);
-    console.log(this.image.name);
-    
+    this.imageFile=<File>event.target.files[0];   
+    // this.image = this.imageFile.name;
+    // this.image = decodeURIComponent(escape(this.imageFile.name));    
   }
+  
+    public extractFilename(path) {
+      if (path.substr(0, 12) == "C:/fakepath/")
+        return path.substr(12); // modern browser
+      var x;
+      x = path.lastIndexOf('/');
+      if (x >= 0) // Unix-based path
+        return path.substr(x+1);
+      x = path.lastIndexOf('\\');
+      if (x >= 0) // Windows-based path
+        return path.substr(x+1);
+      return path; // just the file name
+    }
 }
 

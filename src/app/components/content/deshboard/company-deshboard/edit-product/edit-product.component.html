@@ -76,8 +76,9 @@
   <div class="form-group row row">
     <label class="col-md-2 control-label" for="file">Image</label>
     <div class="col-md-4">
-      <input required #couponImage="ngModel" type="file" name="couponImageName" id="couponImageId" [(ngModel)]="image">
+      <input required #couponImage="ngModel" type="text" name="couponImageName" id="couponImageId" [(ngModel)]="image">
       <!-- <img class="img-thumbnail" [src]="image"> -->
+      <input required #couponImage type="file" (change)="onFileChanged($event)" >
     </div>
   </div>
 
