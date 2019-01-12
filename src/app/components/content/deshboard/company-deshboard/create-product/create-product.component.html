@@ -76,10 +76,12 @@
   <div class="form-group row row">
     <label class="col-md-2 control-label" for="textinput">Image</label>
     <div class="col-md-4">
-      <input required #couponImage type="file" (change)="onFileChanged($event)" >
+      <!-- <input required #couponImage type="file" (change)="onFileChanged($event)" > -->
       <!-- <img class="img-thumbnail" [src]="image"> -->
       <!-- <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput> -->
       <!-- <button (click)="fileInput.click()">Select File</button> -->
+      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+<button (click)="fileInput.click()">Select File</button>
     </div>
   </div>
 

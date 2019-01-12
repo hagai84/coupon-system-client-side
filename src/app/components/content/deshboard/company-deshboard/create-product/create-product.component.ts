@@ -68,8 +68,8 @@ export class CreateProductComponent implements OnInit {
   }
 
   public extractFilename(path) {
-    // if (path.substr(0, 12) == "C:/fakepath/")
-      return path.substr(14); // modern browser
+    if (path.substr(0, 12) == "C:/fakepath/")
+      return path.substr(12); // modern browser
     var x;
     x = path.lastIndexOf('/');
     if (x >= 0) // Unix-based path
@@ -81,7 +81,15 @@ export class CreateProductComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.image = event.target.files[0]
+    
+    // this.image = this.extractFilename(event.target.files[0]);
+    // return val.replace( /C:\\fakepath\\/i, "" );
+    console.log(event.target.files);
+    
+    this.image=<File>event.target.files[0];
+    console.log(this.image);
+    console.log(this.image.name);
+    
   }
 }
 
