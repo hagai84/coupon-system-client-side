@@ -33,18 +33,19 @@ export class EditProductComponent implements OnInit {
     console.log(this.router.url);
     
     if(this.router.url=='/dashboard/create-product'){
+      this.coupon.companyId = Number(sessionStorage.getItem('companyId'));
       this.create=true;
       this.legendTitle=" Create Coupon ";
       console.log("create == true");
       
     }else {
+      this.coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
       this.create=false;
       this.legendTitle=" Edit Coupon ";
     }
    }
   ngOnInit() {
     if(!this.create){
-      this.coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
     }
   }
 
