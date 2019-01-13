@@ -71,8 +71,8 @@
     <div class="col-md-4">
       <div class="input-group registration-date-time">
         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
-        <input #couponEndDate="ngModel" class="form-control" name="couponEndDateName" id="couponEndDateId" type="date"
-          [(ngModel)]="coupon.endDate" [value]="coupon.startDate">
+        <input #couponEndDate="ngModel" class="form-control" name="couponEndDateName" id="couponEndDateId" type="date" min={{coupon.startDate}}
+          [(ngModel)]="coupon.endDate" [value]="coupon.endDate">
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
       <input *ngIf="create" required #couponImage="ngModel" name="couponImage" type="text" placeholder="choose file" [(ngModel)]="image"
         class="form-control input-md"> -->
         <input #fileInput type="file" (change)="onFileChanged($event)" >
-        <img class="img-thumbnail" [src]="'/couponby/resources/coupons/' + coupon.image">
+        <img class="img-thumbnail" [src]="util.resourcesUrl + coupon.image">
     </div>
   </div>
 
