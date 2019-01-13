@@ -32,7 +32,6 @@ export class CustomersTableComponent implements OnInit {
   customerProfile(index:number){
     sessionStorage.setItem('customerBean', JSON.stringify(this.customers[index]));
     sessionStorage.setItem('customerId', this.customers[index].id.toString());
-    localStorage.setItem('adminSelect', new Date().toString());
     this.router.navigate(['/dashboard/user-profile']);
   }
 

@@ -3,6 +3,7 @@ import { CustomerApiService } from 'src/app/services/api/customer-api.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MenuList } from 'src/app/models/MenuList';
 import { CustomerService } from 'src/app/services/reources/customer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-lyout',
@@ -14,7 +15,7 @@ export class DashboardLyoutComponent implements OnInit {
 
   public userName:String;
   menuList: MenuList[] = [];
-  constructor(public customerService: CustomerService, private loginService: LoginService) { }
+  constructor(public customerService: CustomerService, private loginService: LoginService, private router:Router) { }
 
   ngOnInit() {
     this.userName = sessionStorage.getItem("userName");
@@ -26,20 +27,17 @@ export class DashboardLyoutComponent implements OnInit {
       // this.userName = sessionStorage.getItem("companyName");
     } else if (sessionStorage.getItem("userType") == "ADMIN") {
       this.buildAdminMenuList();
-      // this.userName = "Admin";     
+      // this.userName = "Admin";   
+      this.router.events.subscribe((val) => {
+        // see also 
+        this.buildAdminMenuList();
+
+        console.log(val); 
+    });
     }
     else {
       this.buildguestMenuList();
       this.userName = "Guest";
-    }
-
-    if(sessionStorage.getItem('userType')=='ADMIN'){
-      window.addEventListener('storage', (event)=>{
-        if (event.key == 'adminSelect') {         
-          this.menuList=[];
-          this.buildAdminMenuList();
-        }  
-      });
     }
   }
 
@@ -59,9 +57,7 @@ export class DashboardLyoutComponent implements OnInit {
     this.menuList.push(new MenuList("Statistics","statistics"));
   }
   buildAdminMenuList() {
-    this.menuList.push(new MenuList("Profile","profile"));
-    // this.menuList.push(new MenuList("Change Password","change-Password"));
-    this.menuList.push(new MenuList("Account Setting","settings"));
+    this.menuList=[];
     this.menuList.push(new MenuList("Customers Table","customers-table"));
     const customerId = sessionStorage.getItem('customerId');
     if(customerId!=null){
@@ -75,6 +71,9 @@ export class DashboardLyoutComponent implements OnInit {
       this.menuList.push(new MenuList("Change Password","company-Password"));    
       this.menuList.push(new MenuList("Create new Coupon", "create-product"));
     }
+    // this.menuList.push(new MenuList("Profile","profile"));
+    // this.menuList.push(new MenuList("Change Password","change-Password"));
+    // this.menuList.push(new MenuList("Account Setting","settings"));
     // this.menuList.push(new MenuList("Statistics","statistics"));
   }
   buildguestMenuList() {
