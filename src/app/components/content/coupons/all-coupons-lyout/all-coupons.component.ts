@@ -13,8 +13,8 @@ import { utils } from 'protractor';
   styleUrls: ['./all-coupons.component.css']
 })
 export class AllCouponsComponent implements OnInit {
-  public coupons: Coupon[];
-  public savedCoupons: Coupon[];
+  public coupons: Coupon[] = [];
+  public savedCoupons: Coupon[] = [];
   public keyWord:string;
 
   constructor(private router: Router, private util: UtilService, private couponApiService: CouponApiService, private cookieService: CookieService) { }

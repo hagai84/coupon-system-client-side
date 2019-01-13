@@ -73,8 +73,8 @@ export class CouponApiService {
     return this.http.delete<void>(url,{ withCredentials: true });
   }
   public updateCouponAmount(amount:number, couponId : Number): Observable<void> {
-    var str = this.utilService.webServiceUrl + "/rest/coupons/amount/"+ couponId;
-    return this.http.put<void>(str,{amount},{ withCredentials: true });
+    var str = this.utilService.webServiceUrl + "/rest/coupons/amount/"+ couponId + "?amount=" + amount;
+    return this.http.put<void>(str,{},{ withCredentials: true });
   }
   
 }

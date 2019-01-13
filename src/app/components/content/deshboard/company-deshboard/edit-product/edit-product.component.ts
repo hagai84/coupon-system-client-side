@@ -29,22 +29,20 @@ export class EditProductComponent implements OnInit {
     "TRAVELLING"
   ];
 
-  constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) {
-    console.log(this.router.url);
+  constructor(public util: UtilService, public router: Router, public couponApi: CouponApiService) {    
     
+   }
+  ngOnInit() {
     if(this.router.url=='/dashboard/create-product'){
       this.coupon.companyId = Number(sessionStorage.getItem('companyId'));
       this.create=true;
       this.legendTitle=" Create Coupon ";
-      console.log("create == true");
       
     }else {
       this.coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
       this.create=false;
       this.legendTitle=" Edit Coupon ";
     }
-   }
-  ngOnInit() {
   }
 
   public createProduct() {  
@@ -65,11 +63,11 @@ export class EditProductComponent implements OnInit {
     const ob = this.couponApi.updateCoupon(this.coupon);
     ob.subscribe(
       couponId => {
-        alert("coupon update successfuly");
-        this.router.navigate(['/company-coupons']);
         if(this.amountDelta!=null){
           this.updateProductAmount();
         }
+        alert("coupon update successfuly");
+        this.router.navigate(['/company-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
