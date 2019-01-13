@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coupon } from 'src/app/models/coupon';
 import { CartBean } from 'src/app/models/cartBean';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { UtilService } from '../util.service';
 
 @Injectable({
@@ -17,9 +17,10 @@ export class CouponApiService {
   public createCoupon(coupon : Coupon):Observable<number>{
     return this.http.post<number>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
   }
-  public uploadImage(uploadData:FormData):Observable<void>{
+  public uploadImage(uploadData:FormData):Observable<HttpEvent<void>>{
     // return this.http.post<number>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });
-     return this.http.post<void>(this.utilService.webServiceUrl + "/rest/coupons/uploadimage", uploadData,{ withCredentials: true });
+     return this.http.post<void>(this.utilService.webServiceUrl + "/rest/coupons/uploadimage", uploadData,{ withCredentials: true, reportProgress: true,
+      observe: 'events' });
   }
   public updateCoupon(coupon : Coupon):Observable<void>{
     return this.http.put<void>(this.utilService.webServiceUrl + "/rest/coupons",coupon,{ withCredentials: true });

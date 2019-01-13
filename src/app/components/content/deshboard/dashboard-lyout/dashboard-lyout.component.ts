@@ -35,9 +35,7 @@ export class DashboardLyoutComponent implements OnInit {
 
     if(sessionStorage.getItem('userType')=='ADMIN'){
       window.addEventListener('storage', (event)=>{
-        if (event.key == 'adminSelect') {
-          console.log("ADMIN change password");
-          
+        if (event.key == 'adminSelect') {         
           this.menuList=[];
           this.buildAdminMenuList();
         }  

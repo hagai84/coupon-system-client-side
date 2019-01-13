@@ -7,6 +7,7 @@
 
   <!-- Text input-->
   <div class="form-group row row">
+    
     <label class="col-md-2 control-label" for="couponTitle">Title</label>
     <div class="col-md-4">
       <input [disabled]="!create" required #couponTitle="ngModel" name="couponTitleName" id="couponTitleId" type="text" placeholder="meal for two" [(ngModel)]="coupon.title"
@@ -50,9 +51,9 @@
       </div>
       <label class="col-md-2 control-label" ></label>
       <div class="col-md-4">
-        <button *ngIf="!create" (click)="updateProduct()" [disabled]="!editProductForm.form.valid" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Edit
+        <button *ngIf="!create" (click)="updateProduct()" [disabled]="!editProductForm.form.valid || coupon.image==null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Edit
           Coupon</button>
-          <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || imageFile == null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create
+          <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || coupon.image == null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create
               Coupon</button>
           <button  id="clearbutton" name="clearbutton" class="btn btn-secondary" type="reset">Clear Form</button>
           <button *ngIf="!create" (click)="deleteCoupon()" class="btn btn-danger" type="button">Delete Coupon</button>
@@ -100,8 +101,11 @@
           <!-- <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || imageFile == null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create -->
             <!-- <button  id="clearbutton" name="clearbutton" class="btn btn-secondary" type="reset">Clear Form</button> -->
               <!-- Coupon</button> -->
-          <img class="img-thumbnail" [src]="util.resourcesUrl + coupon.image">
-      </div>
+          <img *ngIf="coupon.image!=null" class="img-thumbnail" [src]="util.resourcesUrl + coupon.image">
+            <div *ngIf="coupon.image==null && imageFile != null" class="first">
+              <div [ngStyle]="{'width.%':width}" class="second"></div>
+            </div>
+        </div>
   </div>
 
 

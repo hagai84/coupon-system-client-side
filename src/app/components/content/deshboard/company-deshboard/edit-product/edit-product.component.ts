@@ -3,6 +3,7 @@ import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
 import { CouponApiService } from 'src/app/services/api/coupon-api.service';
 import { Coupon } from 'src/app/models/coupon';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-product',
@@ -11,12 +12,13 @@ import { Coupon } from 'src/app/models/coupon';
 })
 export class EditProductComponent implements OnInit {
 
-  public coupon:Coupon = new Coupon(0,"", new Date(), new Date(), 0, "", "", 0,"", 0);
+  public coupon:Coupon = new Coupon(0,"", new Date(), new Date(), 0, "", "", 0,null, 0);
   public create: boolean;
   public amountDelta: number;
   public imageFile: File;
   public myStorage :Storage = sessionStorage;
   public legendTitle:string;
+  public width:any;
 
 
   public couponTypes: string[] = [
@@ -43,6 +45,7 @@ export class EditProductComponent implements OnInit {
       this.create=false;
       this.legendTitle=" Edit Coupon ";
     }
+    
   }
 
   public createProduct() {  
@@ -79,7 +82,7 @@ export class EditProductComponent implements OnInit {
     const ob = this.couponApi.updateCouponAmount(this.amountDelta, this.coupon.couponId);
     ob.subscribe(
       couponId => {
-        alert("amount update successfuly");
+        // alert("amount update successfuly");
         this.router.navigate(['/company-coupons']);
       },
       error => {
@@ -106,15 +109,24 @@ export class EditProductComponent implements OnInit {
   }
 
   uploadImage(){
+    this.coupon.image = null;
     const localyGenFileName:string = (Math.random()*100000000000000000000).toString();
     const uploadData = new FormData();
         uploadData.append('pic', this.imageFile, localyGenFileName);
         const ob2 = this.couponApi.uploadImage(uploadData);
       ob2.subscribe(
-        fileName => {
+        event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            // This is an upload progress event. Compute and show the % done:
+            const percentDone = Math.round(100 * event.loaded / event.total);
+            // console.log(`File is ${percentDone}% uploaded.`);
+            this.width = Math.round(100 * event.loaded / event.total);
+          } else if (event instanceof HttpResponse) {
+            // console.log('File is completely uploaded!');
+            // alert("Image successfuly uploaded" + event);
+            this.coupon.image = localyGenFileName;
+          }
           // this.image = fileName;
-          this.coupon.image = localyGenFileName;
-          alert("Image successfuly uploaded");
         },
         error => {
           this.util.PrintErrorToCustomer(error);
