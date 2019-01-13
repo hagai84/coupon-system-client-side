@@ -32,7 +32,7 @@ export class DashboardLyoutComponent implements OnInit {
         // see also 
         this.buildAdminMenuList();
 
-        console.log(val); 
+        // console.log(val); 
     });
     }
     else {

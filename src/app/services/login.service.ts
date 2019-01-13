@@ -40,8 +40,8 @@ export class LoginService {
         this.isFinishLogIn = true;
       },
       error => {
-        this.isFinishLogIn = true;
         this.util.PrintErrorToCustomer(error);
+        this.isFinishLogIn = true;
       });
     }
     

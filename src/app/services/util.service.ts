@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class UtilService {
   //Remote Client
-  public webServiceUrl : string = "http://ec2-18-222-31-108.us-east-2.compute.amazonaws.com:8080/couponby";
+  public webServiceUrl : string = "http://ec2-18-222-31-108.us-east-2.compute.amazonaws.com:8080/CouponSystemWeb-App";
   public resourcesUrl:string = "/resources/coupons/";
   //Local Client
   // public webServiceUrl : String ="http://localhost:8080/Coupon_System_Web-App";
