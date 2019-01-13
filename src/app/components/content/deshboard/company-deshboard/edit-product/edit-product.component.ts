@@ -45,8 +45,6 @@ export class EditProductComponent implements OnInit {
     }
    }
   ngOnInit() {
-    if(!this.create){
-    }
   }
 
   public createProduct() {  

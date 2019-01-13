@@ -12,50 +12,6 @@
       <input [disabled]="!create" required #couponTitle="ngModel" name="couponTitleName" id="couponTitleId" type="text" placeholder="meal for two" [(ngModel)]="coupon.title"
         class="form-control input-md">
     </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group row row">
-    <label class="col-md-2 control-label" for="textinput">Description</label>
-    <div class="col-md-4">
-      <textarea required #couponMessege="ngModel" id="couponDescriptionId" name="couponDescriptionName" type="text" placeholder="diner for 2 at our place"
-        [(ngModel)]="coupon.message" class="form-control input-md"></textarea>
-    </div>
-  </div>
-
-
-  <div class="form-group row row">
-    <label class="col-md-2 control-label" for="selectbasic">coupon type</label>
-    <div class="col-md-4">
-      <select #couponType="ngModel" id="couponTypeId" name="couponTypeName" class="form-control" [(ngModel)]="coupon.type">
-        <option  *ngFor="let types of couponTypes" [value]="types">{{types}}</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group row row">
-    <label class="col-md-2 control-label" for="textinput">Price</label>
-    <div class="col-md-4">
-      <input required #couponPrice="ngModel" name="couponPriceName" id="couponPriceId" type="number" step="1" min="0" placeholder="155"
-        [(ngModel)]="coupon.price" class="form-control input-md">
-    </div>
-  </div>
-  <div class="form-group row row">
-    <label class="col-md-2 control-label" for="amount">amount</label>
-    <div class="col-md-4">
-      <input [disabled]="!create" required #couponAmount="ngModel" name="couponAmountName" id="couponAmountId" type="number" placeholder="10" min="0" class="form-control input-md" [(ngModel)]="coupon.amount">
-    </div>
-    
-  </div>
-  <div *ngIf="!create" class="form-group row row">
-      
-      <label class="col-md-2 control-label" for="amountdelta">Stock change</label>
-      <div class="col-md-4">
-        <input #amountdelta="ngModel" name="amountDeltaName" id="amountDeltaId" type="number" step="1" class="form-control input-md" [(ngModel)]="amountDelta">
-      </div>
-    </div>
-
-  <div class="form-group row row">
     <label class="control-label col-md-2" for="couponStartDate">Start Date</label>
     <div class="col-md-4">
       <div class="input-group registration-date-time">
@@ -66,7 +22,15 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <!-- Text input-->
+  <div class="form-group row row">
+      <label class="col-md-2 control-label" for="selectbasic">coupon type</label>
+      <div class="col-md-4">
+        <select #couponType="ngModel" id="couponTypeId" name="couponTypeName" class="form-control" [(ngModel)]="coupon.type">
+          <option  *ngFor="let types of couponTypes" [value]="types">{{types}}</option>
+        </select>
+      </div>
+    
     <label class="control-label col-md-2" for="couponEndDate">End Date</label>
     <div class="col-md-4">
       <div class="input-group registration-date-time">
@@ -79,21 +43,101 @@
 
 
   <div class="form-group row row">
-    <label class="col-md-2 control-label" for="couponImage">Image Name</label>
+      <label class="col-md-2 control-label" for="textinput">Description</label>
+      <div class="col-md-4">
+        <textarea required #couponMessege="ngModel" id="couponDescriptionId" name="couponDescriptionName" type="text" placeholder="diner for 2 at our place"
+          [(ngModel)]="coupon.message" class="form-control input-md"></textarea>
+      </div>
+      <label class="col-md-2 control-label" ></label>
+      <div class="col-md-4">
+        <button *ngIf="!create" (click)="updateProduct()" [disabled]="!editProductForm.form.valid" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Edit
+          Coupon</button>
+          <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || imageFile == null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create
+              Coupon</button>
+          <button  id="clearbutton" name="clearbutton" class="btn btn-secondary" type="reset">Clear Form</button>
+          <button *ngIf="!create" (click)="deleteCoupon()" class="btn btn-danger" type="button">Delete Coupon</button>
+      </div>
+  </div>
+
+  <div class="form-group row row">
+    <label class="col-md-2 control-label" for="textinput">Price</label>
+    <div class="col-md-4">
+      <input required #couponPrice="ngModel" name="couponPriceName" id="couponPriceId" type="number" step="1" min="0" placeholder="155"
+        [(ngModel)]="coupon.price" class="form-control input-md">
+    </div>
+    <label class="col-md-2 control-label" for="couponImage">Image </label>
     <div class="col-md-4">
       <!-- <input *ngIf="!create" required #couponImage="ngModel" type="text" name="couponImage" id="couponImage" [(ngModel)]="image"
       class="form-control input-md">
       <input *ngIf="create" required #couponImage="ngModel" name="couponImage" type="text" placeholder="choose file" [(ngModel)]="image"
         class="form-control input-md"> -->
-        <input #fileInput type="file" (change)="onFileChanged($event)" >
-        <img class="img-thumbnail" [src]="util.resourcesUrl + coupon.image">
+        <input #fileInput type="file" (change)="onFileChanged($event)" >    
+        </div>
+    
+  </div>
+  <div class="form-group row row">
+      <label class="col-md-2 control-label" for="amount">amount</label>
+      <div class="col-md-4">
+        <input [disabled]="!create" required #couponAmount="ngModel" name="couponAmountName" id="couponAmountId" type="number" placeholder="10" min="0" class="form-control input-md" [(ngModel)]="coupon.amount">
+      </div>
+      <label class="col-md-2 control-label" ></label>
+        <div class="col-md-4">
+          <!-- <button *ngIf="!create" (click)="updateProduct()" [disabled]="!editProductForm.form.valid" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Edit -->
+            <!-- Coupon</button> -->
+            <!-- <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || imageFile == null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create -->
+              <!-- <button  id="clearbutton" name="clearbutton" class="btn btn-secondary" type="reset">Clear Form</button> -->
+                <!-- Coupon</button> -->
+            <img class="img-thumbnail" [src]="util.resourcesUrl + coupon.image">
+        </div>
+      
+        
     </div>
+    
+    
+
+  <div class="form-group row row">
+      <label class="col-md-2 control-label" for="amountdelta">Stock change</label>
+      <div class="col-md-4">
+        <input [disabled]="create" #amountdelta="ngModel" name="amountDeltaName" id="amountDeltaId" type="number" step="1" class="form-control input-md" [(ngModel)]="amountDelta">
+      </div>
+    <!-- <label class="control-label col-md-2" for="couponStartDate">Start Date</label>
+    <div class="col-md-4">
+      <div class="input-group registration-date-time">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+        <input required #couponStartDate="ngModel" class="form-control" name="couponStartDateName" id="couponStartDateId"
+          type="date" [(ngModel)]="coupon.startDate" [value]="coupon.startDate">
+      </div>
+    </div> -->
+  </div>
+
+  <div class="form-group row">
+    <!-- <label class="control-label col-md-2" for="couponEndDate">End Date</label>
+    <div class="col-md-4">
+      <div class="input-group registration-date-time">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+        <input #couponEndDate="ngModel" class="form-control" name="couponEndDateName" id="couponEndDateId" type="date" min={{coupon.startDate}}
+          [(ngModel)]="coupon.endDate" [value]="coupon.endDate">
+      </div>
+    </div> -->
+  </div>
+
+
+  <div class="form-group row row">
+    <!-- <label class="col-md-2 control-label" for="couponImage">Image Name</label> -->
+    <!-- <div class="col-md-4"> -->
+      <!-- <input *ngIf="!create" required #couponImage="ngModel" type="text" name="couponImage" id="couponImage" [(ngModel)]="image"
+      class="form-control input-md">
+      <input *ngIf="create" required #couponImage="ngModel" name="couponImage" type="text" placeholder="choose file" [(ngModel)]="image"
+        class="form-control input-md"> -->
+        <!-- <input #fileInput type="file" (change)="onFileChanged($event)" > -->
+        <!-- <img class="img-thumbnail" [src]="util.resourcesUrl + coupon.image"> -->
+    <!-- </div> -->
   </div>
 
   <div class="form-group row row">
   </div>
   <div class="form-group row">
-    <label class="col-md-2 control-label" for="singlebutton"></label>
+    <!-- <label class="col-md-2 control-label" for="singlebutton"></label>
     <div class="col-md-4">
       <button *ngIf="!create" (click)="updateProduct()" [disabled]="!editProductForm.form.valid" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Edit
         Coupon</button>
@@ -101,7 +145,7 @@
             Coupon</button>
         <button  id="clearbutton" name="clearbutton" class="btn btn-secondary" type="reset">Clear Form</button>
         <button *ngIf="!create" (click)="deleteCoupon()" class="btn btn-danger" type="button">Delete Coupon</button>
-    </div>
+    </div> -->
 
   </div>
 </form>
