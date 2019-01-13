@@ -65,15 +65,17 @@ export class DashboardLyoutComponent implements OnInit {
     this.menuList.push(new MenuList("Customers Table","customers-table"));
     const customerId = sessionStorage.getItem('customerId');
     if(customerId!=null){
-      this.menuList.push(new MenuList("Change Customer's Password : " + customerId,"customer-Password"));
+      this.menuList.push(new MenuList("Customer:" + customerId,"user-profile"));    
+      this.menuList.push(new MenuList("Change Password","customer-Password"));
     }
     this.menuList.push(new MenuList("Companies Table","companies-table"));
     const companyId = sessionStorage.getItem('companyId');
     if(companyId!=null){
+      this.menuList.push(new MenuList("Company:" + companyId,"company-profile"));    
+      this.menuList.push(new MenuList("Change Password","company-Password"));    
       this.menuList.push(new MenuList("Create new Coupon", "create-product"));
-      this.menuList.push(new MenuList("Change Company's Password : " + companyId,"company-Password"));
     }
-    this.menuList.push(new MenuList("Statistics","statistics"));
+    // this.menuList.push(new MenuList("Statistics","statistics"));
   }
   buildguestMenuList() {
     this.menuList.push(new MenuList("Terms Of Use","Terms-of-use"));

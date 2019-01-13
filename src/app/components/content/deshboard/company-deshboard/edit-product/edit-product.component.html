@@ -16,9 +16,9 @@
     <label class="control-label col-md-2" for="couponStartDate">Start Date</label>
     <div class="col-md-4">
       <div class="input-group registration-date-time">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
-        <input required #couponStartDate="ngModel" class="form-control" name="couponStartDateName" 
-          type="date" [(ngModel)]="coupon.startDate" value={{coupon.startDate}}>
+          <span class="input-group-addon" id="Start Date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+        <input [disabled]="!create" required #couponStartDate="ngModel" class="form-control" name="couponStartDate" [min]="todayDateString"
+          type="date" [(ngModel)]="coupon.startDate" >
       </div>
     </div>
   </div>
@@ -35,9 +35,9 @@
     <label class="control-label col-md-2" for="couponEndDate">End Date</label>
     <div class="col-md-4">
       <div class="input-group registration-date-time">
-        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
-        <input #couponEndDate="ngModel" class="form-control" name="couponEndDateName" type="date" min={{coupon.startDate}}
-          [(ngModel)]="coupon.endDate" value={{coupon.endDate}}>
+          <span class="input-group-addon" id="End Date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+        <input required #couponEndDate="ngModel" class="form-control" name="couponEndDate" type="date" [min]="coupon.startDate"
+          [(ngModel)]="coupon.endDate" >
       </div>
     </div>
   </div>

@@ -19,7 +19,7 @@ export class EditProductComponent implements OnInit {
   public myStorage :Storage = sessionStorage;
   public legendTitle:string;
   public width:any;
-
+  public todayDateString:string = new Date().toISOString().split('T')[0];
 
   public couponTypes: string[] = [
     "RESTAURANTS",
@@ -35,6 +35,7 @@ export class EditProductComponent implements OnInit {
     
    }
   ngOnInit() {
+
     if(this.router.url=='/dashboard/create-product'){
       this.coupon.companyId = Number(sessionStorage.getItem('companyId'));
       this.create=true;
@@ -44,6 +45,8 @@ export class EditProductComponent implements OnInit {
       this.coupon = JSON.parse(sessionStorage.getItem("lestCouponToUpdate"));
       this.create=false;
       this.legendTitle=" Edit Coupon ";
+      this.coupon.startDate = this.coupon.startDate.toString().split('Z')[0];
+      this.coupon.endDate = this.coupon.endDate.toString().split('Z')[0];
     }
     
   }
@@ -62,7 +65,6 @@ export class EditProductComponent implements OnInit {
   }
 
   public updateProduct() {
-    // this.updateProductAmount()
     const ob = this.couponApi.updateCoupon(this.coupon);
     ob.subscribe(
       couponId => {
@@ -91,9 +93,7 @@ export class EditProductComponent implements OnInit {
   }
   onFileChanged(event) {
     this.imageFile=<File>event.target.files[0]; 
-    this.uploadImage();  
-    // this.image = this.imageFile.name;
-    // this.image = decodeURIComponent(escape(this.imageFile.name));    
+    this.uploadImage();     
   }
 
   deleteCoupon(){
@@ -117,16 +117,11 @@ export class EditProductComponent implements OnInit {
       ob2.subscribe(
         event => {
           if (event.type === HttpEventType.UploadProgress) {
-            // This is an upload progress event. Compute and show the % done:
-            const percentDone = Math.round(100 * event.loaded / event.total);
-            // console.log(`File is ${percentDone}% uploaded.`);
             this.width = Math.round(100 * event.loaded / event.total);
           } else if (event instanceof HttpResponse) {
-            // console.log('File is completely uploaded!');
-            // alert("Image successfuly uploaded" + event);
+            // alert("Image successfuly uploaded");
             this.coupon.image = localyGenFileName;
           }
-          // this.image = fileName;
         },
         error => {
           this.util.PrintErrorToCustomer(error);
