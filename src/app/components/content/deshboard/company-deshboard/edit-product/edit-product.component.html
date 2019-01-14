@@ -78,7 +78,7 @@
         <br>   
         <button *ngIf="!create" (click)="updateProduct()" [disabled]="!editProductForm.form.valid || coupon.image==null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Edit
           Coupon</button>
-          <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || coupon.image == null" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create
+          <button *ngIf="create" (click)="createProduct()" [disabled]="!editProductForm.form.valid || coupon.image == null || coupon.price==0 || coupon.amount==0" id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">Create
               Coupon</button>
           <button  *ngIf="create" id="clearbutton" name="clearbutton" class="btn btn-secondary" type="reset">Clear Form</button>
           <button *ngIf="!create" (click)="deleteCoupon()" class="btn btn-danger" type="button">Delete Coupon</button>
