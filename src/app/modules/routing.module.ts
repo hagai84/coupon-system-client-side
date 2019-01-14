@@ -11,7 +11,7 @@ import { UserProfileComponent } from '../components/content/deshboard/customer-d
 import { AllCouponsComponent } from '../components/content/coupons/all-coupons-lyout/all-coupons.component';
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
-import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
+// import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
 import { GuestGuardServiceService } from '../services/gurds/guest-guard-service.service';
 import { CustomerGuardServiceService } from '../services/gurds/customer-guard-service.service';
 import { CompanyGuardServiceService } from '../services/gurds/company-guard-service.service';

@@ -33,7 +33,7 @@ import { LoginGurardServiceService } from '../services/gurds/login-gurard-servic
 import { ChangePasswordComponent } from '../components/content/deshboard/customer-deshboard/change-password/change-password.component';
 import { CompanyProfileComponent } from '../components/content/deshboard/company-deshboard/company-profile/company-profile.component';
 import { CompanyMenuComponent } from '../components/header/company-menu/company-menu.component';
-import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
+// import { CreateProductComponent } from '../components/content/deshboard/company-deshboard/create-product/create-product.component';
 import { CustomerService } from '../services/reources/customer.service';
 import { CompanyService } from '../services/reources/company.service';
 import { EditProductComponent } from '../components/content/deshboard/company-deshboard/edit-product/edit-product.component';
@@ -59,7 +59,7 @@ import { CompaniesTableComponent } from '../components/content/deshboard/admin-d
     ChangePasswordComponent,
     CompanyProfileComponent,
     CompanyMenuComponent,
-    CreateProductComponent,
+    // CreateProductComponent,
     EditProductComponent,
     CustomersTableComponent,
     CompaniesTableComponent,
