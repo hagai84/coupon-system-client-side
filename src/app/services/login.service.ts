@@ -31,7 +31,7 @@ export class LoginService {
   }
   
   public submitLogin(loginBean: LogInBean) {
-    this.isFinishLogIn = false;
+    // this.isFinishLogIn = false;
     const ob = this.loginApi.login(loginBean);
     ob.subscribe(
       userId => {
