@@ -42,10 +42,22 @@ export class CouponsComponent implements OnInit {
     ob.subscribe(
       () => {
         alert("coupon deleted successfuly");
+        this.removCouponFromCoupons(coupon);
         this.router.navigate(['/company-coupons']);
       },
       error => {
         this.util.PrintErrorToCustomer(error);
       });
+  }
+
+  removCouponFromCoupons(coupon: Coupon) {
+
+    var tempCoupon: Array<Coupon> = [];
+    this.coupons.forEach(element => {
+      if (element.couponId != coupon.couponId) {
+        tempCoupon.push(element);
+      }
+      this.coupons = tempCoupon;
+    });
   }
 }
